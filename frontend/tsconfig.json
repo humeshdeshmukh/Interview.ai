@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "jsx": "react-jsx",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": ["./*"]
+      },
+      "typeRoots": ["./node_modules/@types", "./src/types"],
+      "resolveJsonModule": true,
+      "sourceMap": true,          // Generate source maps for debugging
+      "incremental": true,        // Enable incremental compilation for faster builds
+      "declaration": true,        // Generate declaration files (.d.ts)
+      "declarationMap": true,     // Generate map files for declaration files
+      "allowJs": true,            // Allow JavaScript files to be compiled
+      "allowSyntheticDefaultImports": true // Allow default imports from modules with no default export
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+  }
+  

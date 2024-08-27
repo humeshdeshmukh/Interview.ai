@@ -1,0 +1,116 @@
+/* Header.css */
+
+/* Navbar styles */
+.navbar {
+    background-color: #343a40; /* Dark background color */
+    padding: 1rem; /* Add some padding */
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem; /* Larger font size for the brand name */
+    font-weight: bold; /* Bold font for the brand */
+    color: #ffffff; /* White text color */
+  }
+  
+  .nav-link {
+    color: #adb5bd; /* Light grey color for the links */
+    transition: color 0.3s ease; /* Smooth transition on hover */
+  }
+  
+  .nav-link:hover {
+    color: #ffffff; /* Change color to white on hover */
+  }
+  
+  /* Custom search form styles */
+  .form-control {
+    border-radius: 0; /* Remove rounded corners */
+  }
+  
+  .form-control:focus {
+    box-shadow: none; /* Remove the default box shadow */
+    border-color: #6c757d; /* Change border color on focus */
+  }
+  
+  .button {
+    border-radius: 0; /* Remove rounded corners for the button */
+  }
+  
+  /* Notification badge styles */
+  .position-relative {
+    position: relative;
+  }
+  
+  .badge {
+    padding: 0.5em 0.75em; /* Add padding inside the badge */
+    font-size: 0.75rem; /* Smaller font size for the badge */
+  }
+  
+  .badge-pill {
+    border-radius: 50rem; /* Full rounded pill shape */
+  }
+  
+  /* Avatar styles */
+  .avatar {
+    width: 32px; /* Fixed width for avatar */
+    height: 32px; /* Fixed height for avatar */
+    border-radius: 50%; /* Make it circular */
+  }
+  
+  /* Dropdown menu styles */
+  .menu {
+    background-color: #343a40; /* Dark background color */
+  }
+  
+  .menu-item {
+    color: #adb5bd; /* Light grey color for the menu items */
+  }
+  
+  .menu-item:hover {
+    background-color: #495057; /* Darker background on hover */
+    color: #ffffff; /* White text on hover */
+  }
+  
+  /* Tooltip styles */
+  .tooltip {
+    background-color: #495057; /* Dark background for tooltip */
+    color: #ffffff; /* White text color */
+  }
+  
+  /* Additional utility classes */
+  .text-white {
+    color: #ffffff !important; /* Force white text color */
+  }
+  
+  .font-bold {
+    font-weight: bold; /* Force bold text */
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium shadow for the header */
+  }
+  
+  .ml-2 {
+    margin-left: 0.5rem; /* Add margin-left for spacing */
+  }
+  
+  .mr-2 {
+    margin-right: 0.5rem; /* Add margin-right for spacing */
+  }
+  
+  .position-absolute {
+    position: absolute !important; /* Force absolute positioning */
+  }
+  
+  .top-0 {
+    top: 0 !important; /* Align to the top */
+  }
+  
+  .start-100 {
+    left: 100% !important; /* Align to the right edge */
+  }
+  
+  .translate-middle {
+    transform: translate(-50%, -50%) !important; /* Center the badge */
+  }
+  
+  

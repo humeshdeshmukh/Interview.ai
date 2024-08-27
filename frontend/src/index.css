@@ -1,0 +1,123 @@
+/* index.css */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom Global Styles */
+:root {
+  --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --line-height: 1.5;
+  --font-weight: 400;
+  --color-scheme: light dark;
+  --text-color-light: rgba(0, 0, 0, 0.87);
+  --text-color-dark: rgba(255, 255, 255, 0.87);
+  --background-color-dark: #242424;
+  --background-color-light: #ffffff;
+  --primary-color: #1a1a1a;
+  --secondary-color: #808080;
+  --tertiary-color: #ffffff;
+  --primary-button-bg: #007bff;
+  --primary-button-hover: #0056b3;
+  --link-hover-color: #0056b3;
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  font-weight: var(--font-weight);
+  color: var(--text-color-dark);
+  background-color: var(--background-color-dark);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+header, footer {
+  width: 100%;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  padding: 1rem;
+  text-align: center;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+a {
+  font-weight: 500;
+  color: var(--primary-button-bg);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--primary-button-bg);
+  color: var(--tertiary-color);
+  cursor: pointer;
+  transition: background-color 0.25s, border-color 0.25s;
+}
+
+button:hover {
+  background-color: var(--primary-button-hover);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --text-color-dark: #213547;
+    --background-color-dark: #ffffff;
+    --primary-color: #f9f9f9;
+    --tertiary-color: #000000;
+    --primary-button-bg: #007bff;
+    --primary-button-hover: #0056b3;
+    --link-hover-color: #0056b3;
+  }
+
+  a:hover {
+    color: var(--link-hover-color);
+  }
+
+  button {
+    background-color: var(--primary-button-bg);
+  }
+}

@@ -1,0 +1,71 @@
+/* MainLayout.css */
+
+/* General layout styles */
+.flex {
+    display: flex;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .flex-1 {
+    flex: 1;
+  }
+  
+  .min-h-screen {
+    min-height: 100vh; /* Ensure the layout takes up the full height of the screen */
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    width: 250px; /* Fixed width for the sidebar */
+    background-color: #343a40; /* Dark background color */
+    transition: transform 0.3s ease; /* Smooth transition for open/close */
+    position: relative;
+    z-index: 1000; /* Ensure it stays on top of the content */
+  }
+  
+  .sidebar-open {
+    transform: translateX(0); /* Sidebar is visible */
+  }
+  
+  .sidebar-closed {
+    transform: translateX(-100%); /* Sidebar is hidden */
+  }
+  
+  /* Main content area */
+  main {
+    padding: 1rem; /* Add padding to the main content area */
+    background-color: #f8f9fa; /* Light grey background */
+  }
+  
+  .bg-gray-100 {
+    background-color: #f1f3f5; /* Background color for the main content */
+  }
+  
+  /* Header and Footer spacing */
+  header, footer {
+    flex-shrink: 0; /* Ensure header and footer don't shrink */
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: absolute;
+      height: 100%; /* Make the sidebar take up the full height on mobile */
+    }
+  
+    .sidebar-open {
+      transform: translateX(0); /* Sidebar is visible on mobile */
+    }
+  
+    .sidebar-closed {
+      transform: translateX(-100%); /* Sidebar is hidden on mobile */
+    }
+  
+    main {
+      padding: 0.5rem; /* Reduce padding on smaller screens */
+    }
+  }
+  

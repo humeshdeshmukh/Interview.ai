@@ -1,0 +1,8 @@
+/* src/components/HomePage/HeroSection.css */
+.hero-section {
+    min-height: 80vh; /* Ensures the section occupies at least 80% of the viewport height */
+    background-image: url('/path/to/your/image.jpg'); /* Optional: Background image */
+    background-size: cover; /* Ensures the background image covers the entire section */
+    background-position: center; /* Centers the background image */
+  }
+  
