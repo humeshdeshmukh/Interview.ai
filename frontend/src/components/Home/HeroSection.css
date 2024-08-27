@@ -1,8 +1,37 @@
-/* src/components/HomePage/HeroSection.css */
 .hero-section {
-    min-height: 80vh; /* Ensures the section occupies at least 80% of the viewport height */
-    background-image: url('/path/to/your/image.jpg'); /* Optional: Background image */
-    background-size: cover; /* Ensures the background image covers the entire section */
-    background-position: center; /* Centers the background image */
-  }
-  
+  position: relative;
+  min-height: 60vh;
+  background: url('/path-to-your-hero-image.jpg') no-repeat center center;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.5); /* Add a dark overlay for better text visibility */
+}
+
+.display-4 {
+  font-size: 3rem; /* Adjust font size if needed */
+}
+
+.font-weight-bold {
+  font-weight: 700; /* Ensure bold text */
+}
+
+.lead {
+  font-size: 1.25rem; /* Adjust font size for the lead paragraph */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Bootstrap primary color */
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
