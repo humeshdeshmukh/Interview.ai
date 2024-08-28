@@ -1,6 +1,6 @@
+// src/components/Chatbot/Chatbot.tsx
 import React, { useState } from 'react';
-import ChatbotWindow from './ChatbotWindow';
-import './Chatbot.css'; // Import custom styles for the chatbot
+import './ChatbotWindow.css';
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,24 +10,34 @@ const Chatbot: React.FC = () => {
   };
 
   return (
-    <>
-      <div className={`chatbot-container ${isOpen ? 'open' : ''}`}>
-        <div className="chatbot-header" onClick={toggleChatbot}>
-          <span className="chatbot-title">Chat with us</span>
-          <button className="chatbot-toggle-btn">
-            {isOpen ? '-' : '+'}
-          </button>
-        </div>
-        {isOpen && (
-          <div className="chatbot-body">
-            <ChatbotWindow />
+    <div className={`chatbot-container ${isOpen ? 'open' : ''}`}>
+      {isOpen ? (
+        <div className="chatbot-window">
+          <div className="chatbot-window-header">
+            <button className="chatbot-close-button" onClick={toggleChatbot}>
+              &#x2715; {/* Close Icon */}
+            </button>
+            Chatbot
           </div>
-        )}
-      </div>
-      <button className="chatbot-float-btn" onClick={toggleChatbot}>
-        Chat
-      </button>
-    </>
+          <div className="chatbot-window-messages">
+            {/* Render chat messages here */}
+          </div>
+          <div className="chatbot-window-input">
+            <textarea
+              className="chatbot-window-textarea"
+              placeholder="Type a message..."
+            />
+            <button className="chatbot-window-send-button">
+              Send
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button className="chatbot-icon-button" onClick={toggleChatbot}>
+          <img src="/path/to/chatbot-icon.png" alt="Chatbot Icon" />
+        </button>
+      )}
+    </div>
   );
 };
 

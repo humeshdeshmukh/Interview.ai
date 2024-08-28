@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Build output
+build/
+dist/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# IDE or editor configurations
+.vscode/
+.idea/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Coverage reports
+coverage/

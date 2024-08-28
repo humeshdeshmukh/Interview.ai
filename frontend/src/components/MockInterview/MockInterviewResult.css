@@ -1,0 +1,135 @@
+/* MockInterviewResult.css */
+
+/* Container for the results page */
+.mock-interview-result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f4f4f4; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header for the results section */
+  .mock-interview-result-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .mock-interview-result-header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .mock-interview-result-header p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  /* Styles for the results summary section */
+  .results-summary {
+    width: 100%;
+    max-width: 800px;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+  }
+  
+  .results-summary h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .results-summary p {
+    font-size: 1.1rem;
+    color: #666;
+  }
+  
+  /* Styles for the charts or graphs section */
+  .results-charts {
+    width: 100%;
+    max-width: 800px;
+    margin: 1.5rem 0;
+  }
+  
+  .results-charts .chart {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Styles for the detailed analysis section */
+  .detailed-analysis {
+    width: 100%;
+    max-width: 800px;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .detailed-analysis h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .detailed-analysis p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  /* Styles for buttons or actions */
+  .result-action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .result-action-buttons button {
+    background-color: #007bff; /* Blue button color */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .result-action-buttons button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .mock-interview-result-container {
+      padding: 1rem;
+    }
+  
+    .mock-interview-result-header h1 {
+      font-size: 1.5rem;
+    }
+  
+    .mock-interview-result-header p {
+      font-size: 1rem;
+    }
+  
+    .results-summary h2 {
+      font-size: 1.2rem;
+    }
+  
+    .detailed-analysis h3 {
+      font-size: 1.1rem;
+    }
+  
+    .result-action-buttons button {
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+  

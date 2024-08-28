@@ -1,23 +1,29 @@
+/* Root element styles */
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Light text color for contrast */
 }
 
+/* Logo styles */
 .logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  transition: filter 300ms, transform 300ms;
 }
 
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa); /* Light blue shadow on hover */
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa); /* React logo shadow */
+}
+
+/* Keyframes for logo spinning animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,16 +33,77 @@
   }
 }
 
+/* Apply spinning animation for logos when prefers-reduced-motion is not set */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* Card styles */
 .card {
   padding: 2em;
+  background-color: #444; /* Slightly lighter background for cards */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #fff; /* Ensure text is visible on dark background */
+  margin-bottom: 2em; /* Space between cards */
 }
 
+/* Read the docs text style */
 .read-the-docs {
-  color: #888;
+  color: #888; /* Light grey color for less emphasis */
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  #root {
+    padding: 1.5rem; /* Reduce padding on medium screens */
+  }
+
+  .card {
+    padding: 1.5em; /* Reduce padding inside cards on medium screens */
+  }
+}
+
+@media (max-width: 992px) {
+  .logo {
+    height: 4em; /* Smaller logo size on smaller screens */
+    padding: 1em;
+  }
+
+  .card {
+    padding: 1em; /* Further reduce padding inside cards on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem; /* Further reduce padding on small screens */
+  }
+
+  .logo {
+    height: 3em; /* Even smaller logo size on very small screens */
+    padding: 0.5em;
+  }
+
+  .card {
+    padding: 0.5em; /* Minimal padding inside cards on very small screens */
+  }
+
+  /* Stack cards vertically on very small screens */
+  .card {
+    display: block;
+    margin: 0 auto 1em auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .card {
+    font-size: 0.875rem; /* Smaller font size in cards on extra small screens */
+  }
+
+  .read-the-docs {
+    font-size: 0.75rem; /* Smaller font size for less emphasis text on extra small screens */
+  }
 }

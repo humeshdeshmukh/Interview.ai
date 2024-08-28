@@ -1,0 +1,68 @@
+/* src/components/Chatbot/ChatbotMessage.css */
+
+/* Container for chat messages */
+.chatbot-messages {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f9f9f9; /* Background color for the chat area */
+  }
+  
+  /* Individual chat message */
+  .chatbot-message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  /* Message bubble */
+  .chatbot-message .bubble {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+  }
+  
+  /* Sender's message */
+  .chatbot-message.user .bubble {
+    background-color: #007bff; /* Blue color for user's messages */
+    color: #fff;
+    margin-left: auto; /* Align user's messages to the right */
+  }
+  
+  /* Receiver's message */
+  .chatbot-message.bot .bubble {
+    background-color: #e9ecef; /* Light gray color for bot's messages */
+    color: #000;
+    margin-right: auto; /* Align bot's messages to the left */
+  }
+  
+  /* Tail for the message bubble */
+  .chatbot-message .bubble::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+  }
+  
+  /* Tail for user's message bubble */
+  .chatbot-message.user .bubble::before {
+    border-left-color: #007bff;
+    left: -20px; /* Adjust based on your design */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Tail for bot's message bubble */
+  .chatbot-message.bot .bubble::before {
+    border-right-color: #e9ecef;
+    right: -20px; /* Adjust based on your design */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  

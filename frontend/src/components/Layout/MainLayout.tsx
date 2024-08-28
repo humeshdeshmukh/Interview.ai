@@ -12,15 +12,15 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
+    setSidebarOpen(prev => !prev);
   };
 
   return (
-    <div className="main-layout flex flex-col min-h-screen">
+    <div className="main-layout">
       <Header onToggleSidebar={toggleSidebar} />
-      <div className="content-wrapper flex flex-1">
+      <div className={`content-wrapper ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <Sidebar isOpen={sidebarOpen} onClose={toggleSidebar} />
-        <main className="main-content flex-1 bg-gray-100 p-4 transition-transform duration-300 ease-in-out">
+        <main className="main-content">
           {children}
         </main>
       </div>

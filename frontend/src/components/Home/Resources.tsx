@@ -1,57 +1,48 @@
 import React from 'react';
-import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
-
-const resources = [
-    {
-        title: 'Resume Building Tips',
-        description: 'Learn how to craft the perfect resume to land your dream job.',
-        link: '/resume-tips',
-    },
-    {
-        title: 'Top Interview Questions',
-        description: 'Explore the most commonly asked interview questions and how to answer them.',
-        link: '/interview-questions',
-    },
-    {
-        title: 'Practice Tests',
-        description: 'Take practice tests to prepare for your interviews.',
-        link: '/practice-tests',
-    },
-    // Add more resources as needed
-];
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import './Resources.css'; // Import custom CSS if needed
 
 const Resources: React.FC = () => {
-    return (
-        <div className="container mx-auto px-4 py-8">
-            <Typography variant="h4" className="text-center text-blue-600 font-bold mb-8">
-                Resources
-            </Typography>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {resources.map((resource, index) => (
-                    <Card key={index} className="shadow-lg">
-                        <CardContent>
-                            <Typography variant="h6" className="text-gray-800 font-semibold mb-4">
-                                {resource.title}
-                            </Typography>
-                            <Typography variant="body2" className="text-gray-600">
-                                {resource.description}
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                className="bg-blue-600 hover:bg-blue-700"
-                                href={resource.link}
-                            >
-                                Explore
-                            </Button>
-                        </CardActions>
-                    </Card>
-                ))}
-            </div>
-        </div>
-    );
+  // Sample resources data
+  const resources = [
+    {
+      title: 'Interview Preparation Guide',
+      description: 'A comprehensive guide to help you prepare for various types of interviews.',
+    },
+    {
+      title: 'Resume Writing Tips',
+      description: 'Tips and tricks for writing a standout resume that gets noticed.',
+    },
+    {
+      title: 'Mock Interview Platform',
+      description: 'An interactive platform to practice mock interviews with real-time feedback.',
+    },
+    {
+      title: 'Interview Questions Database',
+      description: 'A collection of common and challenging interview questions across different industries.',
+    },
+    // Add more resources as needed
+  ];
+
+  return (
+    <section className="resources-section py-5">
+      <Container>
+        <h2 className="text-center mb-4 text-dark">Resources</h2>
+        <Row>
+          {resources.map((resource, index) => (
+            <Col md={6} lg={4} key={index} className="mb-4">
+              <Card className="resource-card">
+                <Card.Body>
+                  <Card.Title>{resource.title}</Card.Title>
+                  <Card.Text>{resource.description}</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </section>
+  );
 };
 
 export default Resources;

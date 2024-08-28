@@ -3,37 +3,41 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from 'react-bootstrap';
 import './Header.css';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onToggleSidebar: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="header-navbar">
       <Container>
-        <Navbar.Brand as={Link} to="/" className="header-brand">
+        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img src="/path-to-your-logo.png" alt="Logo" className="header-logo" />
-          <span className="header-title">Home</span>
+          <span className="header-title ms-2">InterviewMastery</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link as={Link as any} to="/resume">Resume Builder</Nav.Link>
-            <Nav.Link as={Link as any} to="/questions">Interview Questions</Nav.Link>
-            <Nav.Link as={Link as any} to="/practice">Practice Tests</Nav.Link>
-            <Nav.Link as={Link as any} to="/mock-interview">Mock Interviews</Nav.Link>
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/resume">Resume Builder</Nav.Link>
+            <Nav.Link as={Link} to="/questions">Interview Questions</Nav.Link>
+            <Nav.Link as={Link} to="/practice-tests">Practice Tests</Nav.Link> {/* Updated Link */}
+            <Nav.Link as={Link} to="/mock-interview">Mock Interviews</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link as any} to="/about">About Us</NavDropdown.Item>
-              <NavDropdown.Item as={Link as any} to="/contact">Contact</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/about">About Us</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/contact">Contact</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link as any} to="/faq">FAQ</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/faq">FAQ</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Form className="d-flex ml-auto search-form">
-            <FormControl type="text" placeholder="Search" className="mr-2 search-input" />
-            <Button variant="outline-light" className="search-button">Search</Button>
+          <Form className="d-flex ms-auto">
+            <FormControl type="text" placeholder="Search" className="me-2" />
+            <Button variant="outline-light">Search</Button>
           </Form>
-          <Nav className="ml-auto">
-            <Button as={Link as any} to="/login" variant="outline-light" className="me-2">
+          <Nav className="ms-3">
+            <Button as={Link} to="/login" variant="outline-light" className="me-2">
               Login
             </Button>
-            <Button as={Link as any} to="/register" variant="outline-light">
+            <Button as={Link} to="/register" variant="outline-light">
               Register
             </Button>
           </Nav>
