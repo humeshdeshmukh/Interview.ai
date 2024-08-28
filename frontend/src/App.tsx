@@ -1,4 +1,3 @@
-// src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Layout/Header';
@@ -12,6 +11,7 @@ import Resources from './components/Home/Resources';
 import NotFound from './components/NotFound';
 import RegisterForm from './components/Auth/RegisterForm';
 import LoginForm from './components/Auth/LoginForm';
+import UserProfile from './components/Home/UserProfile'; // Import UserProfile component
 import { AuthProvider } from './contexts/AuthContext';
 import Chatbot from './components/Chatbot/Chatbot';
 
@@ -23,6 +23,7 @@ const AppRoutes: React.FC = () => (
     <Route path="/practice-tests" element={<PracticeTests />} />
     <Route path="/mock-interview" element={<MockInterview />} />
     <Route path="/resources" element={<Resources />} />
+    <Route path="/profile" element={<UserProfile />} /> {/* Add the UserProfile route */}
     <Route path="/register" element={<RegisterForm />} />
     <Route path="/login" element={<LoginForm />} />
     <Route path="*" element={<NotFound />} />

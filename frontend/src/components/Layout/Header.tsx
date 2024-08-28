@@ -1,8 +1,10 @@
+// Header.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import './Header.css';
-import logo from './logo.jpg'; // Import the logo image
+import logo from '../../assets/logo.jpg'; // Adjust the path to your logo image
+import profilePic from '../../assets/Profile-pic.webp'; // Adjust the path to your profile picture
 
 interface HeaderProps {
   onToggleSidebar: () => void;
@@ -13,10 +15,10 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
     <Navbar bg="dark" variant="dark" expand="lg" className="header-navbar">
       <Container>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
-          <img src={logo} alt="Logo" className="header-logo" /> {/* Use the imported logo */}
+          <img src={logo} alt="Logo" className="header-logo" />
           <span className="header-title ms-2">InterviewMastery</span>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={onToggleSidebar} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/resume">Resume Builder</Nav.Link>
@@ -32,7 +34,12 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
           </Nav>
           <Nav className="ms-auto">
             <NavDropdown
-              title={<span className="profile-title">Profile</span>}
+              title={
+                <div className="d-flex align-items-center">
+                  <img src={profilePic} alt="Profile" className="profile-picture" />
+                  <span className="profile-title ms-2">Profile</span>
+                </div>
+              }
               id="basic-nav-dropdown"
               align="end"
             >

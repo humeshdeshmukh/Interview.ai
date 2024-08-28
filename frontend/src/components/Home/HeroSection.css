@@ -31,3 +31,10 @@
 .resources-section h2 {
   color: black; /* Ensure title is black */
 }
+/* Profile picture in the header */
+.profile-picture {
+  width: 30px;  /* Smaller width */
+  height: 30px; /* Smaller height */
+  border-radius: 50%; /* Makes the profile picture circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
