@@ -7,14 +7,18 @@ const ChatbotWindow: React.FC = () => {
   const [messages, setMessages] = useState<{ sender: 'user' | 'bot'; message: string }[]>([]);
   const [input, setInput] = useState('');
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim()) {
       setMessages([...messages, { sender: 'user', message: input }]);
       setInput('');
       // Simulate bot response
       setTimeout(() => {
-        setMessages([...messages, { sender: 'user', message: input }, { sender: 'bot', message: "I'm here to help!" }]);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { sender: 'user', message: input },
+          { sender: 'bot', message: "I'm here to help!" },
+        ]);
       }, 1000);
     }
   };

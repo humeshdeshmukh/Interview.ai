@@ -11,16 +11,16 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
-  const handleSidebarToggle = () => {
+  const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <div className="flex flex-1">
-        <Sidebar isOpen={sidebarOpen} onClose={handleSidebarToggle} />
-        <main className="flex-1 bg-gray-100 p-4">
+    <div className="main-layout flex flex-col min-h-screen">
+      <Header onToggleSidebar={toggleSidebar} />
+      <div className="content-wrapper flex flex-1">
+        <Sidebar isOpen={sidebarOpen} onClose={toggleSidebar} />
+        <main className="main-content flex-1 bg-gray-100 p-4 transition-transform duration-300 ease-in-out">
           {children}
         </main>
       </div>

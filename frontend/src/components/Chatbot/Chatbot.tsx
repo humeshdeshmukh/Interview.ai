@@ -1,28 +1,33 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import './Chatbot.css'; // Import your custom CSS if needed
+import React, { useState } from 'react';
+import ChatbotWindow from './ChatbotWindow';
+import './Chatbot.css'; // Import custom styles for the chatbot
 
 const Chatbot: React.FC = () => {
-  const openChatbot = () => {
-    // Replace with your chatbot service initialization code
-    window.open('https://your-chatbot-link.com', '_blank');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleChatbot = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
-    <div className="chatbot-container text-center">
-      <Button 
-        variant="info" 
-        className="chatbot-button"
-        onClick={openChatbot}
-        aria-label="Chat with us"
-      >
-        <span className="chatbot-icon">&#128172;</span> {/* Emoji or icon for chatbot */}
-        Chat with us
-      </Button>
-      <p className="mt-2">
-        Have questions? Our AI chatbot is here to help!
-      </p>
-    </div>
+    <>
+      <div className={`chatbot-container ${isOpen ? 'open' : ''}`}>
+        <div className="chatbot-header" onClick={toggleChatbot}>
+          <span className="chatbot-title">Chat with us</span>
+          <button className="chatbot-toggle-btn">
+            {isOpen ? '-' : '+'}
+          </button>
+        </div>
+        {isOpen && (
+          <div className="chatbot-body">
+            <ChatbotWindow />
+          </div>
+        )}
+      </div>
+      <button className="chatbot-float-btn" onClick={toggleChatbot}>
+        Chat
+      </button>
+    </>
   );
 };
 
