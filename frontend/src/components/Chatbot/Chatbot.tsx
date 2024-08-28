@@ -1,12 +1,39 @@
-// src/components/Chatbot/Chatbot.tsx
 import React, { useState } from 'react';
 import './ChatbotWindow.css';
+import chatbotIcon from './chatbot.1.png';
+
+interface Message {
+  text: string;
+  sender: 'user' | 'bot';
+}
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState('');
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSend = () => {
+    if (inputValue.trim()) {
+      // Add the new message to the state
+      const newMessage: Message = { text: inputValue, sender: 'user' };
+      setMessages([...messages, newMessage]);
+
+      // Clear the input field
+      setInputValue('');
+
+      // You can add a bot response here as well (optional)
+      // Example: 
+      const botReply: Message = { text: "This is a bot response!", sender: 'bot' };
+      setMessages(prevMessages => [...prevMessages, newMessage, botReply]);
+    }
   };
 
   return (
@@ -20,21 +47,32 @@ const Chatbot: React.FC = () => {
             Chatbot
           </div>
           <div className="chatbot-window-messages">
-            {/* Render chat messages here */}
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`chatbot-message ${
+                  message.sender === 'user' ? 'user-message' : 'bot-message'
+                }`}
+              >
+                {message.text}
+              </div>
+            ))}
           </div>
           <div className="chatbot-window-input">
             <textarea
               className="chatbot-window-textarea"
               placeholder="Type a message..."
+              value={inputValue}
+              onChange={handleInputChange}
             />
-            <button className="chatbot-window-send-button">
+            <button className="chatbot-window-send-button" onClick={handleSend}>
               Send
             </button>
           </div>
         </div>
       ) : (
         <button className="chatbot-icon-button" onClick={toggleChatbot}>
-          <img src="/path/to/chatbot-icon.png" alt="Chatbot Icon" />
+          <img src={chatbotIcon} alt="Chatbot Icon" />
         </button>
       )}
     </div>

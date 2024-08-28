@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from 'react-bootstrap';
 import './Header.css';
+import logo from './logo.jpg'; // Import the logo image
 
 interface HeaderProps {
   onToggleSidebar: () => void;
@@ -12,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
     <Navbar bg="dark" variant="dark" expand="lg" className="header-navbar">
       <Container>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
-          <img src="/path-to-your-logo.png" alt="Logo" className="header-logo" />
+          <img src={logo} alt="Logo" className="header-logo" /> {/* Use the imported logo */}
           <span className="header-title ms-2">InterviewMastery</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -20,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/resume">Resume Builder</Nav.Link>
             <Nav.Link as={Link} to="/questions">Interview Questions</Nav.Link>
-            <Nav.Link as={Link} to="/practice-tests">Practice Tests</Nav.Link> {/* Updated Link */}
+            <Nav.Link as={Link} to="/practice-tests">Practice Tests</Nav.Link>
             <Nav.Link as={Link} to="/mock-interview">Mock Interviews</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/about">About Us</NavDropdown.Item>

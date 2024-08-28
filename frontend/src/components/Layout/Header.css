@@ -10,9 +10,12 @@
 }
 
 .header-logo {
-  height: 40px;
-  margin-right: 10px;
+  width: 40px; /* Adjust the size as needed */
+  height: 40px; /* Set the height to match the width for a circular shape */
+  border-radius: 50%; /* Makes the logo rounded */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
 }
+
 
 .header-title {
   font-weight: bold;

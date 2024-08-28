@@ -3,7 +3,7 @@
 .chatbot-container {
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    right: 20px; /* Change this to 'left: 20px;' to position it on the left */
     z-index: 1000;
   }
   
