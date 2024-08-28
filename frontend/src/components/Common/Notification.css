@@ -1,0 +1,47 @@
+/* Notification.css */
+
+/* Custom styles for notifications */
+.notification-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050; /* Ensure it's on top of other content */
+    width: 300px; /* Fixed width for consistency */
+    border-radius: 8px;
+    color: #fff; /* White text color */
+  }
+  
+  .notification-toast .toast-header {
+    background-color: #333; /* Dark background for the header */
+    color: #fff; /* White text color */
+    border-bottom: none; /* Remove default border */
+  }
+  
+  .notification-toast .toast-body {
+    background-color: #444; /* Slightly lighter background for the body */
+  }
+  
+  .notification-toast.success {
+    background-color: #28a745; /* Green background for success */
+  }
+  
+  .notification-toast.error {
+    background-color: #dc3545; /* Red background for error */
+  }
+  
+  .notification-toast.info {
+    background-color: #17a2b8; /* Blue background for info */
+  }
+  
+  .notification-toast.warning {
+    background-color: #ffc107; /* Yellow background for warning */
+  }
+  
+  .notification-toast .close {
+    color: #fff; /* White color for close button */
+  }
+  
+  .notification-toast .close:hover {
+    color: #ccc; /* Light color on hover */
+  }
+  

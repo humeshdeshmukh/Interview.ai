@@ -1,0 +1,24 @@
+/* InputField.css */
+
+/* Custom input field styles */
+.custom-input {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .custom-input:focus {
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Blue shadow on focus */
+  }
+  
+  .custom-input.is-invalid {
+    border-color: #dc3545; /* Red border for invalid state */
+    background-color: #f8d7da; /* Light red background for invalid state */
+  }
+  
+  .custom-input.is-invalid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); /* Red shadow on focus for invalid state */
+  }
+  

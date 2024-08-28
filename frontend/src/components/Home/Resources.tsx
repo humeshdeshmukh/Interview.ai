@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import './Resources.css'; // Import custom CSS if needed
+import './Resources.css'; // Import custom CSS
 
 const Resources: React.FC = () => {
   // Sample resources data
@@ -21,25 +21,49 @@ const Resources: React.FC = () => {
       title: 'Interview Questions Database',
       description: 'A collection of common and challenging interview questions across different industries.',
     },
-    // Add more resources as needed
+    {
+      title: 'Salary Negotiation Tips',
+      description: 'Strategies and tips to help you successfully negotiate your salary.',
+    },
+    {
+      title: 'Job Search Strategies',
+      description: 'Effective strategies to help you find and secure the job you want.',
+    },
+    {
+      title: 'Career Development Resources',
+      description: 'Tools and resources to help you grow and advance in your career.',
+    },
+    {
+      title: 'Networking Best Practices',
+      description: 'Best practices for building and maintaining a professional network.',
+    },
+    {
+      title: 'Cover Letter Writing Tips',
+      description: 'Guidance on writing compelling cover letters that make a strong impression.',
+    },
   ];
 
+  // Duplicate resources for continuous scroll effect
+  const duplicatedResources = [...resources, ...resources];
+
   return (
-    <section className="resources-section py-5">
+    <section className="resources-section">
       <Container>
-        <h2 className="text-center mb-4 text-dark">Resources</h2>
-        <Row>
-          {resources.map((resource, index) => (
-            <Col md={6} lg={4} key={index} className="mb-4">
-              <Card className="resource-card">
+        <h2 className="resources-heading">Resources</h2>
+        <div className="resources-slider">
+          <div className="resources-slide-inner">
+            {duplicatedResources.map((resource, index) => (
+              <Card className="resource-card" key={index}>
                 <Card.Body>
-                  <Card.Title>{resource.title}</Card.Title>
-                  <Card.Text>{resource.description}</Card.Text>
+                  <Card.Title className="resource-title">{resource.title}</Card.Title>
+                  <Card.Text className="resource-description">
+                    {resource.description}
+                  </Card.Text>
                 </Card.Body>
               </Card>
-            </Col>
-          ))}
-        </Row>
+            ))}
+          </div>
+        </div>
       </Container>
     </section>
   );

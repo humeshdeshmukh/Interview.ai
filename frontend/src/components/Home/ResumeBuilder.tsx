@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Col, Row, Alert, Spinner } from 'react-bootstrap';
+import './ResumeBuilder.css';
+
 
 // Mock function for ATS scoring (replace with actual implementation)
 const calculateATSScore = (resumeContent: string) => {

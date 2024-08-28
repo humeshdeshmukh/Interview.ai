@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import './Header.css';
 import logo from './logo.jpg'; // Import the logo image
 
@@ -30,10 +30,18 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
               <NavDropdown.Item as={Link} to="/faq">FAQ</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Form className="d-flex ms-auto">
-            <FormControl type="text" placeholder="Search" className="me-2" />
-            <Button variant="outline-light">Search</Button>
-          </Form>
+          <Nav className="ms-auto">
+            <NavDropdown
+              title={<span className="profile-title">Profile</span>}
+              id="basic-nav-dropdown"
+              align="end"
+            >
+              <NavDropdown.Item as={Link} to="/profile">View Profile</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item as={Link} to="/logout">Logout</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
           <Nav className="ms-3">
             <Button as={Link} to="/login" variant="outline-light" className="me-2">
               Login

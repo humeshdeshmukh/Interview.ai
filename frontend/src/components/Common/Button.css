@@ -1,0 +1,33 @@
+/* Button.css */
+
+/* Custom button styles */
+.custom-button {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .custom-button .spinner-border {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .custom-button .button-icon {
+    margin-right: 8px;
+  }
+  
+  /* Hover and focus effects */
+  .custom-button:hover,
+  .custom-button:focus {
+    transform: scale(1.05);
+  }
+  
+  /* Loading spinner color adjustment */
+  .custom-button.loading {
+    padding-left: 2.5rem; /* Space for spinner */
+  }
+  

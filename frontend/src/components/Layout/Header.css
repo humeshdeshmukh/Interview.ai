@@ -16,41 +16,27 @@
   object-fit: cover; /* Ensures the image covers the area without distortion */
 }
 
-
 .header-title {
   font-weight: bold;
+  color: #fff; /* Ensure the title is visible on a dark background */
 }
 
 .nav-link {
   font-size: 1rem;
   margin: 0 10px;
+  color: #fff; /* Ensure nav links are visible */
 }
 
-.search-form {
-  display: flex;
-  align-items: center;
-}
-
-.search-input {
-  border-radius: 20px;
-  padding: 0.5rem;
-  border: 1px solid #6c757d;
-  background-color: #343a40;
-  color: #fff;
-}
-
-.search-button {
-  border-radius: 20px;
-  margin-left: 10px;
+.profile-title {
+  color: #fff; /* Ensure the profile title is visible */
 }
 
 @media (max-width: 768px) {
   .header-navbar {
     padding: 0.5rem 0;
   }
-  
-  .search-form {
-    margin-top: 10px;
-    width: 100%;
+
+  .nav-link {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
   }
 }

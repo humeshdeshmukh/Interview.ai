@@ -1,0 +1,112 @@
+/* Resources.css */
+
+/* Container for the Resources section */
+.resources-section {
+    background-color: #000; /* Black background */
+    padding: 50px 0;
+    position: relative;
+    overflow: hidden; /* Hide overflow for smooth scrolling effect */
+  }
+  
+  /* Heading styles */
+  .resources-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff; /* White text color */
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  /* Sliding effect container */
+  .resources-slider {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Sliding effect inner container */
+  .resources-slide-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 200%; /* Double the width for continuous scrolling effect */
+    animation: slideLeftToRight 20s linear infinite;
+  }
+  
+  /* Keyframes for left to right sliding animation */
+  @keyframes slideLeftToRight {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  /* Duplicate the sliding effect for right to left animation */
+  .resources-slide-inner::after {
+    content: "";
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%; /* Extra space for seamless loop */
+    animation: slideRightToLeft 20s linear infinite;
+  }
+  
+  @keyframes slideRightToLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(50%);
+    }
+  }
+  
+  /* Individual resource card */
+  .resource-card {
+    background-color: #222; /* Dark grey background for cards */
+    border: 1px solid #444; /* Darker border */
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 15px; /* Space between cards */
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7); /* Dark shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    flex-shrink: 0; /* Prevent cards from shrinking */
+  }
+  
+  /* Hover effect for cards */
+  .resource-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9); /* Enhanced shadow on hover */
+  }
+  
+  /* Resource title styles */
+  .resource-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #fff; /* White text color */
+    margin-bottom: 10px;
+  }
+  
+  /* Resource description styles */
+  .resource-description {
+    font-size: 1rem;
+    color: #ccc; /* Light grey text for description */
+    margin-bottom: 15px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .resources-section {
+      padding: 30px 0;
+    }
+  
+    .resources-heading {
+      font-size: 2rem;
+    }
+  
+    .resource-card {
+      width: 250px;
+    }
+  }
+  

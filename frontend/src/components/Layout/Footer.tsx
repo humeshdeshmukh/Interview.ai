@@ -1,58 +1,70 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import './Footer.css'; // Import custom styles for the footer
+import { Link } from 'react-router-dom';
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
+import Chatbot from '../Chatbot/Chatbot'; // Correct path to your Chatbot component
+import './Footer.css'; // Ensure you have appropriate styles
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
-    <footer className="bg-dark text-light py-4">
-      <div className="container">
-        <div className="row">
-          {/* Company Info */}
-          <div className="col-md-3 mb-3">
-            <h5>Company</h5>
-            <ul className="list-unstyled">
-              <li><a href="#about-us" className="text-light">About Us</a></li>
-              <li><a href="#services" className="text-light">Services</a></li>
-              <li><a href="#contact" className="text-light">Contact</a></li>
-              <li><a href="#careers" className="text-light">Careers</a></li>
-            </ul>
-          </div>
-
-          {/* Social Media Links */}
-          <div className="col-md-3 mb-3">
-            <h5>Follow Us</h5>
-            <div className="d-flex flex-column">
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-light mb-2">Twitter</a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-light mb-2">Facebook</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-light mb-2">LinkedIn</a>
-            </div>
-          </div>
-
-          {/* Newsletter Signup */}
-          <div className="col-md-3 mb-3">
-            <h5>Newsletter</h5>
-            <form className="d-flex flex-column">
-              <input type="email" className="form-control mb-2" placeholder="Your email address" />
-              <button type="submit" className="btn btn-primary">Subscribe</button>
-            </form>
-          </div>
-
-          {/* Legal Information */}
-          <div className="col-md-3 mb-3">
-            <h5>Legal</h5>
-            <ul className="list-unstyled">
-              <li><a href="#privacy-policy" className="text-light">Privacy Policy</a></li>
-              <li><a href="#terms-of-service" className="text-light">Terms of Service</a></li>
-            </ul>
+    <footer className="footer">
+      <div className="footer-container">
+        {/* Company Info */}
+        <div className="footer-section company-info">
+          <h3>InterviewMaster.ai</h3>
+          <p>Empowering your interview preparation with advanced tools and resources.</p>
+          <div className="social-media">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FaFacebookF />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <FaTwitter />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedinIn />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FaInstagram />
+            </a>
           </div>
         </div>
 
-        {/* Chatbot */}
-        <div className="text-center mt-4">
-          <button className="btn btn-info" onClick={() => window.open('https://your-chatbot-link.com', '_blank')}>
-            Chat with us
-          </button>
-          <p className="mt-2">Have questions? Our AI chatbot is here to help!</p>
+        {/* Quick Links */}
+        <div className="footer-section quick-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><Link to="/dashboard">Dashboard</Link></li>
+            <li><Link to="/resume-builder">Resume Builder</Link></li>
+            <li><Link to="/interview-questions">Interview Questions</Link></li>
+            <li><Link to="/practice-tests">Practice Tests</Link></li>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/contact">Contact Us</Link></li>
+          </ul>
+        </div>
+
+        {/* Contact Info */}
+        <div className="footer-section contact-info">
+          <h4>Contact Info</h4>
+          <p>Email: <a href="mailto:info@interviewmaster.ai">info@interviewmaster.ai</a></p>
+          <p>Phone: +123 456 7890</p>
+          <p>Address: 123 Interview St, Suite 456, Prep City, PC 78901</p>
+        </div>
+
+        {/* Newsletter Signup */}
+        <div className="footer-section newsletter">
+          <h4>Subscribe to Our Newsletter</h4>
+          <form className="newsletter-form">
+            <input 
+              type="email" 
+              placeholder="Enter your email address" 
+              required 
+            />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+
+        {/* Chatbot Integration */}
+        <div className="footer-section chatbot">
+          <Chatbot />
         </div>
       </div>
     </footer>
