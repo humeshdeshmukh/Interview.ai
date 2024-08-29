@@ -1,13 +1,12 @@
-// Header.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import './Header.css';
-import logo from '../../assets/logo.jpg'; // Adjust the path to your logo image
-import profilePic from '../../assets/Profile-pic.webp'; // Adjust the path to your profile picture
+import logo from '../../assets/logo.jpg';
+import profilePic from '../../assets/Profile-pic.webp';
 
 interface HeaderProps {
-  onToggleSidebar: () => void;
+  onToggleSidebar?: () => void; // Make onToggleSidebar optional
 }
 
 const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
