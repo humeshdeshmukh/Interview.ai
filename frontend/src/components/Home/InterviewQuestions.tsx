@@ -1,41 +1,30 @@
+// src/components/InterviewQuestions.tsx
+
 import React, { useState } from 'react';
 import { Container, Card, Button, Form, ProgressBar, Dropdown, Modal, Spinner, InputGroup } from 'react-bootstrap';
-
-interface Question {
-  id: number;
-  title: string;
-  description: string;
-  isBookmarked: boolean;
-}
+import { questions, Question } from './questionsData'; // Adjust the path as necessary
 
 const InterviewQuestions: React.FC = () => {
-  const [questions, setQuestions] = useState<Question[]>([
-    { id: 1, title: 'Tell me about yourself', description: 'Describe your background and experience in a brief manner.', isBookmarked: false },
-    { id: 2, title: 'What is your greatest strength?', description: 'Discuss your most significant strength and provide examples of how it has helped you in your career.', isBookmarked: false },
-    { id: 3, title: 'What is your greatest weakness?', description: 'Explain a weakness you have and how you are working to improve it.', isBookmarked: false },
-    { id: 4, title: 'Why do you want to work here?', description: 'Share your reasons for wanting to join the company and how you align with its values and goals.', isBookmarked: false },
-    { id: 5, title: 'Describe a challenging project you worked on.', description: 'Provide details about a difficult project and how you managed to overcome the challenges.', isBookmarked: false },
-    { id: 6, title: 'How do you handle stress and pressure?', description: 'Discuss your strategies for managing stress and maintaining performance under pressure.', isBookmarked: false },
-    { id: 7, title: 'Where do you see yourself in five years?', description: 'Outline your career goals and how you plan to achieve them.', isBookmarked: false },
-    { id: 8, title: 'Describe a time when you had to work as part of a team.', description: 'Share an experience where you collaborated with others to achieve a common goal.', isBookmarked: false },
-    { id: 9, title: 'How do you prioritize your work?', description: 'Explain your approach to managing tasks and meeting deadlines.', isBookmarked: false },
-    { id: 10, title: 'Why should we hire you?', description: 'Summarize why you are the best candidate for the position and what unique qualities you bring to the team.', isBookmarked: false },
-  ]);
-
+  const [questionsData, setQuestionsData] = useState<Question[]>(questions); // Use imported questions
   const [filter, setFilter] = useState<string>('All');
+  const [companyFilter, setCompanyFilter] = useState<string>('All');
   const [search, setSearch] = useState<string>('');
   const [progress, setProgress] = useState<number>(0);
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
   const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
 
   const handleBookmark = (id: number) => {
-    setQuestions((prevQuestions) =>
+    setQuestionsData((prevQuestions) =>
       prevQuestions.map((q) => (q.id === id ? { ...q, isBookmarked: !q.isBookmarked } : q))
     );
   };
 
   const handleFilterChange = (filterValue: string) => {
     setFilter(filterValue);
+  };
+
+  const handleCompanyFilterChange = (companyValue: string) => {
+    setCompanyFilter(companyValue);
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,8 +41,10 @@ const InterviewQuestions: React.FC = () => {
     setSelectedQuestion(null);
   };
 
-  const filteredQuestions = questions
+  const filteredQuestions = questionsData
     .filter((q) => (filter === 'Bookmarked' ? q.isBookmarked : true))
+    .filter((q) => (filter === 'Tech' || filter === 'Non-Tech' ? q.category === filter : true))
+    .filter((q) => (companyFilter === 'All' ? true : q.company === companyFilter))
     .filter((q) => q.title.toLowerCase().includes(search.toLowerCase()) || q.description.toLowerCase().includes(search.toLowerCase()));
 
   return (
@@ -75,11 +66,28 @@ const InterviewQuestions: React.FC = () => {
         <div className="d-flex align-items-center mb-3 mb-md-0">
           <Dropdown>
             <Dropdown.Toggle variant="secondary" id="filter-dropdown">
-              Filter Questions
+              Filter by Category
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => handleFilterChange('All')}>All</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange('Tech')}>Tech</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange('Non-Tech')}>Non-Tech</Dropdown.Item>
               <Dropdown.Item onClick={() => handleFilterChange('Bookmarked')}>Bookmarked</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown className="ms-3">
+            <Dropdown.Toggle variant="secondary" id="company-filter-dropdown">
+              Filter by Company
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => handleCompanyFilterChange('All')}>All</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleCompanyFilterChange('TCS')}>TCS</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleCompanyFilterChange('Infosys')}>Infosys</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleCompanyFilterChange('Google')}>Google</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleCompanyFilterChange('Amazon')}>Amazon</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleCompanyFilterChange('Facebook')}>Facebook</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleCompanyFilterChange('Apple')}>Apple</Dropdown.Item>
+              {/* Add more companies as needed */}
             </Dropdown.Menu>
           </Dropdown>
           <ProgressBar now={progress} label={`${Math.round(progress)}%`} className="w-50 ms-3" />

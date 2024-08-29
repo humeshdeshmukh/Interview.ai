@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  auth-service:
+    build:
+      context: ./microservices/auth-service
+    ports:
+      - "3001:3000"
+    networks:
+      - backend
+
+  resume-service:
+    build:
+      context: ./microservices/resume-service
+    ports:
+      - "3002:3000"
+    networks:
+      - backend
+
+  chatbot-service:
+    build:
+      context: ./microservices/chatbot-service
+    ports:
+      - "3003:3000"
+    networks:
+      - backend
+
+  user-service:
+    build:
+      context: ./microservices/user-service
+    ports:
+      - "3004:3000"
+    networks:
+      - backend
+
+  event-bus:
+    build:
+      context: ./microservices/event-bus
+    networks:
+      - backend
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+    ports:
+      - "8080:3000"
+    networks:
+      - backend
+
+  service-mesh:
+    build:
+      context: ./service-mesh
+    networks:
+      - backend
+
+  monitoring:
+    image: prom/prometheus:latest
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - backend
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - ./monitoring/grafana/grafana.yml:/etc/grafana/grafana.ini
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    volumes:
+      - ./monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - "9093:9093"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
