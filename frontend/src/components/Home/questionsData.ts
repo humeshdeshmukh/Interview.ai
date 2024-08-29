@@ -138,4 +138,95 @@ export interface Question {
   { id: 98, title: 'What are some methods you use to stay up-to-date with industry trends and technologies?', description: 'Share your approach to keeping current with advancements in your field.', category: 'Non-Tech', isBookmarked: false },
   { id: 99, title: 'How do you handle feedback that you disagree with?', description: 'Explain how you respond to feedback that you may not agree with and how you use it constructively.', category: 'Non-Tech', isBookmarked: false },
   { id: 100, title: 'Describe a time when you had to lead a team through a challenging project.', description: 'Share an example of your leadership during a difficult project and the outcome.', category: 'Non-Tech', isBookmarked: false },
+// src/questionsData.ts
+
+// Tech Questions
+{ id: 101, title: 'What is the difference between a thread and a process?', description: 'Explain the differences between threads and processes, and their use cases.', category: 'Tech', company: 'TCS', isBookmarked: false },
+{ id: 102, title: 'Describe how the Observer pattern works and provide an example of its implementation.', description: 'Discuss the Observer design pattern and how it can be applied in software development.', category: 'Tech', company: 'TCS', isBookmarked: false },
+{ id: 103, title: 'How does TCS handle big data and analytics?', description: 'Discuss the tools and techniques used by TCS for big data processing and analytics.', category: 'Tech', company: 'TCS', isBookmarked: false },
+{ id: 104, title: 'What is continuous integration and why is it important?', description: 'Explain the concept of continuous integration and its significance in modern software development.', category: 'Tech', company: 'TCS', isBookmarked: false },
+{ id: 105, title: 'Explain the concept of SQL joins and provide examples of their use.', description: 'Discuss different types of SQL joins and their applications in querying databases.', category: 'Tech', company: 'TCS', isBookmarked: false },
+
+// Non-Tech Questions
+{ id: 106, title: 'Describe a time when you had to work with a difficult team member.', description: 'Share an experience where you managed to collaborate effectively with a challenging team member.', category: 'Non-Tech', company: 'TCS', isBookmarked: false },
+{ id: 107, title: 'How do you prioritize tasks when managing multiple projects?', description: 'Discuss your approach to prioritizing tasks and managing multiple projects simultaneously.', category: 'Non-Tech', company: 'TCS', isBookmarked: false },
+{ id: 108, title: 'Tell me about a time when you had to adapt to a significant change in your work environment.', description: 'Describe how you adjusted to a major change in your workplace and the outcomes.', category: 'Non-Tech', company: 'TCS', isBookmarked: false },
+{ id: 109, title: 'How do you handle conflicting feedback from different stakeholders?', description: 'Discuss your strategy for managing and reconciling conflicting feedback from various stakeholders.', category: 'Non-Tech', company: 'TCS', isBookmarked: false },
+{ id: 110, title: 'What motivates you to excel in your work?', description: 'Share what drives you to achieve excellence and maintain high performance in your job.', category: 'Non-Tech', company: 'TCS', isBookmarked: false },
+// src/questionsData.ts
+
+// Tech Questions
+{ id: 111, title: 'What are the advantages and disadvantages of using NoSQL databases?', description: 'Discuss the benefits and drawbacks of NoSQL databases compared to traditional relational databases.', category: 'Tech', company: 'Infosys', isBookmarked: false },
+{ id: 112, title: 'How do you implement authentication and authorization in a web application?', description: 'Explain methods for managing user authentication and authorization in web applications.', category: 'Tech', company: 'Infosys', isBookmarked: false },
+{ id: 113, title: 'Describe the use of Docker in application development and deployment.', description: 'Discuss how Docker is utilized for containerization and its benefits in development and deployment.', category: 'Tech', company: 'Infosys', isBookmarked: false },
+{ id: 114, title: 'How does Infosys use Agile methodologies in project management?', description: 'Describe the Agile practices adopted by Infosys and their impact on project management.', category: 'Tech', company: 'Infosys', isBookmarked: false },
+{ id: 115, title: 'What is the role of indexing in database performance?', description: 'Explain how indexing improves database performance and its implications for query optimization.', category: 'Tech', company: 'Infosys', isBookmarked: false },
+
+// Non-Tech Questions
+{ id: 116, title: 'Share an experience where you had to resolve a complex problem under pressure.', description: 'Discuss a situation where you successfully solved a challenging problem in a high-pressure environment.', category: 'Non-Tech', company: 'Infosys', isBookmarked: false },
+{ id: 117, title: 'How do you approach learning new technologies or tools?', description: 'Explain your methods for staying current with new technologies and tools in your field.', category: 'Non-Tech', company: 'Infosys', isBookmarked: false },
+{ id: 118, title: 'Describe a time when you had to collaborate with a cross-functional team.', description: 'Share your experience working with a team from different functional areas and the outcomes.', category: 'Non-Tech', company: 'Infosys', isBookmarked: false },
+{ id: 119, title: 'How do you handle working on multiple projects with varying deadlines?', description: 'Discuss your approach to managing and balancing multiple projects with different deadlines.', category: 'Non-Tech', company: 'Infosys', isBookmarked: false },
+{ id: 120, title: 'What strategies do you use to maintain work-life balance?', description: 'Explain how you achieve and maintain a healthy work-life balance.', category: 'Non-Tech', company: 'Infosys', isBookmarked: false },
+// src/questionsData.ts
+
+// Tech Questions
+{ id: 121, title: 'What is the purpose of MapReduce and how does it work?', description: 'Explain the MapReduce programming model and its use in processing large data sets.', category: 'Tech', company: 'Google', isBookmarked: false },
+{ id: 122, title: 'How does Google’s BigQuery perform large-scale data analysis?', description: 'Discuss the features of BigQuery and how it handles large-scale data analysis.', category: 'Tech', company: 'Google', isBookmarked: false },
+{ id: 123, title: 'What are the benefits of using Kubernetes for container orchestration?', description: 'Describe the advantages of Kubernetes for managing containerized applications.', category: 'Tech', company: 'Google', isBookmarked: false },
+{ id: 124, title: 'How does Google handle data consistency and replication across its distributed systems?', description: 'Explain Google’s strategies for ensuring data consistency and replication in distributed systems.', category: 'Tech', company: 'Google', isBookmarked: false },
+{ id: 125, title: 'What are the key components of Google Cloud Platform (GCP)?', description: 'Discuss the main components of GCP and their functions in cloud computing.', category: 'Tech', company: 'Google', isBookmarked: false },
+
+// Non-Tech Questions
+{ id: 126, title: 'Describe a time when you had to influence others to accept your ideas.', description: 'Share an example of how you successfully persuaded others to support your ideas.', category: 'Non-Tech', company: 'Google', isBookmarked: false },
+{ id: 127, title: 'How do you manage and prioritize competing tasks in a fast-paced environment?', description: 'Discuss your approach to handling multiple tasks and priorities in a dynamic work setting.', category: 'Non-Tech', company: 'Google', isBookmarked: false },
+{ id: 128, title: 'Tell me about a time when you had to learn a new skill quickly to complete a project.', description: 'Share an experience where you rapidly acquired a new skill to meet a project requirement.', category: 'Non-Tech', company: 'Google', isBookmarked: false },
+{ id: 129, title: 'How do you handle feedback and use it to improve your performance?', description: 'Discuss how you process and incorporate feedback to enhance your work performance.', category: 'Non-Tech', company: 'Google', isBookmarked: false },
+{ id: 130, title: 'What are your strategies for maintaining effective communication within a team?', description: 'Explain your methods for ensuring clear and effective communication among team members.', category: 'Non-Tech', company: 'Google', isBookmarked: false },
+// src/questionsData.ts
+
+// Tech Questions
+{ id: 131, title: 'How does Amazon Web Services (AWS) support scalability for web applications?', description: 'Discuss how AWS services enable scalability for web applications.', category: 'Tech', company: 'Amazon', isBookmarked: false },
+{ id: 132, title: 'What are the different types of load balancers used in cloud architecture?', description: 'Explain various load balancing techniques and their use in cloud-based systems.', category: 'Tech', company: 'Amazon', isBookmarked: false },
+{ id: 133, title: 'Describe how Amazon handles distributed transaction management.', description: 'Discuss Amazon’s approach to managing transactions across distributed systems.', category: 'Tech', company: 'Amazon', isBookmarked: false },
+{ id: 134, title: 'What is Amazon’s DynamoDB and how does it ensure high availability?', description: 'Explain the key features of DynamoDB and its methods for ensuring high availability.', category: 'Tech', company: 'Amazon', isBookmarked: false },
+{ id: 135, title: 'How does Amazon’s recommendation engine work?', description: 'Discuss the principles behind Amazon’s recommendation algorithms and their implementation.', category: 'Tech', company: 'Amazon', isBookmarked: false },
+
+// Non-Tech Questions
+{ id: 136, title: 'Describe a situation where you had to make a data-driven decision.', description: 'Share an experience where you used data to make an important decision.', category: 'Non-Tech', company: 'Amazon', isBookmarked: false },
+{ id: 137, title: 'How do you handle unexpected changes or challenges in a project?', description: 'Discuss your approach to managing unexpected issues or changes during a project.', category: 'Non-Tech', company: 'Amazon', isBookmarked: false },
+{ id: 138, title: 'Tell me about a time when you worked with a diverse team and how you managed differences.', description: 'Share your experience working with a diverse team and how you handled differences effectively.', category: 'Non-Tech', company: 'Amazon', isBookmarked: false },
+{ id: 139, title: 'How do you stay motivated and productive when working on long-term projects?', description: 'Discuss your strategies for maintaining motivation and productivity during lengthy projects.', category: 'Non-Tech', company: 'Amazon', isBookmarked: false },
+{ id: 140, title: 'What techniques do you use to ensure quality and accuracy in your work?', description: 'Explain the methods you employ to maintain high standards of quality and accuracy in your tasks.', category: 'Non-Tech', company: 'Amazon', isBookmarked: false },
+// src/questionsData.ts
+
+// Tech Questions
+{ id: 141, title: 'What are the key components of Facebook’s infrastructure for handling large-scale data?', description: 'Discuss the main components of Facebook’s infrastructure and their role in managing large data volumes.', category: 'Tech', company: 'Facebook', isBookmarked: false },
+{ id: 142, title: 'How does Facebook implement real-time updates and notifications?', description: 'Explain the technologies and techniques used by Facebook to provide real-time updates and notifications.', category: 'Tech', company: 'Facebook', isBookmarked: false },
+{ id: 143, title: 'What are the differences between SQL and NoSQL databases, and when would you use each?', description: 'Discuss the key differences between SQL and NoSQL databases and their respective use cases.', category: 'Tech', company: 'Facebook', isBookmarked: false },
+{ id: 144, title: 'How does Facebook use machine learning for content recommendations?', description: 'Explain the role of machine learning in Facebook’s content recommendation systems.', category: 'Tech', company: 'Facebook', isBookmarked: false },
+{ id: 145, title: 'What is GraphQL and how does it benefit API development?', description: 'Discuss the GraphQL query language and its advantages for API development compared to traditional REST APIs.', category: 'Tech', company: 'Facebook', isBookmarked: false },
+
+// Non-Tech Questions
+{ id: 146, title: 'Describe a time when you had to manage a project with a tight deadline.', description: 'Share how you successfully managed a project with a challenging deadline.', category: 'Non-Tech', company: 'Facebook', isBookmarked: false },
+{ id: 147, title: 'How do you handle conflict within a team?', description: 'Discuss your approach to resolving conflicts among team members.', category: 'Non-Tech', company: 'Facebook', isBookmarked: false },
+{ id: 148, title: 'Tell me about a time when you had to mentor a junior team member.', description: 'Share your experience mentoring a less experienced team member and the impact it had.', category: 'Non-Tech', company: 'Facebook', isBookmarked: false },
+{ id: 149, title: 'How do you approach setting and achieving personal and professional goals?', description: 'Discuss your methods for setting, pursuing, and achieving both personal and professional goals.', category: 'Non-Tech', company: 'Facebook', isBookmarked: false },
+{ id: 150, title: 'What is your approach to managing and resolving project risks?', description: 'Explain your strategies for identifying, managing, and mitigating risks in projects.', category: 'Non-Tech', company: 'Facebook', isBookmarked: false },
+// src/questionsData.ts
+
+// Tech Questions
+{ id: 151, title: 'How does Apple’s iOS ecosystem support app security?', description: 'Discuss the security features and practices in the iOS ecosystem that protect applications.', category: 'Tech', company: 'Apple', isBookmarked: false },
+{ id: 152, title: 'What is the role of Core Animation in iOS app development?', description: 'Explain how Core Animation is used in iOS development for creating animations and transitions.', category: 'Tech', company: 'Apple', isBookmarked: false },
+{ id: 153, title: 'How does Apple use SwiftUI for building user interfaces?', description: 'Describe the benefits of using SwiftUI for developing user interfaces in iOS applications.', category: 'Tech', company: 'Apple', isBookmarked: false },
+{ id: 154, title: 'What are the key features of Apple’s HomeKit framework?', description: 'Discuss the HomeKit framework and its features for developing smart home applications.', category: 'Tech', company: 'Apple', isBookmarked: false },
+{ id: 155, title: 'How does Apple handle memory management in Swift?', description: 'Explain the memory management techniques used in Swift and their impact on application performance.', category: 'Tech', company: 'Apple', isBookmarked: false },
+
+// Non-Tech Questions
+{ id: 156, title: 'Describe a time when you had to resolve a conflict with a customer or client.', description: 'Share how you effectively handled a conflict with a customer or client.', category: 'Non-Tech', company: 'Apple', isBookmarked: false },
+{ id: 157, title: 'How do you approach professional development and skill enhancement?', description: 'Discuss your strategies for continuous learning and improving your skills in your field.', category: 'Non-Tech', company: 'Apple', isBookmarked: false },
+{ id: 158, title: 'Tell me about a project where you had to use creative problem-solving.', description: 'Share an experience where creative thinking was essential to solving a problem in a project.', category: 'Non-Tech', company: 'Apple', isBookmarked: false },
+{ id: 159, title: 'How do you balance teamwork with individual responsibilities?', description: 'Discuss your approach to balancing collaborative efforts with personal responsibilities in projects.', category: 'Non-Tech', company: 'Apple', isBookmarked: false },
+{ id: 160, title: 'What strategies do you use to stay organized and manage your workload effectively?', description: 'Explain the techniques you use to stay organized and handle your workload efficiently.', category: 'Non-Tech', company: 'Apple', isBookmarked: false },
+
 ];

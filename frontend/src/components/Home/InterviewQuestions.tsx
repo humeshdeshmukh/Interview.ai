@@ -1,15 +1,13 @@
-// src/components/InterviewQuestions.tsx
-
 import React, { useState } from 'react';
-import { Container, Card, Button, Form, ProgressBar, Dropdown, Modal, Spinner, InputGroup } from 'react-bootstrap';
+import { Container, Card, Button, Form, Dropdown, Modal, Spinner, InputGroup, Row, Col, Badge } from 'react-bootstrap';
 import { questions, Question } from './questionsData'; // Adjust the path as necessary
+import './InterviewQuestions.css';
 
 const InterviewQuestions: React.FC = () => {
   const [questionsData, setQuestionsData] = useState<Question[]>(questions); // Use imported questions
   const [filter, setFilter] = useState<string>('All');
   const [companyFilter, setCompanyFilter] = useState<string>('All');
   const [search, setSearch] = useState<string>('');
-  const [progress, setProgress] = useState<number>(0);
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
   const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
 
@@ -45,7 +43,12 @@ const InterviewQuestions: React.FC = () => {
     .filter((q) => (filter === 'Bookmarked' ? q.isBookmarked : true))
     .filter((q) => (filter === 'Tech' || filter === 'Non-Tech' ? q.category === filter : true))
     .filter((q) => (companyFilter === 'All' ? true : q.company === companyFilter))
-    .filter((q) => q.title.toLowerCase().includes(search.toLowerCase()) || q.description.toLowerCase().includes(search.toLowerCase()));
+    .filter((q) =>
+      q.title.toLowerCase().includes(search.toLowerCase()) ||
+      q.description.toLowerCase().includes(search.toLowerCase()) ||
+      q.category.toLowerCase().includes(search.toLowerCase()) ||
+      q.company.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
     <Container className="py-5">
@@ -53,18 +56,18 @@ const InterviewQuestions: React.FC = () => {
 
       {/* Search, Filter, and Progress Bar */}
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-3 w-100 w-md-50">
           <Form.Control
             type="text"
-            placeholder="Search questions..."
+            placeholder="Search questions by title, category, or company..."
             value={search}
             onChange={handleSearchChange}
           />
-          <Button variant="outline-secondary">Search</Button>
+          <Button variant="outline-secondary" onClick={() => setSearch('')}>Clear</Button>
         </InputGroup>
 
         <div className="d-flex align-items-center mb-3 mb-md-0">
-          <Dropdown>
+          <Dropdown className="me-2">
             <Dropdown.Toggle variant="secondary" id="filter-dropdown">
               Filter by Category
             </Dropdown.Toggle>
@@ -75,7 +78,8 @@ const InterviewQuestions: React.FC = () => {
               <Dropdown.Item onClick={() => handleFilterChange('Bookmarked')}>Bookmarked</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <Dropdown className="ms-3">
+
+          <Dropdown>
             <Dropdown.Toggle variant="secondary" id="company-filter-dropdown">
               Filter by Company
             </Dropdown.Toggle>
@@ -87,21 +91,30 @@ const InterviewQuestions: React.FC = () => {
               <Dropdown.Item onClick={() => handleCompanyFilterChange('Amazon')}>Amazon</Dropdown.Item>
               <Dropdown.Item onClick={() => handleCompanyFilterChange('Facebook')}>Facebook</Dropdown.Item>
               <Dropdown.Item onClick={() => handleCompanyFilterChange('Apple')}>Apple</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleCompanyFilterChange('Microsoft')}>Microsoft</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleCompanyFilterChange('IBM')}>IBM</Dropdown.Item>
               {/* Add more companies as needed */}
             </Dropdown.Menu>
           </Dropdown>
-          <ProgressBar now={progress} label={`${Math.round(progress)}%`} className="w-50 ms-3" />
         </div>
       </div>
 
-      <div className="row">
+      <Row>
         {filteredQuestions.length > 0 ? (
           filteredQuestions.map((question) => (
-            <div className="col-md-4 mb-3" key={question.id}>
+            <Col md={6} lg={4} className="mb-3" key={question.id}>
               <Card className="h-100">
                 <Card.Body>
-                  <Card.Title>{question.title}</Card.Title>
-                  <Card.Text>{question.description}</Card.Text>
+                  <Card.Title>
+                    {question.title}
+                    <Badge bg="info" className="ms-2">{question.category}</Badge>
+                    <Badge bg="success" className="ms-2">{question.company}</Badge>
+                  </Card.Title>
+                  <Card.Text>
+                    {question.description.length > 100
+                      ? question.description.substring(0, 100) + '...'
+                      : question.description}
+                  </Card.Text>
                   <Button variant="primary" onClick={() => handleViewDetails(question)}>
                     View Details
                   </Button>
@@ -114,12 +127,14 @@ const InterviewQuestions: React.FC = () => {
                   </Button>
                 </Card.Body>
               </Card>
-            </div>
+            </Col>
           ))
         ) : (
-          <p className="text-muted text-center">No questions to display.</p>
+          <Col className="text-center">
+            <p className="text-muted">No questions to display.</p>
+          </Col>
         )}
-      </div>
+      </Row>
 
       {/* Details Modal */}
       <Modal show={showDetailsModal} onHide={handleCloseModal} size="lg">
@@ -129,7 +144,10 @@ const InterviewQuestions: React.FC = () => {
         <Modal.Body>
           {selectedQuestion ? (
             <>
+              <h5>Category: <Badge bg="info">{selectedQuestion.category}</Badge></h5>
+              <h5>Company: <Badge bg="success">{selectedQuestion.company}</Badge></h5>
               <p>{selectedQuestion.description}</p>
+              <p><strong>Details:</strong> {selectedQuestion.details || 'No additional details available.'}</p>
               {/* Add more detailed information here if needed */}
             </>
           ) : (
