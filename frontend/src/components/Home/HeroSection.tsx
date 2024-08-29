@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import TypingEffect from 'react-typing-effect';
 import './HeroSection.css'; // Ensure you have modern styles in this file
-import Resources from './Resources'; // Import the Resources component
 
 const HeroSection: React.FC = () => {
   return (
@@ -58,17 +57,7 @@ const HeroSection: React.FC = () => {
         </Container>
       </section>
 
-      {/* Resources Section */}
-      <section className="resources-section py-5">
-        <Container>
-          <Row>
-            <Col>
-              <h2 className="text-center mb-4 text-dark"></h2> {/* Title added and styled */}
-              <Resources />
-            </Col>
-          </Row>
-        </Container>
-      </section>
+      
     </>
   );
 };

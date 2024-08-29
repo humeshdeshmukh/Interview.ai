@@ -1,22 +1,37 @@
-/* ResumeBuilder.css */
+/* src/components/ResumeBuilder/ResumeBuilder.css */
 
 /* Container for the Resume Builder */
 .resume-builder-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    background-color: #121212;
+    color: #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* Heading styles */
 .resume-builder-heading {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    color: #333;
+    color: #ffffff;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* Heading effect */
+.resume-builder-heading::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 50px;
+    height: 5px;
+    background: #007bff;
+    border-radius: 5px;
+    transform: translateX(-50%);
 }
 
 /* Form styles */
@@ -28,57 +43,74 @@
 
 /* Input field styles */
 .resume-builder-input {
-    padding: 10px;
+    padding: 14px;
     font-size: 1rem;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
     width: 100%;
     box-sizing: border-box;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.resume-builder-input:focus {
+    border-color: #007bff;
+    background-color: #2c2c2c;
+    outline: none;
 }
 
 /* Label styles */
 .resume-builder-label {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    color: #495057;
+    color: #e0e0e0;
 }
 
 /* Button styles */
 .resume-builder-submit-btn {
     background-color: #007bff;
-    color: #fff;
-    padding: 12px;
-    font-size: 1rem;
+    color: #ffffff;
+    padding: 14px;
+    font-size: 1.1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .resume-builder-submit-btn:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 /* Section styles */
 .resume-section {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .resume-section-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: #495057;
-    margin-bottom: 10px;
+    color: #ffffff;
+    margin-bottom: 15px;
 }
 
 /* Field styles */
 .resume-field {
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    margin-bottom: 10px;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.resume-field:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
 /* Flexbox layout for form fields */
@@ -95,11 +127,11 @@
 /* Responsive design */
 @media (max-width: 768px) {
     .resume-builder-container {
-        padding: 15px;
+        padding: 20px;
     }
 
     .resume-builder-heading {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .flex-container {

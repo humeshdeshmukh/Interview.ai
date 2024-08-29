@@ -1,6 +1,7 @@
+// src/components/UserProfile/UserProfile.tsx
 import React, { useState } from 'react';
-import './UserProfile.css';
 import { Card, Button, ListGroup } from 'react-bootstrap';
+import './UserProfile.css';
 
 interface UserProfileProps {
   name: string;
@@ -47,15 +48,20 @@ const UserProfile: React.FC<UserProfileProps> = ({
 
   const handleSaveClick = () => {
     // Save the edited bio to the state or backend
+    // Implement the save logic here
     setIsEditing(false);
   };
 
   return (
-    <div className="container mt-5">
-      <Card className="user-profile">
+    <div className="user-profile-container mt-5">
+      <Card className="user-profile-card">
         <Card.Body>
           <div className="d-flex align-items-center mb-4">
-            <img src={profilePicture} alt={`${name}'s profile`} className="profile-picture rounded-circle" />
+            <img
+              src={profilePicture}
+              alt={`${name}'s profile`}
+              className="profile-picture rounded-circle"
+            />
             <div className="ms-3">
               <Card.Title>{name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{email}</Card.Subtitle>
@@ -64,7 +70,11 @@ const UserProfile: React.FC<UserProfileProps> = ({
 
           <ListGroup variant="flush">
             {location && <ListGroup.Item>Location: {location}</ListGroup.Item>}
-            {website && <ListGroup.Item>Website: <a href={website} target="_blank" rel="noopener noreferrer">{website}</a></ListGroup.Item>}
+            {website && (
+              <ListGroup.Item>
+                Website: <a href={website} target="_blank" rel="noopener noreferrer">{website}</a>
+              </ListGroup.Item>
+            )}
             {phone && <ListGroup.Item>Phone: {phone}</ListGroup.Item>}
 
             {stats && (
@@ -85,10 +95,26 @@ const UserProfile: React.FC<UserProfileProps> = ({
               <ListGroup.Item>
                 <h5>Social Links</h5>
                 <div className="d-flex flex-column">
-                  {socialLinks.facebook && <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>}
-                  {socialLinks.twitter && <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">Twitter</a>}
-                  {socialLinks.linkedin && <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
-                  {socialLinks.instagram && <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>}
+                  {socialLinks.facebook && (
+                    <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer">
+                      Facebook
+                    </a>
+                  )}
+                  {socialLinks.twitter && (
+                    <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
+                      Twitter
+                    </a>
+                  )}
+                  {socialLinks.linkedin && (
+                    <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                      LinkedIn
+                    </a>
+                  )}
+                  {socialLinks.instagram && (
+                    <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
+                      Instagram
+                    </a>
+                  )}
                 </div>
               </ListGroup.Item>
             )}
@@ -102,12 +128,16 @@ const UserProfile: React.FC<UserProfileProps> = ({
                     value={editedBio}
                     onChange={handleBioChange}
                   />
-                  <Button variant="primary" onClick={handleSaveClick}>Save</Button>
+                  <Button variant="primary" onClick={handleSaveClick}>
+                    Save
+                  </Button>
                 </>
               ) : (
                 <>
                   <p>{bio || 'No bio available'}</p>
-                  <Button variant="secondary" onClick={handleEditClick}>Edit Bio</Button>
+                  <Button variant="secondary" onClick={handleEditClick}>
+                    Edit Bio
+                  </Button>
                 </>
               )}
             </ListGroup.Item>

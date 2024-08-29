@@ -20,6 +20,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={onToggleSidebar} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">Home</Nav.Link> {/* Added Home link */}
             <Nav.Link as={Link} to="/resume">Resume Builder</Nav.Link>
             <Nav.Link as={Link} to="/questions">Interview Questions</Nav.Link>
             <Nav.Link as={Link} to="/practice-tests">Practice Tests</Nav.Link>

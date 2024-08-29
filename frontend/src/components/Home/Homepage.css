@@ -1,0 +1,182 @@
+/* Homepage.css */
+
+/* General styles for the homepage */
+.homepage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f4f4; /* Light background color */
+  }
+  
+  /* Hero Section styles */
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background: url('../assets/images/hero.png') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    background-color: #000; /* Set background color to black */
+  }
+  
+  .hero-section h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-section p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+  }
+  
+  .hero-section .cta-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .hero-section .cta-button:hover {
+    background-color: #0056b3; /* Darker shade of primary color */
+  }
+  
+  /* Section styles */
+  .section {
+    padding: 60px 20px;
+    background-color: #fff;
+    margin: 20px 0;
+    border-radius: 10px;
+  }
+  
+  .section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .section .section-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .section .card {
+    flex: 1;
+    min-width: 250px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section .card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .section .card p {
+    font-size: 1rem;
+  }
+  
+  .section .card a {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .section .card a:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Subscription Section styles */
+  .subscription-section {
+    background-color: #007bff; /* Blue background */
+    color: #fff;
+  }
+  
+  .subscription-section h2 {
+    color: #fff;
+  }
+  
+  .subscription-section .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .subscription-section input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .subscription-section button {
+    padding: 10px 20px;
+    background-color: #28a745; /* New cool color for button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .subscription-section button:hover {
+    background-color: #218838; /* Darker shade of the new color */
+  }
+  
+  /* Plan Section styles */
+  .plan-section {
+    background-color: #000; /* Set background color to black */
+    color: #1a0202; /* Text color to white for contrast */
+  }
+  
+  .plan-section .plan-card {
+    background-color: #080101; /* Darker background for cards */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .plan-section .plan-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .plan-section .plan-card p {
+    font-size: 1rem;
+  }
+  
+  .plan-section .plan-card .price {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .hero-section h1 {
+      font-size: 2rem;
+    }
+  
+    .hero-section p {
+      font-size: 1rem;
+    }
+  
+    .section .section-content {
+      flex-direction: column;
+    }
+  }
+  

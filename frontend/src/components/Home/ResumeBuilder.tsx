@@ -8,6 +8,7 @@ import './ResumeBuilder.css';
 
 // Mock function for ATS scoring (replace with actual implementation)
 const calculateATSScore = (resumeContent: string) => {
+  // Example ATS scoring algorithm (replace with actual algorithm)
   const score = Math.floor(Math.random() * 100);
   return score;
 };
