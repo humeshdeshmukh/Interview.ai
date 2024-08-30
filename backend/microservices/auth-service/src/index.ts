@@ -1,26 +1,26 @@
-// src/index.ts
-
+// Importing required modules
 import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import authRoutes from './routes/authRoutes';
+import cors from 'cors';
 
-dotenv.config();
+// Importing routes from the 'routes' directory
+import authRoutes from './routes/authRoutes'; // './' refers to the current directory (src), 'routes' is a subdirectory, and 'authRoutes' is the file name without the '.ts' extension.
 
 const app = express();
-app.use(express.json());
+const PORT = process.env.PORT || 5000;
 
-const PORT = process.env.PORT || 3000;
+// Middleware
+app.use(cors());
+app.use(express.json()); // For parsing application/json
 
-app.use('/auth', authRoutes);
+// Registering the authentication routes with the Express app
+app.use('/auth', authRoutes); // All routes defined in authRoutes will be prefixed with '/auth'
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/auth-service', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Auth service running on port ${PORT}`);
-  });
-}).catch(err => {
-  console.error('Database connection error:', err);
+// Default route for testing if the server is running
+app.get('/', (req, res) => {
+  res.send('Welcome to the Interview Mastery backend!');
+});
+
+// Starting the server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
