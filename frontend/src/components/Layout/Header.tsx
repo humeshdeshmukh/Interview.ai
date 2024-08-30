@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
       <Container fluid>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img src={logo} alt="Logo" className="header-logo" />
-          <span className="header-title ms-2">InterviewMastery</span>
+          <span className="header-title ms-2">InterviewMaster.Ai</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={onToggleSidebar} className="navbar-toggler" />
         <Navbar.Collapse id="basic-navbar-nav">
