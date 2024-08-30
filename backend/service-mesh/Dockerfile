@@ -1,21 +1,25 @@
-# service-mesh/Dockerfile
+# Dockerfile for service-mesh module
 
-# Use a base image with necessary tools (e.g., Node.js or a custom image)
-FROM node:18
+# Use a lightweight Node.js image
+FROM node:18-alpine
 
-# Set the working directory
-WORKDIR /usr/src/app
+# Install Istioctl
+RUN wget -qO- https://github.com/istio/istio/releases/download/1.16.0/istioctl-1.16.0-linux-amd64.tar.gz | tar xz -C /usr/local/bin
 
-# Copy any necessary files or scripts
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
 COPY . .
 
-# Install any necessary dependencies
-# (Install dependencies as needed, e.g., for custom scripts or tools)
+# Expose a port if needed (e.g., for debugging purposes)
+EXPOSE 3000
 
-# Expose necessary ports (if your service mesh setup requires them)
-# Example:
-# EXPOSE 15000
-
-# Command to run any setup scripts or tools (if applicable)
-# Example:
-# CMD ["node", "service-mesh.ts"]
+# Command to run the application (adjust according to your needs)
+CMD ["npm", "start"]

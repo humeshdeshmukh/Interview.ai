@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext'; // Ensure this path is correct
 import './Header.css';
 import logo from '../../assets/logo.jpg';
 import profilePic from '../../assets/Profile-pic.webp';
@@ -12,7 +12,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth(); // Use the hook
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="header-navbar">

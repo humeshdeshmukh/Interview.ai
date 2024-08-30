@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext'; // Make sure this path is correct
+import { useAuth } from '../../contexts/AuthContext'; // Ensure this path is correct
+import axiosInstance from '../../services/api'; // Import the Axios instance
 
 const RegisterForm: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -8,7 +9,7 @@ const RegisterForm: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const { register } = useAuth(); // Assuming you have a register method in AuthContext
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,7 +23,7 @@ const RegisterForm: React.FC = () => {
     try {
       setError(null);
       setLoading(true);
-      await register(email, password);
+      await axiosInstance.post('/auth/register', { email, password }); // Use the Axios instance
       navigate('/login'); // Redirect to login page upon successful registration
     } catch (error: any) {
       setError('Failed to create an account. Please try again.');

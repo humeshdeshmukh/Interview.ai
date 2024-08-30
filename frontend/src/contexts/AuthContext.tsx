@@ -1,77 +1,47 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
+import axios from 'axios';
 
-// Define the type for authentication context
-interface AuthContextType {
-  user: User | null;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-  isAuthenticated: boolean;
-}
+const AuthContext = createContext<any>(null);
 
-// Define the type for user
-interface User {
-  email: string;
-  // Add other user properties if needed
-}
-
-// Default values for the context
-const defaultAuthContext: AuthContextType = {
-  user: null,
-  login: async () => {},
-  logout: async () => {},
-  isAuthenticated: false,
-};
-
-// Create the AuthContext
-const AuthContext = createContext<AuthContextType>(defaultAuthContext);
-
-// Create a custom hook to use the AuthContext
-export const useAuth = (): AuthContextType => {
-  return useContext(AuthContext);
-};
-
-// Define the type for AuthProvider props
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-// AuthProvider component to provide context values
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<any>(null); // Replace `any` with your user type
 
-  const login = async (email: string, password: string): Promise<void> => {
-    // Replace with your actual authentication logic
+  const register = async (email: string, password: string) => {
     try {
-      // Simulate authentication
-      // Example: call an API to authenticate and get user data
-      // const response = await api.login(email, password);
-      // setUser(response.user);
-      
-      // For demonstration, just setting a static user
-      setUser({ email });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/auth/register`,
+        { email, password },
+        {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`
+          }
+        }
+      );
+      setUser(response.data.user);
     } catch (error) {
-      console.error('Login failed:', error);
-      throw new Error('Login failed');
+      console.error('Error registering:', error);
+      throw new Error('Failed to register');
     }
   };
 
-  const logout = async (): Promise<void> => {
-    // Replace with your actual logout logic
-    try {
-      // Example: call an API to log out
-      // await api.logout();
-      setUser(null);
-    } catch (error) {
-      console.error('Logout failed:', error);
-      throw new Error('Logout failed');
-    }
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('authToken');
   };
-
-  const isAuthenticated = user !== null;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+export { AuthProvider, useAuth };

@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
-import { Button, Col, Row, Alert, Spinner, Modal, Card, ListGroup } from 'react-bootstrap';
-import { TextField, Dialog, DialogTitle, DialogContent, DialogActions, Typography, IconButton } from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
+import { Button, Col, Row, Alert, Spinner, Card, ListGroup } from 'react-bootstrap';
+import { TextField, Dialog, DialogTitle, DialogContent, DialogActions, Typography, IconButton, MenuItem } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './ResumeBuilder.css';
 
-// Mock function for ATS scoring (replace with actual implementation)
-const calculateATSScore = (resumeContent: string) => {
-  // Example ATS scoring algorithm (replace with actual algorithm)
-  const score = Math.floor(Math.random() * 100);
-  return score;
+// Mock AI function (replace with actual API call)
+const fetchAIResumeSuggestions = async (formData: any) => {
+  // Simulate an AI service response
+  return {
+    summary: 'Experienced professional with a strong background in software development and project management.',
+    experience: '5+ years of experience in developing scalable applications and leading teams.',
+    education: 'Bachelor\'s degree in Computer Science from XYZ University.',
+    skills: 'JavaScript, React, Node.js, TypeScript, Project Management'
+  };
 };
 
-// Mock templates (replace with actual template rendering logic)
+// Mock ATS scoring (replace with actual implementation)
+const calculateATSScore = (resumeContent: string) => Math.floor(Math.random() * 100);
+
 const templates = [
   { id: '1', name: 'Professional' },
   { id: '2', name: 'Modern' },
@@ -22,26 +28,18 @@ const templates = [
 
 const ResumeBuilder: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    summary: '',
-    experience: '',
-    education: '',
-    skills: ''
+    name: '', email: '', phone: '', summary: '', experience: '', education: '', skills: ''
   });
   const [atsScore, setAtsScore] = useState<number | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [previewOpen, setPreviewOpen] = useState<boolean>(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<string>('1');
+  const [aiLoading, setAiLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,42 +52,35 @@ const ResumeBuilder: React.FC = () => {
       const resumeContent = `${formData.name}\n${formData.summary}\n${formData.experience}\n${formData.education}\n${formData.skills}`;
       const score = calculateATSScore(resumeContent);
       setAtsScore(score);
-    } catch (err) {
+    } catch {
       setError('An error occurred while calculating the ATS score.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handlePreviewOpen = () => {
-    setPreviewOpen(true);
-  };
+  const handleAIEnhancement = async () => {
+    setAiLoading(true);
+    setError(null);
 
-  const handlePreviewClose = () => {
-    setPreviewOpen(false);
+    try {
+      const aiSuggestions = await fetchAIResumeSuggestions(formData);
+      setFormData(prev => ({
+        ...prev,
+        summary: aiSuggestions.summary,
+        experience: aiSuggestions.experience,
+        education: aiSuggestions.education,
+        skills: aiSuggestions.skills
+      }));
+    } catch {
+      setError('An error occurred while fetching AI suggestions.');
+    } finally {
+      setAiLoading(false);
+    }
   };
 
   const handleDownload = async () => {
     const doc = new jsPDF();
-    const resumeContent = `
-      Name: ${formData.name}
-      Email: ${formData.email}
-      Phone: ${formData.phone}
-      
-      Professional Summary:
-      ${formData.summary}
-      
-      Work Experience:
-      ${formData.experience}
-      
-      Education:
-      ${formData.education}
-      
-      Skills:
-      ${formData.skills}
-    `;
-
-    // Use html2canvas to capture the HTML content for PDF
     const canvas = await html2canvas(document.getElementById('resume-preview')!);
     const imgData = canvas.toDataURL('image/png');
     doc.addImage(imgData, 'PNG', 10, 10);
@@ -138,7 +129,6 @@ const ResumeBuilder: React.FC = () => {
           className="mb-3"
           required
         />
-
         <TextField
           label="Professional Summary"
           variant="outlined"
@@ -150,7 +140,6 @@ const ResumeBuilder: React.FC = () => {
           rows={3}
           className="mb-3"
         />
-
         <TextField
           label="Work Experience"
           variant="outlined"
@@ -162,7 +151,6 @@ const ResumeBuilder: React.FC = () => {
           rows={3}
           className="mb-3"
         />
-
         <TextField
           label="Education"
           variant="outlined"
@@ -174,7 +162,6 @@ const ResumeBuilder: React.FC = () => {
           rows={3}
           className="mb-3"
         />
-
         <TextField
           label="Skills"
           variant="outlined"
@@ -186,7 +173,6 @@ const ResumeBuilder: React.FC = () => {
           rows={2}
           className="mb-3"
         />
-
         <TextField
           select
           label="Select Template"
@@ -194,17 +180,18 @@ const ResumeBuilder: React.FC = () => {
           onChange={e => setSelectedTemplate(e.target.value)}
           fullWidth
           className="mb-3"
-          SelectProps={{ native: true }}
         >
           {templates.map(template => (
-            <option key={template.id} value={template.id}>
+            <MenuItem key={template.id} value={template.id}>
               {template.name}
-            </option>
+            </MenuItem>
           ))}
         </TextField>
-
         <Button variant="primary" type="submit" className="w-100" disabled={loading}>
           {loading ? <Spinner animation="border" size="sm" /> : 'Generate Resume'}
+        </Button>
+        <Button variant="secondary" className="mt-3 w-100" onClick={handleAIEnhancement} disabled={aiLoading}>
+          {aiLoading ? <Spinner animation="border" size="sm" /> : 'Enhance with AI'}
         </Button>
       </form>
 
@@ -226,17 +213,17 @@ const ResumeBuilder: React.FC = () => {
         </div>
       )}
 
-      <Button variant="outline-secondary" className="mt-3" onClick={handlePreviewOpen}>
+      <Button variant="outline-secondary" className="mt-3" onClick={() => setPreviewOpen(true)}>
         Preview Resume
       </Button>
 
-      <Dialog open={previewOpen} onClose={handlePreviewClose} maxWidth="lg" fullWidth>
+      <Dialog open={previewOpen} onClose={() => setPreviewOpen(false)} maxWidth="lg" fullWidth>
         <DialogTitle>
           Resume Preview
           <IconButton
             edge="end"
             color="inherit"
-            onClick={handlePreviewClose}
+            onClick={() => setPreviewOpen(false)}
             aria-label="close"
             sx={{ position: 'absolute', right: 8, top: 8 }}
           >
@@ -258,7 +245,7 @@ const ResumeBuilder: React.FC = () => {
           </Card>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" color="secondary" onClick={handlePreviewClose}>
+          <Button variant="outlined" color="secondary" onClick={() => setPreviewOpen(false)}>
             Close
           </Button>
           <Button variant="contained" color="primary" onClick={handleDownload}>

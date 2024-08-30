@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define the base URL for the API
-const API_BASE_URL = 'https://api.example.com'; // Replace with your API base URL
+const API_BASE_URL = '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'; // Replace with your API base URL
 
 // Create an instance of axios with default settings
 const api = axios.create({
