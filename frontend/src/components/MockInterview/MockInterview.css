@@ -1,0 +1,32 @@
+.mock-interview {
+    padding: 2rem;
+    background-color: #f5f5f5; /* Light gray background */
+    min-height: 100vh;
+  }
+  
+  .mock-interview > * {
+    margin: 1rem 0; /* Margin around each component */
+  }
+  
+  .mock-interview .card {
+    padding: 2rem;
+    background-color: #ffffff; /* White background for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+  }
+  
+  .mock-interview .btn-primary {
+    margin-top: 1rem;
+  }
+  
+  .mock-interview h4 {
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .mock-interview {
+      padding: 1rem;
+    }
+  }
+  

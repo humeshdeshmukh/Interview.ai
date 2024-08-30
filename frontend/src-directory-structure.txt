@@ -126,3 +126,45 @@ C:.
         helpers.ts
         validators.ts
         
+
+
+
++---MockInterview
+|   +---components
+|   |   |   MockInterview.tsx
+|   |   |   MockInterviewStart.tsx
+|   |   |   MockInterviewSession.tsx
+|   |   |   MockInterviewResults.tsx
+|   |   |   Timer.tsx
+|   |   |   SpeechRecognition.tsx
+|   |   |   AIChatbot.tsx
+|   |   |   UserProfile.tsx
+|   |   |   VideoRecorder.tsx
+|   |   |   VideoPlayer.tsx
+|   +---services
+|   |   |   aiService.ts
+|   |   |   userService.ts
+|   |   |   videoService.ts
+|   +---styles
+|   |   |   MockInterview.css
+|   |   |   MockInterviewStart.css
+|   |   |   MockInterviewSession.css
+|   |   |   MockInterviewResults.css
+|   |   |   Timer.css
+|   |   |   SpeechRecognition.css
+|   |   |   AIChatbot.css
+|   |   |   UserProfile.css
+|   |   |   VideoRecorder.css
+|   |   |   VideoPlayer.css
+|   +---utils
+|   |   |   formatTime.ts
+|   |   |   storageUtils.ts
+|   |   |   videoUtils.ts
+|   +---types
+|   |   |   index.ts
+|   +---MockInterview.tsx
+|   |   |   MockInterviewResults.tsx
+|   |   |   MockInterviewSession.tsx
+|   |   |   MockInterviewStart.tsx
+|   |   |   Timer.tsx
+|   |   |   VideoRecorder.tsx

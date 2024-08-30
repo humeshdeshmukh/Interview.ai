@@ -10,7 +10,7 @@ const Homepage = lazy(() => import('./components/Home/Homepage'));
 const ResumeBuilder = lazy(() => import('./components/Home/ResumeBuilder'));
 const InterviewQuestions = lazy(() => import('./components/Home/InterviewQuestions'));
 const PracticeTests = lazy(() => import('./components/Home/PracticeTests'));
-const MockInterview = lazy(() => import('./components/Layout/MockInterview/MockInterview'));
+const MockInterview = lazy(() => import('./components/MockInterview/components/MockInterview')); // Updated path
 const Resources = lazy(() => import('./components/Home/Resources'));
 const UserProfile = lazy(() => import('./components/Home/UserProfile'));
 const RegisterForm = lazy(() => import('./components/Auth/RegisterForm'));

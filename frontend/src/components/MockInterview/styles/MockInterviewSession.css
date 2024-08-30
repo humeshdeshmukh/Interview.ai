@@ -1,0 +1,14 @@
+/* MockInterviewSession.css */
+
+.mock-interview-session {
+    text-align: center;
+  }
+  
+  .btn-complete {
+    background-color: #ffc107;
+  }
+  
+  .btn-complete:hover {
+    background-color: #e0a800;
+  }
+  

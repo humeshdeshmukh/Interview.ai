@@ -4,7 +4,7 @@ import { questions, Question } from './questionsData'; // Adjust the path as nec
 import './InterviewQuestions.css';
 
 const InterviewQuestions: React.FC = () => {
-  const [questionsData, setQuestionsData] = useState<Question[]>(questions); // Use imported questions
+  const [questionsData, setQuestionsData] = useState<Question[]>(questions);
   const [filter, setFilter] = useState<string>('All');
   const [companyFilter, setCompanyFilter] = useState<string>('All');
   const [search, setSearch] = useState<string>('');
@@ -12,8 +12,10 @@ const InterviewQuestions: React.FC = () => {
   const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
 
   const handleBookmark = (id: number) => {
-    setQuestionsData((prevQuestions) =>
-      prevQuestions.map((q) => (q.id === id ? { ...q, isBookmarked: !q.isBookmarked } : q))
+    setQuestionsData(prevQuestions =>
+      prevQuestions.map(q =>
+        q.id === id ? { ...q, isBookmarked: !q.isBookmarked } : q
+      )
     );
   };
 
@@ -39,16 +41,21 @@ const InterviewQuestions: React.FC = () => {
     setSelectedQuestion(null);
   };
 
-  const filteredQuestions = questionsData
-    .filter((q) => (filter === 'Bookmarked' ? q.isBookmarked : true))
-    .filter((q) => (filter === 'Tech' || filter === 'Non-Tech' ? q.category === filter : true))
-    .filter((q) => (companyFilter === 'All' ? true : q.company === companyFilter))
-    .filter((q) =>
-      q.title.toLowerCase().includes(search.toLowerCase()) ||
-      q.description.toLowerCase().includes(search.toLowerCase()) ||
-      q.category.toLowerCase().includes(search.toLowerCase()) ||
-      q.company.toLowerCase().includes(search.toLowerCase())
-    );
+  let filteredQuestions: Question[] = [];
+  try {
+    filteredQuestions = questionsData
+      .filter(q => (filter === 'Bookmarked' ? q.isBookmarked : true))
+      .filter(q => (filter === 'Tech' || filter === 'Non-Tech' ? q.category === filter : true))
+      .filter(q => (companyFilter === 'All' ? true : q.company === companyFilter))
+      .filter(q =>
+        q.title.toLowerCase().includes(search.toLowerCase()) ||
+        q.description.toLowerCase().includes(search.toLowerCase()) ||
+        q.category.toLowerCase().includes(search.toLowerCase()) ||
+        q.company.toLowerCase().includes(search.toLowerCase())
+      );
+  } catch (error) {
+    console.error('Error filtering questions:', error);
+  }
 
   return (
     <Container className="py-5">
@@ -101,7 +108,7 @@ const InterviewQuestions: React.FC = () => {
 
       <Row>
         {filteredQuestions.length > 0 ? (
-          filteredQuestions.map((question) => (
+          filteredQuestions.map(question => (
             <Col md={6} lg={4} className="mb-3" key={question.id}>
               <Card className="h-100">
                 <Card.Body>

@@ -1,0 +1,212 @@
+/* MockInterview.css */
+
+.mock-interview-container {
+  padding: 20px;
+  background-color: #f0f2f5; /* Soft light grey background for the container */
+  min-height: 100vh; /* Ensures the container takes up full viewport height */
+  display: flex;
+  flex-direction: column;
+}
+
+.timer-row {
+  margin-bottom: 20px;
+}
+
+.main-content-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px; /* Space between columns */
+  margin-bottom: 20px;
+}
+
+.interview-session-wrapper,
+.video-recorder-wrapper {
+  background: #ffffff; /* White background for clarity */
+  padding: 20px;
+  border-radius: 12px; /* Slightly more rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Deeper shadow for better contrast */
+  box-sizing: border-box;
+  flex: 1; /* Allows elements to grow equally */
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #333; /* Dark grey for headings */
+  font-size: 1.5em; /* Larger font size for headings */
+  margin-bottom: 20px;
+  font-weight: 600; /* Slightly bolder headings */
+}
+
+.btn-start,
+.btn-complete {
+  background-color: #007bff; /* Blue button background */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px; /* Slightly more rounded buttons */
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-start:hover,
+.btn-complete:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Subtle lift effect on hover */
+}
+
+.video-player {
+  margin-top: 20px;
+}
+
+.video-player video {
+  width: 100%; /* Ensures video fits within its container */
+  border-radius: 12px; /* Rounded corners for the video */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Deep shadow for video */
+}
+
+.ai-chatbot-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  transition: all 0.3s ease;
+  max-width: 320px; /* Default width */
+  height: 220px; /* Default height */
+  overflow: hidden;
+  margin: 10px auto; /* Center align */
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-chatbot-wrapper.expanded {
+  max-width: 500px; /* Expanded width */
+  height: 400px; /* Expanded height */
+}
+
+.btn-toggle-chatbot {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px; /* More rounded button */
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-toggle-chatbot:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Layout for video and chatbot sections */
+.ai-chatbot-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+  gap: 20px; /* Space between columns */
+}
+
+.video-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.video-section .video-player {
+  margin: 0; /* Remove margin for alignment */
+}
+
+.chatbot-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatbot-section .chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chatbot-section .chat-box {
+  flex: 1;
+  padding: 10px;
+  background-color: #ffffff;
+  overflow-y: auto;
+}
+
+.chatbot-section .chat-input {
+  display: flex;
+  border-top: 1px solid #dee2e6;
+  background-color: #f1f1f1;
+}
+
+.chatbot-section .chat-input input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 0;
+}
+
+.chatbot-section .chat-input button {
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.chatbot-section .chat-input button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .main-content-row {
+    flex-direction: column;
+  }
+
+  .video-recorder-wrapper,
+  .interview-session-wrapper {
+    margin-bottom: 20px; /* Margin adjustments for small screens */
+  }
+
+  .ai-chatbot-container {
+    grid-template-columns: 1fr; /* Stack video and chatbot sections vertically on small screens */
+  }
+
+  .ai-chatbot-wrapper {
+    width: 90%;
+    height: 300px; /* Adjusted expanded height on small screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .mock-interview-container {
+    padding: 10px;
+  }
+
+  .video-recorder-wrapper,
+  .interview-session-wrapper {
+    padding: 10px;
+  }
+
+  .btn-start,
+  .btn-complete {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .ai-chatbot-wrapper {
+    height: 250px; /* Adjusted height for very small screens */
+  }
+}
