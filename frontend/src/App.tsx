@@ -3,16 +3,21 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import { AuthProvider } from './contexts/AuthContext';
-import Chatbot from './components/Chatbot/ChatbotWidget';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-
-// Lazy loading for performance optimization
+import Chatbot from './components/Chatbot/Chatbot';
+import MockInterview from './components/MockInterview/MockInterview';
+// Lazy loading for better performance
 const Homepage = lazy(() => import('./components/Home/Homepage'));
 const ResumeBuilder = lazy(() => import('./components/Home/ResumeBuilder'));
 const InterviewQuestions = lazy(() => import('./components/Home/InterviewQuestions'));
 const PracticeTests = lazy(() => import('./components/Home/PracticeTests'));
-const MockInterview = lazy(() => import('./components/MockInterview/components/MockInterview'));
+//const MockInterview = lazy(() => import('./components/MockInterview/MockInterview'));
+const Resources = lazy(() => import('./components/Home/Resources'));
+const UserProfile = lazy(() => import('./components/Home/UserProfile'));
+const RegisterForm = lazy(() => import('./components/Auth/RegisterForm'));
+const LoginForm = lazy(() => import('./components/Auth/LoginForm'));
+const NotFound = lazy(() => import('./components/NotFound'));
+
+// Additional pages
 const Blog = lazy(() => import('./components/pages/Blog'));
 const Webinars = lazy(() => import('./components/pages/Webinars'));
 const Ebooks = lazy(() => import('./components/pages/Ebooks'));
@@ -32,12 +37,8 @@ const Team = lazy(() => import('./components/pages/Team'));
 const Careers = lazy(() => import('./components/pages/Careers'));
 const Press = lazy(() => import('./components/pages/Press'));
 const Partners = lazy(() => import('./components/pages/Partners'));
-const UserProfile = lazy(() => import('./components/Home/UserProfile'));
 const ActivityLog = lazy(() => import('./components/pages/ActivityLog'));
 const Subscriptions = lazy(() => import('./components/pages/Subscriptions'));
-const RegisterForm = lazy(() => import('./components/Auth/RegisterForm'));
-const LoginForm = lazy(() => import('./components/Auth/LoginForm'));
-const NotFound = lazy(() => import('./components/NotFound'));
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
@@ -72,6 +73,12 @@ const AppRoutes: React.FC = () => (
       <Route path="/questions" element={<InterviewQuestions />} />
       <Route path="/practice-tests" element={<PracticeTests />} />
       <Route path="/mock-interview" element={<MockInterview />} />
+      <Route path="/resources" element={<Resources />} />
+      <Route path="/profile" element={<UserProfile name="" email="" profilePicture="" />} />
+      <Route path="/register" element={<RegisterForm />} />
+      <Route path="/login" element={<LoginForm />} />
+
+      {/* Additional pages */}
       <Route path="/blog" element={<Blog />} />
       <Route path="/webinars" element={<Webinars />} />
       <Route path="/ebooks" element={<Ebooks />} />
@@ -91,11 +98,9 @@ const AppRoutes: React.FC = () => (
       <Route path="/careers" element={<Careers />} />
       <Route path="/press" element={<Press />} />
       <Route path="/partners" element={<Partners />} />
-      <Route path="/profile" element={<UserProfile />} />
       <Route path="/activity-log" element={<ActivityLog />} />
       <Route path="/subscriptions" element={<Subscriptions />} />
-      <Route path="/register" element={<RegisterForm />} />
-      <Route path="/login" element={<LoginForm />} />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   </Suspense>
@@ -117,7 +122,7 @@ const App: React.FC = () => {
             <AppRoutes />
           </main>
           <Footer />
-          <Chatbot />
+          <Chatbot /> {/* Chatbot will float on the bottom right corner */}
         </ErrorBoundary>
       </Router>
     </AuthProvider>

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './FAQs.css';  // Import the CSS for styling
 
+// Define the FAQ interface
 interface FAQ {
   question: string;
   answer: string;
 }
 
+// Sample FAQ data
 const faqs: FAQ[] = [
   {
     question: 'What is the purpose of this website?',
@@ -25,9 +27,11 @@ const faqs: FAQ[] = [
   }
 ];
 
+// FAQItem component to render individual FAQ items
 const FAQItem: React.FC<{ faq: FAQ }> = ({ faq }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // State to manage the visibility of the answer
 
+  // Function to toggle the visibility of the answer
   const toggleAnswer = () => setIsOpen(!isOpen);
 
   return (
@@ -41,6 +45,7 @@ const FAQItem: React.FC<{ faq: FAQ }> = ({ faq }) => {
   );
 };
 
+// FAQs component to render the list of FAQs
 const FAQs: React.FC = () => (
   <div className="faqs-container">
     <h1>Frequently Asked Questions</h1>

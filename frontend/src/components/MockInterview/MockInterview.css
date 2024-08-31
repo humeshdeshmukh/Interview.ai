@@ -1,32 +1,113 @@
+/* Base Styles for Mock Interview Page */
 .mock-interview {
-    padding: 2rem;
-    background-color: #f5f5f5; /* Light gray background */
-    min-height: 100vh;
+  padding: 2rem;
+  background-color: #f5f5f5; /* Light gray background */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Spacing and Layout */
+.mock-interview > * {
+  margin: 1rem 0; /* Margin around each component */
+}
+
+.mock-interview .card {
+  padding: 2rem;
+  background-color: #ffffff; /* White background for the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  border-radius: 12px; /* More rounded corners */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mock-interview .card:hover {
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.mock-interview .btn-primary {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px; /* Rounded button */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mock-interview .btn-primary:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  color: #ffffff; /* White text color */
+}
+
+.mock-interview h4 {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #333; /* Darker text color */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mock-interview {
+    padding: 1rem;
   }
-  
-  .mock-interview > * {
-    margin: 1rem 0; /* Margin around each component */
-  }
-  
+
   .mock-interview .card {
-    padding: 2rem;
-    background-color: #ffffff; /* White background for the card */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-    border-radius: 8px; /* Rounded corners */
+    padding: 1.5rem;
   }
-  
-  .mock-interview .btn-primary {
-    margin-top: 1rem;
-  }
-  
+
   .mock-interview h4 {
-    margin-bottom: 1rem;
-    font-weight: bold;
+    font-size: 1.2rem;
   }
-  
-  @media (max-width: 768px) {
-    .mock-interview {
-      padding: 1rem;
-    }
+
+  .mock-interview .btn-primary {
+    width: 100%;
   }
-  
+}
+
+/* Enhanced Card Styling */
+.mock-interview .card {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%); /* Gradient background */
+  border: 1px solid #e0e0e0; /* Subtle border */
+}
+
+/* Advanced Flexbox Layout for Components */
+.mock-interview > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Timer Styling */
+.mock-interview .timer {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff; /* Primary color */
+  border: 2px solid #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 50%;
+  text-align: center;
+}
+
+/* Speech Recognition, AI Chatbot, and User Profile */
+.mock-interview .speech-recognition,
+.mock-interview .ai-chatbot,
+.mock-interview .user-profile {
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Video Recorder */
+.mock-interview .video-recorder {
+  position: relative;
+  background: #e9ecef; /* Light background for the video section */
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.mock-interview .video-recorder video {
+  width: 100%;
+  border-radius: 8px;
+}

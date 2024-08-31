@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext'; // Ensure this path is correct
-import './Header.css';
-import logo from '../../assets/logo.jpg';
-import profilePic from '../../assets/Profile-pic.webp';
+import './Header.css'; // Ensure this path is correct
+import logo from '../../assets/logo.jpg'; // Ensure this path is correct
+import profilePic from '../../assets/Profile-pic.webp'; // Ensure this path is correct
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface HeaderProps {

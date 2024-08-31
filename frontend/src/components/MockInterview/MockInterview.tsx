@@ -5,7 +5,7 @@ import MockInterviewResults from './components/MockInterviewResults';
 import Timer from './components/Timer';
 import SpeechRecognition from './components/SpeechRecognition';
 import AIChatbot from './components/AIChatbot';
-import UserProfile from './components/UserProfile';
+//import UserProfile from './components/UserProfile';
 import VideoRecorder from './components/VideoRecorder';
 import { Container, Row, Col } from 'react-bootstrap';
 import './MockInterview.css';
@@ -23,9 +23,9 @@ const MockInterview: React.FC = () => {
         <Col md={12} lg={8}>
           <Timer />
           <SpeechRecognition />
-          <AIChatbot />
-          <UserProfile />
+          
           <VideoRecorder />
+          <AIChatbot />
           {stage === 'start' && <MockInterviewStart onStart={() => handleStageChange('session')} />}
           {stage === 'session' && <MockInterviewSession onComplete={() => handleStageChange('results')} />}
           {stage === 'results' && <MockInterviewResults />}
