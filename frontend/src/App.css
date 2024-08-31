@@ -4,8 +4,11 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: #333; /* Dark background color */
+  background-color: #333; /* Dark background color for the root container */
   color: #fff; /* Light text color for contrast */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the root covers the full viewport height */
 }
 
 /* Logo styles */
@@ -13,14 +16,15 @@
   height: 6em;
   padding: 1.5em;
   transition: filter 300ms, transform 300ms;
+  display: inline-block; /* Ensure proper alignment with text */
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa); /* Light blue shadow on hover */
+  filter: drop-shadow(0 0 2em #646cffaa); /* Light blue shadow on hover for logo */
 }
 
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa); /* React logo shadow */
+  filter: drop-shadow(0 0 2em #61dafbaa); /* React logo shadow on hover */
 }
 
 /* Keyframes for logo spinning animation */
@@ -48,6 +52,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: #fff; /* Ensure text is visible on dark background */
   margin-bottom: 2em; /* Space between cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center content within cards */
 }
 
 /* Read the docs text style */

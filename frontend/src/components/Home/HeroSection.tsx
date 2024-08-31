@@ -46,7 +46,7 @@ const HeroSection: React.FC = () => {
                   variant="outline-light"
                   size="lg"
                   className="px-5 py-3 hero-button"
-                  href="#learn-more"
+                  href="#resources" // Updated href
                   aria-label="Learn More"
                 >
                   Learn More
@@ -56,8 +56,6 @@ const HeroSection: React.FC = () => {
           </Row>
         </Container>
       </section>
-
-      
     </>
   );
 };

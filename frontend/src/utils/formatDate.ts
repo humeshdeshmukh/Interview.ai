@@ -20,8 +20,40 @@ describe('formatDate', () => {
     expect(formatDate(date)).toBe('2024-02-29');
   });
 
+  it('should handle dates at the start of the year', () => {
+    const date = new Date('2024-01-01');
+    expect(formatDate(date)).toBe('2024-01-01');
+  });
+
+  it('should handle dates at the end of the year', () => {
+    const date = new Date('2024-12-31');
+    expect(formatDate(date)).toBe('2024-12-31');
+  });
+
   it('should handle invalid date inputs gracefully', () => {
-    const date = new Date('Invalid Date');
-    expect(formatDate(date)).toBe('NaN-NaN-NaN'); // Based on JavaScript date behavior
+    const invalidDate = new Date('Invalid Date');
+    expect(formatDate(invalidDate)).toBe('Invalid Date');
+  });
+
+  it('should handle empty inputs gracefully', () => {
+    const emptyDate = new Date('');
+    expect(formatDate(emptyDate)).toBe('Invalid Date');
+  });
+
+  it('should handle null and undefined inputs gracefully', () => {
+    // Assuming the function should handle null and undefined as invalid dates
+    expect(formatDate(null as unknown as Date)).toBe('Invalid Date');
+    expect(formatDate(undefined as unknown as Date)).toBe('Invalid Date');
+  });
+
+  it('should format current date correctly', () => {
+    const currentDate = new Date();
+    const formattedDate = formatDate(currentDate);
+    const [year, month, day] = formattedDate.split('-');
+    expect(formattedDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(Number(month)).toBeGreaterThan(0);
+    expect(Number(month)).toBeLessThanOrEqual(12);
+    expect(Number(day)).toBeGreaterThan(0);
+    expect(Number(day)).toBeLessThanOrEqual(31);
   });
 });

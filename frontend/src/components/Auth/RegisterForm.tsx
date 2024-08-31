@@ -4,29 +4,59 @@ import { useAuth } from '../../contexts/AuthContext'; // Ensure this path is cor
 import axiosInstance from '../../services/api'; // Import the Axios instance
 
 const RegisterForm: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const { register } = useAuth();
   const navigate = useNavigate();
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const validateForm = () => {
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match.');
+      return false;
+    }
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setError('Please enter a valid email address.');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
+    if (!validateForm()) return;
 
     try {
-      setError(null);
       setLoading(true);
-      await axiosInstance.post('/auth/register', { email, password }); // Use the Axios instance
+      await axiosInstance.post('/auth/register', {
+        email: formData.email,
+        password: formData.password,
+      }); // Use the Axios instance
+
+      // Call the register function from AuthContext if needed
+      if (register) {
+        await register(formData.email, formData.password);
+      }
+
       navigate('/login'); // Redirect to login page upon successful registration
     } catch (error: any) {
-      setError('Failed to create an account. Please try again.');
+      const errorMsg =
+        error.response?.data?.message ||
+        'Failed to create an account. Please try again.';
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -35,37 +65,51 @@ const RegisterForm: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 shadow-lg rounded-lg">
-        {error && <div className="text-red-500 mb-4">{error}</div>}
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-md mx-auto bg-white p-8 shadow-lg rounded-lg"
+      >
+        {error && (
+          <div className="text-red-500 mb-4 p-2 bg-red-100 rounded">{error}</div>
+        )}
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 mb-2">Email:</label>
+          <label htmlFor="email" className="block text-gray-700 mb-2">
+            Email:
+          </label>
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded"
             required
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 mb-2">Password:</label>
+          <label htmlFor="password" className="block text-gray-700 mb-2">
+            Password:
+          </label>
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formData.password}
+            onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded"
             required
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block text-gray-700 mb-2">Confirm Password:</label>
+          <label
+            htmlFor="confirmPassword"
+            className="block text-gray-700 mb-2"
+          >
+            Confirm Password:
+          </label>
           <input
             type="password"
             id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={formData.confirmPassword}
+            onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded"
             required
           />
@@ -79,7 +123,10 @@ const RegisterForm: React.FC = () => {
         </button>
       </form>
       <p className="text-center mt-4">
-        Already have an account? <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
+        Already have an account?{' '}
+        <Link to="/login" className="text-blue-600 hover:underline">
+          Login
+        </Link>
       </p>
     </div>
   );
