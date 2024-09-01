@@ -1,0 +1,53 @@
+.not-found-container {
+    background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    height: 100vh; /* Ensures the container takes up full viewport height */
+  }
+  
+  .not-found-content {
+    max-width: 600px;
+    padding: 3rem;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .not-found-content h1 {
+    font-size: 10rem; /* Larger font size for the main heading */
+    font-weight: bold;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .not-found-content h2 {
+    font-size: 4rem; /* Larger font size for the secondary heading */
+    margin-bottom: 1.5rem;
+  }
+  
+  .not-found-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .not-found-button {
+    padding: 1rem 2.5rem;
+    font-size: 1.25rem;
+    border-radius: 50px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .not-found-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+  }
+  
+  /* Keyframe Animation for fadeIn effect */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

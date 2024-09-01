@@ -1,0 +1,19 @@
+.testimonial-slider {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 300px;
+    max-width: 100%;
+    color: #fff;
+  }
+  
+  .testimonial-slide p {
+    font-size: 1rem;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .slick-dots {
+    bottom: -30px;
+  }
+  

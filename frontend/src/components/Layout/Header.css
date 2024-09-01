@@ -1,165 +1,86 @@
-/* General Navbar Styling */
+/* Header Styles */
 .header-navbar {
-  background-color: #343a40; /* Dark background for the navbar */
-  padding: 0.75rem 1.5rem; /* Increased padding for a more spacious look */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a floating effect */
-  transition: background-color 0.3s ease-in-out, padding 0.3s ease-in-out; /* Smooth background color and padding transition */
-  position: relative; /* Ensure navbar is positioned relative for proper dropdown positioning */
-  z-index: 1000; /* Ensure navbar is above other elements */
+  background-color: #000; /* Fully black background */
+  color: #fff; /* White text color */
+  border-bottom: 1px solid #333; /* Dark border at the bottom */
 }
 
-.header-navbar:hover {
-  background-color: #2c2e30; /* Darker shade on hover */
-  padding: 1rem 1.75rem; /* Slightly increase padding on hover */
-}
-
+/* Logo Styles */
 .header-logo {
-  width: 60px; /* Larger logo size for better visibility */
-  height: 60px; /* Consistent height for the logo */
   border-radius: 50%; /* Circular logo */
-  object-fit: cover; /* Ensure logo fits within the circle */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth scale and shadow transition */
-}
-
-.header-logo:hover {
-  transform: scale(1.15); /* Slightly enlarge the logo on hover */
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); /* Add a glowing shadow effect */
+  height: 40px; /* Adjust based on your logo size */
+  width: 40px; /* Adjust based on your logo size */
 }
 
 .header-title {
-  font-size: 1.75rem; /* Increased font size for prominence */
-  color: #ffffff; /* White color for the title */
-  margin-left: 0.75rem; /* Increased space between logo and title */
-  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth color and transform transitions */
+  font-size: 24px; /* Title size */
+  font-weight: 700; /* Title weight */
+  color: #fff; /* White title color */
 }
 
-.header-title:hover {
-  color: #007bff; /* Change color on hover */
-  transform: translateX(5px); /* Slightly move the title on hover */
-}
-
-/* Navbar Styles */
+/* Navigation Links */
 .nav-link {
-  color: #ffffff; /* White color for nav links */
-  padding: 0.75rem 1.25rem; /* Increased padding for a more clickable area */
-  transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out; /* Smooth color and text-shadow transition */
+  color: #fff !important; /* White link color */
+  font-weight: 500; /* Font weight */
+  margin-right: 20px; /* Margin between links */
+  transition: color 0.3s ease; /* Smooth color transition */
 }
 
-.nav-link:hover {
-  color: #007bff; /* Highlight color on hover */
-  text-shadow: 0 2px 5px rgba(0, 123, 255, 0.5); /* Add a glow effect */
-  transform: scale(1.05); /* Slightly enlarge the link on hover */
+.nav-link:hover,
+.nav-link:focus {
+  color: #aaa !important; /* Hover color */
 }
 
-/* Dropdown Styling */
-.navbar-nav .dropdown-menu {
-  background-color: #343a40; /* Dark background for dropdown */
-  border: 1px solid #495057; /* Border color for dropdown */
-  border-radius: 0.25rem; /* Rounded corners */
-  min-width: 220px; /* Ensure dropdown is wide enough */
-  z-index: 1050; /* Ensure dropdown is above other elements */
-  opacity: 0; /* Initially hidden */
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth fade-in and transform transitions */
-  transform: translateY(-10px); /* Start with a slight upward offset */
-  position: absolute; /* Position the dropdown absolutely to align correctly with its parent */
-  top: 100%; /* Position directly below the parent */
-  left: 0; /* Align to the left of the parent */
+/* Dropdown Animations */
+.nav-dropdown .dropdown-menu {
+  background-color: #000; /* Black background for dropdown */
+  border: 1px solid #333; /* Dark border around dropdown */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation */
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
-.navbar-nav .dropdown-menu.show {
-  opacity: 1; /* Fade in dropdown menu */
-  transform: translateY(0); /* Move to the original position */
+.nav-dropdown.show .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.navbar-nav .dropdown-item {
-  color: #ffffff; /* White color for dropdown items */
-  padding: 0.75rem 1.25rem; /* Increased padding for better spacing */
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth background color, text color, and transform transitions */
+.nav-dropdown .dropdown-item {
+  color: #fff !important; /* Dropdown item color */
 }
 
-.navbar-nav .dropdown-item:hover {
-  background-color: #007bff; /* Highlight color on hover */
-  color: #ffffff; /* Ensure text color stays white */
-  transform: translateX(10px); /* Slight move effect on hover */
+.nav-dropdown .dropdown-item:hover {
+  background-color: #333; /* Hover background color */
+  color: #fff; /* Hover text color */
 }
 
-/* Dropdown Divider */
-.navbar-nav .dropdown-divider {
-  border-color: #495057; /* Color for the divider line */
-  margin: 0.5rem 0; /* Add spacing around the divider */
-}
-
-/* Profile Dropdown */
+/* User Profile Section */
 .profile-picture {
-  width: 50px; /* Adjust profile picture size */
-  height: 50px; /* Make the profile picture circular */
   border-radius: 50%; /* Circular profile picture */
-  object-fit: cover; /* Ensure profile picture fits within the circle */
-  transition: transform 0.3s ease-in-out, border 0.3s ease-in-out; /* Smooth transform and border transitions */
-}
-
-.profile-picture:hover {
-  transform: scale(1.15); /* Slightly enlarge profile picture on hover */
-  border: 2px solid #007bff; /* Add a border effect on hover */
+  height: 35px; /* Adjust based on your profile picture size */
+  width: 35px; /* Adjust based on your profile picture size */
 }
 
 .profile-title {
-  color: #ffffff; /* White color for profile title */
-  font-weight: bold; /* Make the profile title bold */
-  transition: color 0.3s ease-in-out; /* Smooth color transition */
+  font-size: 16px; /* Font size for profile title */
+  color: #fff; /* White text color */
 }
 
-.profile-title:hover {
-  color: #007bff; /* Change color on hover */
-}
-
-/* Button Styling */
-.btn-outline-light {
-  border-color: #ffffff; /* Border color for buttons */
-  color: #ffffff; /* Text color for buttons */
-  padding: 0.5rem 1.25rem; /* Increase padding for better click area */
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth background, color, and transform transitions */
-}
-
-.btn-outline-light:hover {
-  background-color: #ffffff; /* Background color on hover */
-  color: #343a40; /* Text color on hover */
-  transform: scale(1.05); /* Slightly enlarge button on hover */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .header-navbar {
-    padding: 0.75rem 1rem; /* Adjust padding for smaller screens */
-  }
-
+@media (max-width: 767px) {
   .header-title {
-    font-size: 1.5rem; /* Reduce title size for smaller screens */
+    font-size: 20px; /* Smaller title size for mobile */
   }
 
   .nav-link {
-    padding: 0.5rem 1rem; /* Adjust padding for smaller screens */
+    margin-right: 10px; /* Smaller margin for mobile */
   }
 
-  .btn-outline-light {
-    padding: 0.5rem 1rem; /* Adjust padding for buttons */
+  .profile-picture {
+    height: 30px; /* Smaller profile picture for mobile */
+    width: 30px; /* Smaller profile picture for mobile */
   }
-}
 
-/* Ensure Dropdown is properly displayed */
-.navbar-collapse {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: transform 0.3s ease-in-out; /* Smooth transform transition */
-}
-
-.navbar-toggler {
-  border: none; /* Remove default border from the toggler */
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth background color and transform transitions */
-}
-
-.navbar-toggler:hover {
-  background-color: #2c2e30; /* Darker background on hover */
-  transform: rotate(90deg); /* Rotate the toggler on hover */
+  .profile-title {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
 }

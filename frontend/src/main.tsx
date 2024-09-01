@@ -8,6 +8,8 @@ import { CssBaseline } from '@mui/material'; // Import CssBaseline for MUI globa
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS for styling
 import './index.css'; // Import your global styles if any
 import theme from './styles/theme'; // Import your MUI theme if using MUI
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 // Optional: Import and configure performance monitoring (e.g., Sentry, LogRocket)
 // import * as Sentry from '@sentry/react';

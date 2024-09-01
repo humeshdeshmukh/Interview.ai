@@ -6,7 +6,7 @@ import './Footer.css'; // Ensure you have appropriate styles in Footer.css
 
 const Footer: React.FC = () => {
   return (
-    <footer className="footer bg-gray-900 text-white py-10">
+    <footer className="footer bg-black text-white py-10">
       <div className="footer-container max-w-screen-xl mx-auto px-4 flex flex-wrap justify-between gap-12">
         
         {/* Company Info */}
@@ -14,37 +14,36 @@ const Footer: React.FC = () => {
           <h3 className="text-3xl font-bold mb-4">InterviewMaster.ai</h3>
           <p className="mb-4 text-lg">Empowering your interview preparation with advanced tools and resources.</p>
           <div className="social-media flex gap-6">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-300 hover:text-white transition">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-icon">
               <FaFacebookF size={28} />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-gray-300 hover:text-white transition">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-icon">
               <FaTwitter size={28} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-300 hover:text-white transition">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-icon">
               <FaLinkedinIn size={28} />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-300 hover:text-white transition">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-icon">
               <FaInstagram size={28} />
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="Github" className="text-gray-300 hover:text-white transition">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="Github" className="social-icon">
               <FaGithub size={28} />
             </a>
           </div>
         </div>
 
-      {/* Quick Links */}
-<div className="footer-section flex-1 min-w-[250px]">
-  <h4 className="text-xl font-semibold mb-4">Quick Links</h4>
-  <ul className="space-y-3 text-lg">
-    <li><Link to="/dashboard" className="hover:underline">Dashboard</Link></li>
-    <li><Link to="/resume-builder" className="hover:underline">Resume Builder</Link></li>
-    <li><Link to="/interview-questions" className="hover:underline">Interview Questions</Link></li>
-    <li><Link to="/practice-tests" className="hover:underline">Practice Tests</Link></li>
-    <li><Link to="/about-us" className="hover:underline">About Us</Link></li>
-    <li><Link to="/contact-us" className="hover:underline">Contact Us</Link></li>
-  </ul>
-</div>
-
+        {/* Quick Links */}
+        <div className="footer-section flex-1 min-w-[250px]">
+          <h4 className="text-xl font-semibold mb-4">Quick Links</h4>
+          <ul className="space-y-3 text-lg">
+            <li><Link to="/dashboard" className="hover:underline">Dashboard</Link></li>
+            <li><Link to="/resume-builder" className="hover:underline">Resume Builder</Link></li>
+            <li><Link to="/interview-questions" className="hover:underline">Interview Questions</Link></li>
+            <li><Link to="/practice-tests" className="hover:underline">Practice Tests</Link></li>
+            <li><Link to="/about-us" className="hover:underline">About Us</Link></li>
+            <li><Link to="/contact-us" className="hover:underline">Contact Us</Link></li>
+          </ul>
+        </div>
 
         {/* Contact Info */}
         <div className="footer-section flex-1 min-w-[250px]">
@@ -74,7 +73,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="footer-bottom text-center text-gray-400 py-4">
+      <div className="footer-bottom text-center text-gray-400 py-4 border-t border-gray-800">
         <p>© 2024 InterviewMaster.ai. All rights reserved.</p>
       </div>
     </footer>
