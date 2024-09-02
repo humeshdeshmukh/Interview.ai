@@ -29,8 +29,7 @@ const Chatbot: React.FC = () => {
       // Clear the input field
       setInputValue('');
 
-      // You can add a bot response here as well (optional)
-      // Example: 
+      // Add a bot response (optional)
       const botReply: Message = { text: "This is a bot response!", sender: 'bot' };
       setMessages(prevMessages => [...prevMessages, newMessage, botReply]);
     }
@@ -41,10 +40,14 @@ const Chatbot: React.FC = () => {
       {isOpen ? (
         <div className="chatbot-window">
           <div className="chatbot-window-header">
-            <button className="chatbot-close-button" onClick={toggleChatbot}>
+            <button
+              className="chatbot-close-button"
+              onClick={toggleChatbot}
+              aria-label="Close Chatbot"
+            >
               &#x2715; {/* Close Icon */}
             </button>
-            Chatbot
+            <span>Chatbot</span>
           </div>
           <div className="chatbot-window-messages">
             {messages.map((message, index) => (
@@ -65,13 +68,21 @@ const Chatbot: React.FC = () => {
               value={inputValue}
               onChange={handleInputChange}
             />
-            <button className="chatbot-window-send-button" onClick={handleSend}>
+            <button
+              className="chatbot-window-send-button"
+              onClick={handleSend}
+              aria-label="Send Message"
+            >
               Send
             </button>
           </div>
         </div>
       ) : (
-        <button className="chatbot-icon-button" onClick={toggleChatbot}>
+        <button
+          className="chatbot-icon-button"
+          onClick={toggleChatbot}
+          aria-label="Open Chatbot"
+        >
           <img src={chatbotIcon} alt="Chatbot Icon" />
         </button>
       )}

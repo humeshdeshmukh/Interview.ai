@@ -1,23 +1,31 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import ChatbotMessage from './ChatbotMessage'; // Import the ChatbotMessage component
+import './ChatbotWidget.css'; // Ensure this file contains your styles
+
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY; // Ensure this is correctly set in your environment variables
+const apiBaseUrl = 'https://api.openai.com/v1/completions'; // Correct API endpoint for OpenAI
 
 const ChatbotWidget: React.FC = () => {
   const [input, setInput] = useState<string>('');
-  const [messages, setMessages] = useState<string[]>([]);
-  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+  const [messages, setMessages] = useState<{ sender: 'user' | 'bot'; text: string }[]>([]);
 
   const handleSend = async () => {
     if (input.trim() === '') return;
 
     // Add user message to chat
-    setMessages([...messages, `You: ${input}`]);
+    setMessages([...messages, { sender: 'user', text: input }]);
 
     try {
-      // Send message to chatbot
+      // Send message to OpenAI API
       const response = await axios.post(
-        `${apiBaseUrl}/chat`, // Adjust endpoint as necessary
-        { message: input },
+        apiBaseUrl,
+        {
+          model: 'text-davinci-003', // Specify the model
+          prompt: input,
+          max_tokens: 150,
+          temperature: 0.7
+        },
         {
           headers: {
             'Authorization': `Bearer ${apiKey}`,
@@ -26,12 +34,15 @@ const ChatbotWidget: React.FC = () => {
         }
       );
 
+      // Extract the AI's response
+      const aiResponse = response.data.choices[0].text.trim();
+
       // Add bot response to chat
-      setMessages([...messages, `You: ${input}`, `Bot: ${response.data.reply}`]);
+      setMessages([...messages, { sender: 'user', text: input }, { sender: 'bot', text: aiResponse }]);
       setInput('');
     } catch (error) {
       console.error('Error:', error);
-      setMessages([...messages, 'Bot: Error occurred']);
+      setMessages([...messages, { sender: 'user', text: input }, { sender: 'bot', text: 'Error occurred' }]);
     }
   };
 
@@ -39,7 +50,7 @@ const ChatbotWidget: React.FC = () => {
     <div className="chatbot-widget">
       <div className="chatbox">
         {messages.map((msg, index) => (
-          <div key={index} className="message">{msg}</div>
+          <ChatbotMessage key={index} sender={msg.sender} message={msg.text} />
         ))}
       </div>
       <div className="input-area">

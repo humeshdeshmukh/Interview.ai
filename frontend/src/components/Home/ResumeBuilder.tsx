@@ -1,6 +1,26 @@
 import React, { useState } from 'react';
-import { Button, Col, Row, Alert, Spinner, Card, ListGroup } from 'react-bootstrap';
-import { TextField, Dialog, DialogTitle, DialogContent, DialogActions, Typography, IconButton, MenuItem } from '@mui/material';
+import {
+  Button,
+  Col,
+  Row,
+  Alert,
+  Spinner,
+  Card,
+  ListGroup,
+  Form
+} from 'react-bootstrap';
+import {
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Typography,
+  IconButton,
+  MenuItem,
+  Select,
+  InputLabel
+} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -8,14 +28,48 @@ import './ResumeBuilder.css';
 
 // Mock AI function (replace with actual API call)
 const fetchAIResumeSuggestions = async (formData: any) => {
-  // Simulate an AI service response
+  // Simulate a delay for the API call
+  await new Promise(resolve => setTimeout(resolve, 3000));
+
+  // Simulate detailed AI-generated content based on the form data
+  const { name, summary, experience, education, skills, projects, certifications } = formData;
+
+  // Mock AI response with extended and professional content
   return {
-    summary: 'Experienced professional with a strong background in software development and project management.',
-    experience: '5+ years of experience in developing scalable applications and leading teams.',
-    education: 'Bachelor\'s degree in Computer Science from XYZ University.',
-    skills: 'JavaScript, React, Node.js, TypeScript, Project Management'
+    summary: summary || `Dynamic and accomplished software engineer with over 10 years of experience in designing, developing, and implementing complex software solutions. Proven track record of leading cross-functional teams and driving innovative projects to successful completion. Adept at leveraging deep technical expertise in full-stack development, cloud computing, and data analysis to deliver scalable and high-performance applications. Recognized for strong problem-solving skills, strategic vision, and the ability to thrive in fast-paced environments.`,
+    experience: experience || `Lead Software Engineer | Tech Innovations Inc. (2018 - Present) - Spearheaded the development of a cutting-edge cloud-based project management system, resulting in a 50% increase in team productivity and a significant reduction in operational costs. Managed a team of 15 developers, providing mentorship and guidance on best practices in software design and architecture. Implemented advanced machine learning algorithms to enhance data analytics capabilities, driving actionable insights and strategic decision-making.
+
+Senior Software Engineer | FutureTech Solutions (2014 - 2018) - Engineered a highly scalable e-commerce platform, optimizing performance and user experience. Played a pivotal role in migrating legacy systems to microservices architecture, which improved system reliability and scalability. Coordinated with stakeholders to define project requirements and deliver solutions that aligned with business goals. Led agile development sprints and managed project timelines, ensuring successful on-time delivery of key features.
+
+Software Developer | Innovative Systems Ltd. (2010 - 2014) - Developed and maintained robust web applications using React, Node.js, and PostgreSQL. Contributed to the design and implementation of a real-time data processing system that supported high-volume transactions and improved system responsiveness. Collaborated with cross-functional teams to troubleshoot and resolve complex technical issues, ensuring optimal system performance and user satisfaction.`,
+    education: education || `Master of Science in Computer Science | Stanford University (2012 - 2014) - Specialized in advanced algorithms, artificial intelligence, and data science. Completed a thesis on "Scalable Machine Learning Models for Big Data Analytics," which received high acclaim for its innovation and impact.
+
+Bachelor of Science in Computer Science | XYZ University (2006 - 2010) - Graduated with honors. Coursework included software engineering principles, database management, and human-computer interaction. Participated in multiple research projects and internships focused on software development and system optimization.`,
+    skills: skills || `- Proficient in modern web technologies including JavaScript, TypeScript, React, and Node.js.
+- Extensive experience with cloud platforms (AWS, Azure) and containerization tools (Docker, Kubernetes).
+- Expertise in designing and implementing scalable software architectures and microservices.
+- Strong knowledge of database systems (SQL, PostgreSQL, MongoDB) and data modeling.
+- Skilled in Agile and Scrum methodologies, with a focus on continuous integration and delivery.
+- Advanced problem-solving abilities and experience in optimizing system performance.
+- Effective communicator with experience in collaborating with stakeholders and presenting technical concepts.`,
+    projects: projects || `Project Management System Overhaul - Led the redevelopment of a project management tool, incorporating advanced features such as real-time collaboration, task automation, and comprehensive reporting. Achieved a 50% reduction in project turnaround time and improved user satisfaction.
+
+E-commerce Platform Optimization - Directed a major overhaul of an existing e-commerce platform to enhance performance and scalability. Implemented new caching strategies and optimized the front-end code, resulting in a 40% increase in page load speed and a 30% increase in user engagement.
+
+AI-Driven Data Analytics Tool - Developed an AI-powered data analytics tool that provided predictive insights and automated reporting. The tool utilized machine learning algorithms to analyze large datasets and generate actionable insights, significantly improving business intelligence and decision-making processes.`,
+
+    certifications: certifications || `Certified Scrum Master (CSM) - Demonstrated proficiency in Agile project management and team leadership.
+
+AWS Certified Solutions Architect - Validated expertise in designing and deploying secure, scalable, and highly available systems on AWS.
+
+Microsoft Certified: Azure Solutions Architect Expert - Recognized for advanced skills in designing and implementing solutions on the Azure platform.
+
+Certified Data Analyst - Proficient in data analysis, statistical modeling, and visualization techniques, with a focus on deriving actionable insights from complex datasets.
+
+Google Cloud Certified - Professional Data Engineer - Expertise in designing and implementing data processing systems and workflows using Google Cloud technologies.`,
   };
 };
+
 
 // Mock ATS scoring (replace with actual implementation)
 const calculateATSScore = (resumeContent: string) => Math.floor(Math.random() * 100);
@@ -28,7 +82,15 @@ const templates = [
 
 const ResumeBuilder: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '', email: '', phone: '', summary: '', experience: '', education: '', skills: ''
+    name: '',
+    email: '',
+    phone: '',
+    summary: '',
+    experience: '',
+    education: '',
+    skills: '',
+    projects: '',
+    certifications: ''
   });
   const [atsScore, setAtsScore] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
@@ -36,9 +98,10 @@ const ResumeBuilder: React.FC = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<string>('1');
   const [aiLoading, setAiLoading] = useState(false);
+  const [showResumeDetails, setShowResumeDetails] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }>) => {
+    const { name, value } = e.target as HTMLInputElement;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
@@ -49,7 +112,7 @@ const ResumeBuilder: React.FC = () => {
 
     try {
       // Simulate an API call to calculate ATS score
-      const resumeContent = `${formData.name}\n${formData.summary}\n${formData.experience}\n${formData.education}\n${formData.skills}`;
+      const resumeContent = `${formData.name}\n${formData.summary}\n${formData.experience}\n${formData.education}\n${formData.skills}\n${formData.projects}\n${formData.certifications}`;
       const score = calculateATSScore(resumeContent);
       setAtsScore(score);
     } catch {
@@ -70,7 +133,9 @@ const ResumeBuilder: React.FC = () => {
         summary: aiSuggestions.summary,
         experience: aiSuggestions.experience,
         education: aiSuggestions.education,
-        skills: aiSuggestions.skills
+        skills: aiSuggestions.skills,
+        projects: aiSuggestions.projects,
+        certifications: aiSuggestions.certifications
       }));
     } catch {
       setError('An error occurred while fetching AI suggestions.');
@@ -174,10 +239,32 @@ const ResumeBuilder: React.FC = () => {
           className="mb-3"
         />
         <TextField
-          select
-          label="Select Template"
+          label="Projects"
+          variant="outlined"
+          fullWidth
+          name="projects"
+          value={formData.projects}
+          onChange={handleChange}
+          multiline
+          rows={3}
+          className="mb-3"
+        />
+        <TextField
+          label="Certifications"
+          variant="outlined"
+          fullWidth
+          name="certifications"
+          value={formData.certifications}
+          onChange={handleChange}
+          multiline
+          rows={2}
+          className="mb-3"
+        />
+        <InputLabel id="template-select-label">Select Template</InputLabel>
+        <Select
+          labelId="template-select-label"
           value={selectedTemplate}
-          onChange={e => setSelectedTemplate(e.target.value)}
+          onChange={e => setSelectedTemplate(e.target.value as string)}
           fullWidth
           className="mb-3"
         >
@@ -186,7 +273,7 @@ const ResumeBuilder: React.FC = () => {
               {template.name}
             </MenuItem>
           ))}
-        </TextField>
+        </Select>
         <Button variant="primary" type="submit" className="w-100" disabled={loading}>
           {loading ? <Spinner animation="border" size="sm" /> : 'Generate Resume'}
         </Button>
@@ -217,39 +304,37 @@ const ResumeBuilder: React.FC = () => {
         Preview Resume
       </Button>
 
-      <Dialog open={previewOpen} onClose={() => setPreviewOpen(false)} maxWidth="lg" fullWidth>
+      <Dialog open={previewOpen} onClose={() => setPreviewOpen(false)} maxWidth="md" fullWidth>
         <DialogTitle>
           Resume Preview
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={() => setPreviewOpen(false)}
-            aria-label="close"
-            sx={{ position: 'absolute', right: 8, top: 8 }}
-          >
+          <IconButton edge="end" color="inherit" onClick={() => setPreviewOpen(false)} aria-label="close">
             <CloseIcon />
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <Card id="resume-preview">
-            <Card.Body>
-              <Card.Title>{formData.name}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">{formData.email} | {formData.phone}</Card.Subtitle>
-              <Card.Text>
-                <Typography variant="h6">Summary:</Typography> {formData.summary}
-                <Typography variant="h6">Experience:</Typography> {formData.experience}
-                <Typography variant="h6">Education:</Typography> {formData.education}
-                <Typography variant="h6">Skills:</Typography> {formData.skills}
-              </Card.Text>
-            </Card.Body>
-          </Card>
+          <div id="resume-preview" className={`resume-template-${selectedTemplate}`}>
+            <Typography variant="h4">{formData.name}</Typography>
+            <Typography variant="h6">{formData.email} | {formData.phone}</Typography>
+            <Typography variant="h5">Summary</Typography>
+            <Typography>{formData.summary}</Typography>
+            <Typography variant="h5">Experience</Typography>
+            <Typography>{formData.experience}</Typography>
+            <Typography variant="h5">Education</Typography>
+            <Typography>{formData.education}</Typography>
+            <Typography variant="h5">Skills</Typography>
+            <Typography>{formData.skills}</Typography>
+            <Typography variant="h5">Projects</Typography>
+            <Typography>{formData.projects}</Typography>
+            <Typography variant="h5">Certifications</Typography>
+            <Typography>{formData.certifications}</Typography>
+          </div>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" color="secondary" onClick={() => setPreviewOpen(false)}>
+          <Button onClick={() => setPreviewOpen(false)} color="primary">
             Close
           </Button>
-          <Button variant="contained" color="primary" onClick={handleDownload}>
-            Download Resume
+          <Button onClick={handleDownload} color="primary">
+            Download PDF
           </Button>
         </DialogActions>
       </Dialog>

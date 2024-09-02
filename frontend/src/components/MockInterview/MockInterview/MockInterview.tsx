@@ -21,7 +21,6 @@ const MockInterview: React.FC = () => {
     <div className="mock-interview">
       <Timer />
       <SpeechRecognition />
-      <AIChatbot />
       <UserProfile />
       <VideoRecorder />
       {stage === 'start' && <MockInterviewStart onStart={() => handleStageChange('session')} />}

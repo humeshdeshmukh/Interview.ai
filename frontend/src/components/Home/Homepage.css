@@ -4,6 +4,7 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: #f4f4f4; /* Light background color */
+  overflow: hidden; /* Ensure no overflow of 3D effects */
 }
 
 /* Hero Section styles */
@@ -18,7 +19,31 @@
   color: #fff;
   text-align: center;
   background-color: #000; /* Set background color to black */
+  position: relative;
   animation: fadeIn 1s ease-out;
+}
+
+/* 3D effect for hero section */
+.hero-3d-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+  pointer-events: none; /* Ensure it does not interfere with interactions */
+  animation: rotate 20s infinite linear;
+}
+
+/* Keyframe animation for rotating 3D effect */
+@keyframes rotate {
+  from {
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+  }
+  to {
+    transform: perspective(1000px) rotateX(360deg) rotateY(360deg);
+  }
 }
 
 .hero-section h1 {
@@ -41,12 +66,13 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 .hero-section .cta-button:hover {
   background-color: #0056b3; /* Darker shade of primary color */
   transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Section styles */
@@ -56,18 +82,37 @@
   margin: 20px 0;
   border-radius: 10px;
   animation: fadeInUp 1s ease-out;
+  position: relative;
+  overflow: hidden; /* Ensure no overflow of animations */
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
 }
 
 .section h2 {
   font-size: 2rem;
   margin-bottom: 20px;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .section .section-content {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .section .card {
@@ -78,6 +123,8 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden; /* Ensure no overflow of animations */
 }
 
 .section .card:hover {
@@ -114,17 +161,37 @@
 .subscription-section {
   background-color: #007bff; /* Blue background */
   color: #fff;
+  padding: 60px 20px;
   animation: fadeIn 1s ease-out;
+  position: relative;
+  overflow: hidden; /* Ensure no overflow of animations */
+}
+
+.subscription-section::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
 }
 
 .subscription-section h2 {
   color: #fff;
+  position: relative;
+  z-index: 1;
 }
 
 .subscription-section .form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .subscription-section input {
@@ -160,7 +227,10 @@
 .plan-section {
   background-color: #000; /* Set background color to black */
   color: #fff;
+  padding: 60px 20px;
   animation: fadeIn 1s ease-out;
+  position: relative;
+  overflow: hidden; /* Ensure no overflow of animations */
 }
 
 .plan-section .plan-card {
@@ -169,6 +239,8 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden; /* Ensure no overflow of animations */
 }
 
 .plan-section .plan-card:hover {

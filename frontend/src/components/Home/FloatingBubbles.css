@@ -1,0 +1,60 @@
+/* Container for floating bubbles */
+.floating-bubbles {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Hide overflowing bubbles */
+  }
+  
+  /* Create the bubble effect */
+  .floating-bubbles::before,
+  .floating-bubbles::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6); /* Light color for bubbles */
+    width: 50px;
+    height: 50px;
+    animation: bubbleFloat 10s infinite;
+  }
+  
+  /* Variations for bubbles */
+  .floating-bubbles::before {
+    top: 20%;
+    left: 30%;
+    animation-duration: 12s;
+    animation-delay: 0s;
+    background: rgba(255, 255, 255, 0.8); /* Slightly more opaque */
+  }
+  
+  .floating-bubbles::after {
+    top: 60%;
+    left: 70%;
+    animation-duration: 15s;
+    animation-delay: 2s;
+    background: rgba(255, 255, 255, 0.5); /* Slightly more transparent */
+  }
+  
+  /* Keyframes for bubble floating effect */
+  @keyframes bubbleFloat {
+    0% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-100px) scale(1.2);
+    }
+    100% {
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* Optional: Add more bubbles */
+  .floating-bubbles::nth-of-type(3),
+  .floating-bubbles::nth-of-type(4) {
+    /* Different sizes or positions for more variation */
+    width: 80px;
+    height: 80px;
+    animation-duration: 14s;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  
