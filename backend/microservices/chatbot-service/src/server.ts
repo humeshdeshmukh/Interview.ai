@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import chatRoutes from './routes/chat'; // Adjust path as necessary
+import chatRoutes from './routes/chatbotRoutes'; // Adjust path as necessary
 
 dotenv.config();
 

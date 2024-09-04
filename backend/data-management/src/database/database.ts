@@ -1,22 +1,41 @@
-import { Pool } from 'pg';
+import { MongoClient } from 'mongodb';
 
-const pool = new Pool({
-  user: process.env.DB_USER || 'your_db_user',
-  host: process.env.DB_HOST || 'localhost',
-  database: process.env.DB_NAME || 'your_db_name',
-  password: process.env.DB_PASSWORD || 'your_db_password',
-  port: Number(process.env.DB_PORT) || 5432,
-});
+const uri = process.env.MONGO_URI || 'mongodb://localhost:27017';
+const dbName = process.env.DB_NAME || 'your_db_name';
 
-pool.on('connect', () => {
-  console.log('Connected to the PostgreSQL database');
-});
+let client: MongoClient;
+let db: any;
 
-pool.on('error', (err) => {
-  console.error('Unexpected error on idle PostgreSQL client', err);
-  process.exit(-1);
-});
+// Connect to the MongoDB database
+export const connect = async () => {
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    db = client.db(dbName);
+    console.log('Connected to the MongoDB database');
+  } catch (err) {
+    console.error('Failed to connect to the MongoDB database', err);
+    process.exit(-1);
+  }
+};
 
-export const query = (text: string, params?: any[]) => pool.query(text, params);
+// Function to run a query
+export const query = async (collectionName: string, query: object, options: object = {}) => {
+  if (!db) {
+    await connect();
+  }
+  const collection = db.collection(collectionName);
+  return collection.find(query, options).toArray();
+};
 
-export const close = () => pool.end();
+// Function to close the MongoDB connection
+export const close = async () => {
+  if (client) {
+    await client.close();
+  }
+};
+
+// Example usage
+// await connect();
+// const results = await query('your_collection', { your_query: 'criteria' });
+// await close();

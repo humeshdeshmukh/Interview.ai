@@ -5,6 +5,8 @@ import Footer from './components/Layout/Footer';
 import { AuthProvider } from './contexts/AuthContext';
 import Chatbot from './components/Chatbot/Chatbot';
 import MockInterview from './components/MockInterview/MockInterview';
+import ForgotPassword from './components/Auth/ForgotPassword'; // Adjust the path as needed
+
 // Lazy loading for better performance
 const Homepage = lazy(() => import('./components/Home/Homepage'));
 const ResumeBuilder = lazy(() => import('./components/Home/ResumeBuilder'));
@@ -77,6 +79,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/profile" element={<UserProfile name="" email="" profilePicture="" />} />
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} /> {/* Add this route */}
 
       {/* Additional pages */}
       <Route path="/blog" element={<Blog />} />

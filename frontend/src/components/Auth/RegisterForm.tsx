@@ -41,10 +41,13 @@ const RegisterForm: React.FC = () => {
 
     try {
       setLoading(true);
-      await axiosInstance.post('/auth/register', {
+      // Make API request to register user
+      const response = await axiosInstance.post('/auth/register', {
         email: formData.email,
         password: formData.password,
-      }); // Use the Axios instance
+      });
+
+      console.log('Registration response:', response); // Debug response
 
       // Call the register function from AuthContext if needed
       if (register) {
@@ -53,6 +56,10 @@ const RegisterForm: React.FC = () => {
 
       navigate('/login'); // Redirect to login page upon successful registration
     } catch (error: any) {
+      // Debug error details
+      console.error('Registration error:', error);
+
+      // Set error message to display
       const errorMsg =
         error.response?.data?.message ||
         'Failed to create an account. Please try again.';

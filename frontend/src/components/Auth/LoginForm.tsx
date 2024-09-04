@@ -26,6 +26,10 @@ const LoginForm: React.FC = () => {
     }
   };
 
+  const handleForgotPassword = () => {
+    navigate('/forgot-password'); // Navigate to the password reset page
+  };
+
   return (
     <Container className="py-5">
       <h1 className="text-center mb-4">Login</h1>
@@ -58,6 +62,11 @@ const LoginForm: React.FC = () => {
           <span>Don't have an account? </span>
           <Button variant="link" onClick={() => navigate('/register')}>
             Register
+          </Button>
+        </div>
+        <div className="mt-2">
+          <Button variant="link" onClick={handleForgotPassword}>
+            Forgot Password?
           </Button>
         </div>
       </Form>

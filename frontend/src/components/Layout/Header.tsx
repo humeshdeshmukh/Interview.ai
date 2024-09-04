@@ -11,7 +11,7 @@ const Header: React.FC = () => {
       <Container fluid>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img src={logo} alt="Logo" className="header-logo" />
-          <span className="header-title ms-2">InterviewMaster.Ai</span>
+          <span className="header-title ms-2">InterviewMaster.ai</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
@@ -20,8 +20,12 @@ const Header: React.FC = () => {
             <Nav.Link as={Link} to="/resume" className="nav-link">Resume Builder</Nav.Link>
             <Nav.Link as={Link} to="/questions" className="nav-link">Interview Questions</Nav.Link>
             <Nav.Link as={Link} to="/practice-tests" className="nav-link">Practice Tests</Nav.Link>
-            <Nav.Link as={Link} to="/mock-interview" className="nav-link">Mock Interviews</Nav.Link>
             
+            <NavDropdown title="Mock Interviews" id="mock-interview-dropdown" className="nav-dropdown">
+              <NavDropdown.Item as={Link} to="/mock-interview">Traditional Mock Interviews</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/ai-interview">AI Interview</NavDropdown.Item>
+            </NavDropdown>
+
             <NavDropdown title="Resources" id="resources-dropdown" className="nav-dropdown">
               <NavDropdown.Item as={Link} to="/blog">Blog</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/webinars">Webinars</NavDropdown.Item>

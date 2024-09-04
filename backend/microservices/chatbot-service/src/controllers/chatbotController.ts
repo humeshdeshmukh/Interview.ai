@@ -1,5 +1,3 @@
-// Path: chatbot-service/src/controllers/chatbotController.ts
-
 import { Request, Response } from 'express';
 import { generateChatbotResponse } from '../services/chatbotService';
 

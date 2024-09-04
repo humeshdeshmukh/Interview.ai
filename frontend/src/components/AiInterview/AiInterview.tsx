@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Container, Form, Button, ListGroup, Alert } from 'react-bootstrap';
+import React, { useState, useRef, useEffect } from 'react';
+import { Container, Form, Button, ListGroup, Alert, ProgressBar } from 'react-bootstrap';
 import './AiInterview.css'; // Add your custom styles here
 
 const AiInterview: React.FC = () => {
@@ -18,9 +18,21 @@ const AiInterview: React.FC = () => {
   const [isInterviewComplete, setIsInterviewComplete] = useState(false);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [recordingStatus, setRecordingStatus] = useState<string>('');
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+
+  useEffect(() => {
+    if (feedback) {
+      // Simulate real-time feedback for user input
+      const timer = setTimeout(() => {
+        setFeedback(generateFeedback(userInput));
+      }, 1000); // Simulate delay
+
+      return () => clearTimeout(timer);
+    }
+  }, [userInput]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(event.target.value);
@@ -29,10 +41,8 @@ const AiInterview: React.FC = () => {
   const handleSubmit = () => {
     if (currentQuestionIndex < questions.length) {
       const newResponses = [...responses, { question: questions[currentQuestionIndex], answer: userInput, videoUrl }];
-      const aiFeedback = generateFeedback(userInput);
-
       setResponses(newResponses);
-      setFeedback(aiFeedback);
+      setFeedback(null); // Clear feedback after submission
       setUserInput('');
       setVideoUrl(null);
 
@@ -69,6 +79,7 @@ const AiInterview: React.FC = () => {
         chunksRef.current = [];
       };
       mediaRecorderRef.current.start();
+      setRecordingStatus('Recording...');
       setIsRecording(true);
     }
   };
@@ -76,11 +87,19 @@ const AiInterview: React.FC = () => {
   const stopRecording = () => {
     mediaRecorderRef.current?.stop();
     setIsRecording(false);
+    setRecordingStatus('Stopped');
   };
 
   return (
     <Container className="ai-interview-container">
       <h1>AI Interview</h1>
+      
+      <ProgressBar 
+        now={(currentQuestionIndex / questions.length) * 100}
+        label={`${currentQuestionIndex + 1}/${questions.length}`} 
+        className="mb-4"
+      />
+
       <Form>
         <Form.Group controlId="currentQuestion">
           <Form.Label>Question</Form.Label>
@@ -88,6 +107,7 @@ const AiInterview: React.FC = () => {
             type="text"
             readOnly
             value={questions[currentQuestionIndex]}
+            className="mb-3"
           />
         </Form.Group>
         <Form.Group controlId="userInput">
@@ -98,13 +118,14 @@ const AiInterview: React.FC = () => {
             value={userInput}
             onChange={handleInputChange}
             disabled={isRecording}
+            className="mb-3"
           />
         </Form.Group>
         <Button
           variant="primary"
           onClick={handleSubmit}
-          className="mt-3"
           disabled={isRecording}
+          className="me-2"
         >
           {isInterviewComplete ? 'Finish Interview' : 'Submit Answer'}
         </Button>
@@ -112,10 +133,12 @@ const AiInterview: React.FC = () => {
         <Button
           variant={isRecording ? 'danger' : 'success'}
           onClick={isRecording ? stopRecording : startRecording}
-          className="mt-3 ms-2"
+          className="me-2"
         >
           {isRecording ? 'Stop Recording' : 'Start Recording'}
         </Button>
+
+        {recordingStatus && <Alert variant={isRecording ? 'danger' : 'success'} className="mt-3">{recordingStatus}</Alert>}
       </Form>
 
       <div className="mt-4">
@@ -130,7 +153,7 @@ const AiInterview: React.FC = () => {
 
       <ListGroup className="mt-4">
         {responses.map((response, index) => (
-          <ListGroup.Item key={index}>
+          <ListGroup.Item key={index} className="response-item">
             <strong>Q:</strong> {response.question} <br />
             <strong>A:</strong> {response.answer}
             {response.videoUrl && (
@@ -152,7 +175,7 @@ const AiInterview: React.FC = () => {
 
       {isInterviewComplete && (
         <div className="mt-4">
-                    <h3>Interview Complete</h3>
+          <h3>Interview Complete</h3>
           <p>Thank you for completing the interview. You can review your responses above.</p>
         </div>
       )}
@@ -161,4 +184,3 @@ const AiInterview: React.FC = () => {
 };
 
 export default AiInterview;
-

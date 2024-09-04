@@ -1,36 +1,35 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-import AuthLayout from './AuthLayout'; // Adjust the import path as needed
+import { Form, Button, Container, Alert } from 'react-bootstrap';
+import axiosInstance from '../../services/api'; // Import the Axios instance
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    // Simulate an API call
+    setLoading(true);
+    setError(null);
+
     try {
-      // Here you would typically call your backend service to handle password reset
-      // For example: await authService.requestPasswordReset(email);
-      console.log('Password reset requested for:', email);
-      
-      setMessage('If an account with that email exists, a password reset link will be sent to it.');
-      setError(null);
-    } catch (err) {
-      setError('An error occurred while processing your request.');
-      setMessage('');
+      await axiosInstance.post('/auth/forgot-password', { email });
+      setMessage('If an account with that email exists, you will receive a password reset link.');
+    } catch (error: any) {
+      setError(error.response?.data?.message || 'Failed to send password reset link');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <AuthLayout>
-      <h2 className="text-center mb-4">Forgot Password</h2>
-      {message && <Alert variant="info">{message}</Alert>}
-      {error && <Alert variant="danger">{error}</Alert>}
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
+    <Container className="py-5">
+      <h1 className="text-center mb-4">Forgot Password</h1>
+      <Form onSubmit={handleSubmit} className="mx-auto" style={{ maxWidth: '400px' }}>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {message && <Alert variant="success">{message}</Alert>}
+        <Form.Group controlId="formEmail" className="mb-3">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -40,11 +39,11 @@ const ForgotPassword: React.FC = () => {
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit" className="w-100 mt-3">
-          Request Password Reset
+        <Button variant="primary" type="submit" disabled={loading}>
+          {loading ? 'Sending...' : 'Send Reset Link'}
         </Button>
       </Form>
-    </AuthLayout>
+    </Container>
   );
 };
 
