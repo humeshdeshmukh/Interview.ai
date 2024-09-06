@@ -7,12 +7,10 @@ import './HeroSection.css'; // Ensure you have modern styles in this file
 const HeroSection: React.FC = () => {
   return (
     <section className="hero-section d-flex align-items-center justify-content-center text-white position-relative overflow-hidden">
-      {/* Background Image */}
-      <div className="hero-background position-absolute top-0 start-0 w-100 h-100"></div>
-      {/* 3D Effect */}
-      <div className="hero-3d-effect position-absolute top-0 start-0 w-100 h-100"></div>
-      {/* Overlay */}
-      <div className="hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+      {/* 3D Background Effect */}
+      <div className="hero-background position-absolute top-0 start-0 w-100 h-100">
+        <div className="hero-bg-layer"></div>
+      </div>
 
       <Container className="position-relative z-index-3 text-center">
         <Row>

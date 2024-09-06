@@ -1,40 +1,82 @@
-/* Styles for the hero section */
 .hero-section {
-  position: relative;
-  background-color: #000; /* Black background for hero */
   min-height: 100vh;
-  overflow: hidden; /* Ensure no overflow issues */
+  position: relative;
+  background: #0d1117; /* Dark background for contrast */
+  overflow: hidden;
+  color: #fff;
 }
 
 .hero-background {
-  background-image: url('frontend\src\assets\images\hero.jpg'); /* Update the path to your image */
-  background-size: cover; /* Cover the entire section */
-  background-position: center; /* Center the background image */
-  position: absolute; /* Position behind content */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Place behind other content */
+  overflow: hidden;
+}
+
+.hero-bg-layer {
+  background: linear-gradient(135deg, rgba(58, 123, 213, 0.8), rgba(0, 210, 255, 0.6));
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  left: -10%;
+  top: -10%;
+  transform: rotate(15deg);
+  animation: rotateBg 15s linear infinite;
+}
+
+@keyframes rotateBg {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .hero-overlay {
-  background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+  z-index: 2;
 }
 
-/* Styles for the Resources section */
-.resources-section {
-  background-color: #f4f4f4; /* Light grey background */
-  color: black; /* Ensure text is visible on light background */
+.hero-title {
+  font-size: 3rem;
+  color: #fff;
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.6);
 }
 
-.resources-section h2 {
-  color: black; /* Ensure title is black */
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: #ccc;
 }
-/* Profile picture in the header */
-.profile-picture {
-  width: 30px;  /* Smaller width */
-  height: 30px; /* Smaller height */
-  border-radius: 50%; /* Makes the profile picture circular */
-  object-fit: cover; /* Ensures the image covers the area without distortion */
+
+.hero-button {
+  border-radius: 50px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.hero-button:hover {
+  transform: translateY(-5px);
+}
+
+.hero-3d-effect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('/path-to-your-3d-effect-image.png') no-repeat center center/cover;
+  opacity: 0.1;
+}
+
+.z-index-3 {
+  z-index: 3;
+}
+
+.z-index-4 {
+  z-index: 4;
 }

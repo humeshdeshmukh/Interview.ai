@@ -131,3 +131,230 @@
         width: 250px;
     }
 }
+
+/* General Resume Styles */
+.resume-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Professional Template Styling */
+.resume-template-1 {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background: #ffffff;
+    padding: 30px;
+    border-left: 5px solid #007bff; /* Blue accent */
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+.resume-template-1 h1, .resume-template-1 h2, .resume-template-1 h3 {
+    font-family: 'Arial Black', sans-serif;
+    color: #007bff; /* Blue for headings */
+    margin-bottom: 10px;
+}
+
+.resume-template-1 .section {
+    margin-bottom: 20px;
+}
+
+.resume-template-1 .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.resume-template-1 .item {
+    margin-bottom: 15px;
+}
+
+.resume-template-1 .item-title {
+    font-weight: 600;
+    color: #000;
+}
+
+.resume-template-1 .item-details {
+    margin-left: 20px;
+    color: #555;
+}
+
+/* Modern Template Styling */
+.resume-template-2 {
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #444;
+    background: #f9f9f9;
+    padding: 30px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    line-height: 1.7;
+}
+
+.resume-template-2 h1, .resume-template-2 h2, .resume-template-2 h3 {
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.resume-template-2 .section {
+    margin-bottom: 25px;
+}
+
+.resume-template-2 .section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.resume-template-2 .item {
+    margin-bottom: 20px;
+}
+
+.resume-template-2 .item-title {
+    font-weight: 600;
+    color: #222;
+}
+
+.resume-template-2 .item-details {
+    margin-left: 20px;
+    color: #666;
+}
+
+/* Creative Template Styling */
+.resume-template-3 {
+    font-family: 'Comic Sans MS', cursive;
+    color: #666;
+    background: #e0e0e0;
+    padding: 30px;
+    border: 2px dashed #ff5722; /* Orange dashed border */
+    border-radius: 8px;
+    line-height: 1.8;
+}
+
+.resume-template-3 h1, .resume-template-3 h2, .resume-template-3 h3 {
+    font-family: 'Comic Sans MS', cursive;
+    color: #ff5722; /* Orange for headings */
+    margin-bottom: 14px;
+}
+
+.resume-template-3 .section {
+    margin-bottom: 30px;
+}
+
+.resume-template-3 .section-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    border-bottom: 3px solid #ff5722;
+    padding-bottom: 7px;
+    margin-bottom: 12px;
+}
+
+.resume-template-3 .item {
+    margin-bottom: 20px;
+}
+
+.resume-template-3 .item-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.resume-template-3 .item-details {
+    margin-left: 20px;
+    color: #777;
+}
+
+/* Minimalist Template Styling */
+.resume-template-4 {
+    font-family: 'Georgia', serif;
+    color: #000;
+    background: #fff;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+.resume-template-4 h1, .resume-template-4 h2, .resume-template-4 h3 {
+    font-family: 'Georgia', serif;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.resume-template-4 .section {
+    margin-bottom: 25px;
+}
+
+.resume-template-4 .section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+}
+
+.resume-template-4 .item {
+    margin-bottom: 20px;
+}
+
+.resume-template-4 .item-title {
+    font-weight: 600;
+    color: #000;
+}
+
+.resume-template-4 .item-details {
+    margin-left: 20px;
+    color: #555;
+}
+
+/* Executive Template Styling */
+.resume-template-5 {
+    font-family: 'Times New Roman', serif;
+    color: #222;
+    background: #f0f0f0;
+    padding: 30px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    line-height: 1.7;
+}
+
+.resume-template-5 h1, .resume-template-5 h2, .resume-template-5 h3 {
+    font-family: 'Times New Roman', serif;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.resume-template-5 .section {
+    margin-bottom: 30px;
+}
+
+.resume-template-5 .section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    border-bottom: 2px solid #333;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+}
+
+.resume-template-5 .item {
+    margin-bottom: 25px;
+}
+
+.resume-template-5 .item-title {
+    font-weight: 600;
+    color: #111;
+}
+
+.resume-template-5 .item-details {
+    margin-left: 20px;
+    color: #444;
+}
