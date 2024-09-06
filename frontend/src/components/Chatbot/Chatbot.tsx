@@ -1,92 +1,70 @@
-import React, { useState } from 'react';
-import './ChatbotWindow.css';
+import React, { useState, useEffect } from 'react';
+import './Chatbot.css';
 import chatbotIcon from './chatbot.1.png';
-
-interface Message {
-  text: string;
-  sender: 'user' | 'bot';
-}
+import axios from 'axios';
+import { Message } from './types.ts';
+import ChatbotWindow from './ChatbotWindow';
+import { getBotResponse } from './botUtils';
+import { ChatbotContextProvider } from './chatbotContext';
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const apiKey = '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'; // Replace with your OpenAI API key
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (inputValue.trim()) {
-      // Add the new message to the state
-      const newMessage: Message = { text: inputValue, sender: 'user' };
+      const timestamp = new Date().toLocaleTimeString();
+      const newMessage: Message = { text: inputValue, sender: 'user', timestamp };
       setMessages([...messages, newMessage]);
-
-      // Clear the input field
       setInputValue('');
 
-      // Add a bot response (optional)
-      const botReply: Message = { text: "This is a bot response!", sender: 'bot' };
-      setMessages(prevMessages => [...prevMessages, newMessage, botReply]);
+      setIsLoading(true);
+      const botReply = await getBotResponse(inputValue, apiKey);
+      setIsLoading(false);
+
+      setMessages(prevMessages => [
+        ...prevMessages,
+        newMessage,
+        { text: botReply, sender: 'bot', timestamp },
+      ]);
     }
   };
 
   return (
-    <div className={`chatbot-container ${isOpen ? 'open' : ''}`}>
-      {isOpen ? (
-        <div className="chatbot-window">
-          <div className="chatbot-window-header">
-            <button
-              className="chatbot-close-button"
-              onClick={toggleChatbot}
-              aria-label="Close Chatbot"
-            >
-              &#x2715; {/* Close Icon */}
-            </button>
-            <span>Chatbot</span>
-          </div>
-          <div className="chatbot-window-messages">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`chatbot-message ${
-                  message.sender === 'user' ? 'user-message' : 'bot-message'
-                }`}
-              >
-                {message.text}
-              </div>
-            ))}
-          </div>
-          <div className="chatbot-window-input">
-            <textarea
-              className="chatbot-window-textarea"
-              placeholder="Type a message..."
-              value={inputValue}
-              onChange={handleInputChange}
-            />
-            <button
-              className="chatbot-window-send-button"
-              onClick={handleSend}
-              aria-label="Send Message"
-            >
-              Send
-            </button>
-          </div>
-        </div>
-      ) : (
-        <button
-          className="chatbot-icon-button"
-          onClick={toggleChatbot}
-          aria-label="Open Chatbot"
-        >
-          <img src={chatbotIcon} alt="Chatbot Icon" />
-        </button>
-      )}
-    </div>
+    <ChatbotContextProvider>
+      <div className={`chatbot-container ${isOpen ? 'open' : ''}`}>
+        {isOpen ? (
+          <ChatbotWindow
+            messages={messages}
+            inputValue={inputValue}
+            onInputChange={handleInputChange}
+            onSend={handleSend}
+            isLoading={isLoading}
+            toggleChatbot={toggleChatbot}
+          />
+        ) : (
+          <button
+            className="chatbot-icon-button"
+            onClick={toggleChatbot}
+            aria-label="Open Chatbot"
+          >
+            <img src={chatbotIcon} alt="Chatbot Icon" />
+          </button>
+        )}
+      </div>
+    </ChatbotContextProvider>
   );
 };
 

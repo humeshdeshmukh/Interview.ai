@@ -1,30 +1,18 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
-import './ChatbotMessage.css'; // Import your custom CSS if needed
+import './ChatbotMessage.css';
 
 interface ChatbotMessageProps {
-  sender: 'user' | 'bot'; // Sender can be 'user' or 'bot'
+  role: 'user' | 'bot';
   message: string;
-  timestamp?: string; // Optional timestamp for when the message was sent
+  timestamp: string;
 }
 
-const ChatbotMessage: React.FC<ChatbotMessageProps> = ({ sender, message, timestamp }) => {
+const ChatbotMessage: React.FC<ChatbotMessageProps> = ({ role, message, timestamp }) => {
   return (
-    <Col md={12} className={`chatbot-message ${sender}`}>
-      <div className={`message-container ${sender}`}>
-        <div className="avatar">
-          {sender === 'user' ? '👤' : '🤖'}
-        </div>
-        <div className={`message-bubble ${sender}`}>
-          {message}
-        </div>
-        {timestamp && (
-          <div className="message-timestamp">
-            {timestamp}
-          </div>
-        )}
-      </div>
-    </Col>
+    <div className={`chatbot-message ${role}`}>
+      <div className="chatbot-message-text">{message}</div>
+      <div className="chatbot-message-timestamp">{timestamp}</div>
+    </div>
   );
 };
 
