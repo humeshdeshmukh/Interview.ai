@@ -8,20 +8,23 @@
 }
 
 /* Hero Section styles */
-.hero-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  background: url('../assets/images/hero.png') no-repeat center center;
-  background-size: cover;
+.hero-section .cta-button {
+  padding: 8px 16px; /* Reduced padding */
+  font-size: 0.875rem; /* Slightly smaller font size */
+  background-color: #007bff; /* Bootstrap primary color */
   color: #fff;
-  text-align: center;
-  background-color: #000; /* Set background color to black */
-  position: relative;
-  animation: fadeIn 1s ease-out;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
+
+.hero-section .cta-button:hover {
+  background-color: #0056b3; /* Darker shade of primary color */
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
 
 /* 3D effect for hero section */
 .hero-3d-effect {

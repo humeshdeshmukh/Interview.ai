@@ -12,7 +12,6 @@ const Homepage = lazy(() => import('./components/Home/Homepage'));
 const ResumeBuilder = lazy(() => import('./components/Home/ResumeBuilder'));
 const InterviewQuestions = lazy(() => import('./components/Home/InterviewQuestions'));
 const PracticeTests = lazy(() => import('./components/Home/PracticeTests'));
-//const MockInterview = lazy(() => import('./components/MockInterview/MockInterview'));
 const Resources = lazy(() => import('./components/Home/Resources'));
 const UserProfile = lazy(() => import('./components/Home/UserProfile'));
 const RegisterForm = lazy(() => import('./components/Auth/RegisterForm'));
@@ -41,6 +40,9 @@ const Press = lazy(() => import('./components/pages/Press'));
 const Partners = lazy(() => import('./components/pages/Partners'));
 const ActivityLog = lazy(() => import('./components/pages/ActivityLog'));
 const Subscriptions = lazy(() => import('./components/pages/Subscriptions'));
+
+// Import the AiInterview component
+const AiInterview = lazy(() => import('./components/AiInterview/AiInterview'));
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
@@ -79,7 +81,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/profile" element={<UserProfile name="" email="" profilePicture="" />} />
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} /> {/* Add this route */}
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
       {/* Additional pages */}
       <Route path="/blog" element={<Blog />} />
@@ -103,6 +105,9 @@ const AppRoutes: React.FC = () => (
       <Route path="/partners" element={<Partners />} />
       <Route path="/activity-log" element={<ActivityLog />} />
       <Route path="/subscriptions" element={<Subscriptions />} />
+
+      {/* Route for AiInterview */}
+      <Route path="/ai-interview" element={<AiInterview />} /> {/* Add this route */}
 
       <Route path="*" element={<NotFound />} />
     </Routes>

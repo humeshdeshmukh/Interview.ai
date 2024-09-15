@@ -10,6 +10,7 @@ import './index.css'; // Import your global styles if any
 import theme from './styles/theme'; // Import your MUI theme if using MUI
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'regenerator-runtime/runtime';
 
 // Optional: Import and configure performance monitoring (e.g., Sentry, LogRocket)
 // import * as Sentry from '@sentry/react';

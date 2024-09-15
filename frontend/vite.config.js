@@ -12,4 +12,9 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      'react-speech-recognition': 'react-speech-recognition',
+    },
+  },
 });
