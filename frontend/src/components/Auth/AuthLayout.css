@@ -1,0 +1,85 @@
+.auth-layout {
+    background: linear-gradient(135deg, #f8f9fa, #e0e7ff); /* Gradient background for a modern feel */
+    min-height: 100vh; /* Ensure it takes full viewport height */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .auth-content {
+    background-color: #ffffff; /* White form background */
+    padding: 40px;
+    border-radius: 12px; /* Slightly more rounded corners for modern UI */
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: box-shadow 0.3s ease; /* Smooth transition for shadow changes */
+  }
+  
+  /* Add a hover effect for the form to make it feel interactive */
+  .auth-content:hover {
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* For mobile responsiveness */
+  @media (max-width: 576px) {
+    .auth-content {
+      padding: 25px;
+      border-radius: 10px; /* Slightly smaller radius for mobile */
+    }
+  }
+  
+  /* Adding some polish to the form elements */
+  form input, form button {
+    transition: all 0.3s ease; /* Smooth transition for inputs and buttons */
+  }
+  
+  form input:focus {
+    border-color: #5a67d8; /* Change input border on focus */
+    box-shadow: 0px 0px 8px rgba(90, 103, 216, 0.4); /* Add subtle shadow */
+  }
+  
+  button {
+    background-color: #5a67d8; /* Slightly different blue for the button */
+    border: none;
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #434aa1; /* Darker blue on hover */
+  }
+  
+  button:disabled {
+    background-color: #cbd5e0; /* Greyed out for disabled state */
+    cursor: not-allowed;
+  }
+  
+  button:focus {
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(90, 103, 216, 0.6); /* Focus effect */
+  }
+  
+  /* Styling the alert messages for error feedback */
+  .alert {
+    font-size: 0.9rem;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .alert-danger {
+    background-color: rgba(255, 99, 71, 0.1); /* Light red for error */
+    color: #e53e3e; /* Red text */
+  }
+  
+  .alert-success {
+    background-color: rgba(72, 187, 120, 0.1); /* Light green for success */
+    color: #38a169; /* Green text */
+  }
+  

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define the base URL for the API
-const API_BASE_URL = 'https://api.example.com'; // Replace with your API base URL
+const API_BASE_URL = 'https://api.openai.com/v1/engines/davinci-codex/completions'; // Replace with your API base URL
 
 // Define interfaces for your data models
 export interface User {
