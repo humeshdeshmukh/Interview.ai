@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import HeroSection from './HeroSection';
 import Resources from './Resources';
-import SubscriptionSection from './SubscriptionSection';
+import SubscriptionSection from './subscriptionSection';
 import PlanSection from './PlanSection';
 import './Homepage.css'; // Ensure this file contains your custom styles
 

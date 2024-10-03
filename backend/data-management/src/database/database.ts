@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 const uri = process.env.MONGO_URI || 'mongodb://localhost:27017';
-const dbName = process.env.DB_NAME || 'your_db_name';
+const dbName = process.env.DB_NAME || 'interviewmaster';
 
 let client: MongoClient;
 let db: any;
