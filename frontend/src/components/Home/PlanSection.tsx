@@ -22,7 +22,7 @@ const PlanSection: React.FC = () => {
     {
       title: 'Basic Plan',
       description: 'Ideal for those who want to get serious about their interview prep.',
-      price: '₹100/month',
+      price: '₹99/month',
       features: [
         'Access to basic interview questions',
         'Resume builder',
@@ -38,7 +38,7 @@ const PlanSection: React.FC = () => {
     {
       title: 'Standard Plan',
       description: 'Our most popular plan with advanced features for comprehensive preparation.',
-      price: '₹200/month',
+      price: '₹199/month',
       features: [
         'Access to all interview questions',
         'Advanced resume builder',
@@ -56,7 +56,7 @@ const PlanSection: React.FC = () => {
     {
       title: 'Premium Plan',
       description: 'For those who want the ultimate interview preparation experience.',
-      price: '₹500/month',
+      price: '₹499/month',
       features: [
         'Access to all interview questions',
         'Advanced resume builder',

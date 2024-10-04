@@ -1,15 +1,20 @@
 {
-    "compilerOptions": {
-      "target": "ES6",                     // Target ECMAScript version
-      "module": "commonjs",                // Module system to use
-      "strict": true,                       // Enable all strict type-checking options
-      "esModuleInterop": true,              // Enable interoperability between CommonJS and ES modules
-      "skipLibCheck": true,                 // Skip type checking of all declaration files
-      "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
-      "outDir": "dist",                    // Output directory for compiled files
-      "rootDir": "src"                     // Root directory of input files
-    },
-    "include": ["src/**/*"],                // Include all TypeScript files in the src directory
-    "exclude": ["node_modules", "dist"]    // Exclude node_modules and dist directories
-  }
-  
+  "compilerOptions": {
+    "target": "ES6",                     // Target ECMAScript version
+    "module": "commonjs",                // Module system to use
+    "strict": true,                       // Enable all strict type-checking options
+    "esModuleInterop": true,              // Enable interoperability between CommonJS and ES modules
+    "skipLibCheck": true,                 // Skip type checking of all declaration files
+    "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
+    "outDir": "dist",                    // Output directory for compiled files
+    "rootDir": "src"                     // Root directory of input files
+  },
+  "include": [
+    "src/**/*",                           // Include all TypeScript files in the src directory
+    "src/types/**/*.d.ts"                // Include your custom type declarations
+  ],
+  "exclude": [
+    "node_modules",                       // Exclude node_modules directory
+    "dist"                                // Exclude dist directory
+  ]
+}
