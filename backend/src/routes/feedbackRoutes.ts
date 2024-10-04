@@ -1,8 +1,9 @@
 import express from 'express';
-import { giveFeedback } from '../controllers/FeedbackController';
+import FeedbackController from '../controllers/FeedbackController'; // Ensure this imports your controller
 
 const router = express.Router();
 
-router.post('/', giveFeedback);
+// Route for submitting feedback
+router.post('/', FeedbackController.submitFeedback);
 
 export default router;
