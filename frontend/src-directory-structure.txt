@@ -1,170 +1,188 @@
-Folder PATH listing
-Volume serial number is 28E0-12B5
-C:.
-|   App.css
-|   App.tsx
-|   index.css
-|   main.tsx
-|   
-+---assets
-|       logo.jpg
-|       logo.png
-|       Profile-pic.jpeg
-|       Profile-pic.webp
-|       react.svg
-|       
-+---components
-|   |   NotFound.tsx
-|   |   
-|   +---Auth
-|   |       AuthLayout.tsx
-|   |       ForgotPassword.tsx
-|   |       LoginForm.tsx
-|   |       RegisterForm.tsx
-|   |       
-|   +---Chatbot
-|   |       chatbot.1.png
-|   |       Chatbot.css
-|   |       Chatbot.tsx
-|   |       ChatbotMessage.css
-|   |       ChatbotMessage.tsx
-|   |       ChatbotWindow.css
-|   |       ChatbotWindow.tsx
-|   |       
-|   +---Common
-|   |   |   Button.css
-|   |   |   Button.tsx
-|   |   |   InputField.css
-|   |   |   InputField.tsx
-|   |   |   Modal.tsx
-|   |   |   Notification.css
-|   |   |   Notification.tsx
-|   |   |   PrivateRoute.tsx
-|   |   |   Spinner.css
-|   |   |   Spinner.tsx
-|   |   |   
-|   |   \---Chatbot
-|   +---Feedback
-|   |       FeedbackForm.tsx
-|   |       FeedbackList.tsx
-|   |       
-|   +---Home
-|   |       hero.jpg
-|   |       HeroSection.css
-|   |       HeroSection.tsx
-|   |       InterviewQuestions.tsx
-|   |       PracticeTests.tsx
-|   |       react-typing-effect.d.ts
-|   |       Resources.css
-|   |       Resources.tsx
-|   |       ResumeBuilder.css
-|   |       ResumeBuilder.tsx
-|   |       UserProfile.css
-|   |       UserProfile.tsx
-|   |       
-|   +---Layout
-|   |       Footer.css
-|   |       Footer.tsx
-|   |       Header.css
-|   |       Header.tsx
-|   |       logo.jpeg
-|   |       logo.jpg
-|   |       MainLayout.css
-|   |       MainLayout.tsx
-|   |       Sidebar.tsx
-|   |       
-|   +---MockInterview
-|   |       MockInterview.css
-|   |       MockInterview.tsx
-|   |       MockInterviewResult.css
-|   |       MockInterviewResults.tsx
-|   |       MockInterviewSession.css
-|   |       MockInterviewSession.tsx
-|   |       MockInterviewStart.css
-|   |       MockInterviewStart.tsx
-|   |       Timer.tsx
-|   |       
-|   +---QuestionBank
-|   |       QuestionDetail.tsx
-|   |       QuestionFilter.tsx
-|   |       QuestionList.tsx
-|   |       
-|   \---Resources
-|           ResourceCard.tsx
-|           ResourceDetail.tsx
-|           
-+---contexts
-|       AuthContext.tsx
-|       UserContext.tsx
-|       
-+---features
-|       featureA.ts
-|       featureB.ts
-|       
-+---hooks
-|       useAuth.ts
-|       useFetch.ts
-|       
-+---services
-|       api.ts
-|       auth.ts
-|       interview.ts
-|       question.ts
-|       
-+---styles
-|       theme.ts
-|       variables.ts
-|       
-+---tests
-|       AuthContext.test.tsx
-|       featureA.test.ts
-|       useAuth.test.ts
-|       UserContext.test.tsx
-|       
-\---utils
-        formatDate.ts
-        helpers.ts
-        validators.ts
-        
-
-
-
-+---MockInterview
-|   +---components
-|   |   |   MockInterview.tsx
-|   |   |   MockInterviewStart.tsx
-|   |   |   MockInterviewSession.tsx
-|   |   |   MockInterviewResults.tsx
-|   |   |   Timer.tsx
-|   |   |   SpeechRecognition.tsx
-|   |   |   AIChatbot.tsx
-|   |   |   UserProfile.tsx
-|   |   |   VideoRecorder.tsx
-|   |   |   VideoPlayer.tsx
-|   +---services
-|   |   |   aiService.ts
-|   |   |   userService.ts
-|   |   |   videoService.ts
-|   +---styles
-|   |   |   MockInterview.css
-|   |   |   MockInterviewStart.css
-|   |   |   MockInterviewSession.css
-|   |   |   MockInterviewResults.css
-|   |   |   Timer.css
-|   |   |   SpeechRecognition.css
-|   |   |   AIChatbot.css
-|   |   |   UserProfile.css
-|   |   |   VideoRecorder.css
-|   |   |   VideoPlayer.css
-|   +---utils
-|   |   |   formatTime.ts
-|   |   |   storageUtils.ts
-|   |   |   videoUtils.ts
-|   +---types
-|   |   |   index.ts
-|   +---MockInterview.tsx
-|   |   |   MockInterviewResults.tsx
-|   |   |   MockInterviewSession.tsx
-|   |   |   MockInterviewStart.tsx
-|   |   |   Timer.tsx
-|   |   |   VideoRecorder.tsx
+/d/dowunload/Interview master.ai
+└── frontend
+    ├── .env
+    ├── .eslintignore
+    ├── .eslintrc.js
+    ├── .gitignore
+    ├── .prettierignore
+    ├── .prettierrc
+    ├── apikey.txt
+    ├── eslint.config.js
+    ├── file_structure.txt
+    ├── index.html
+    ├── jest.config.js
+    ├── package-lock.json
+    ├── package.json
+    ├── postcss.config.mjs
+    ├── public
+    │   ├── index.html
+    │   └── vite.svg
+    ├── README.md
+    └── src
+        ├── App.css
+        ├── App.cy.tsx
+        ├── App.tsx
+        ├── assets
+        │   ├── images
+        │   │   ├── hero.jpg
+        │   ├── logo.jpg
+        │   ├── logo.png
+        │   ├── Profile-pic.jpeg
+        │   ├── Profile-pic.webp
+        │   └── react.svg
+        ├── components
+        │   ├── AiInterview
+        │   │   ├── AiInterview.css
+        │   │   └── AiInterview.tsx
+        │   ├── Auth
+        │   │   ├── AuthLayout.css
+        │   │   ├── AuthLayout.tsx
+        │   │   ├── ForgotPassword.tsx
+        │   │   ├── LoginForm.tsx
+        │   │   └── RegisterForm.tsx
+        │   ├── Chatbot
+        │   │   ├── botUtils.ts
+        │   │   ├── chatbot.1.png
+        │   │   ├── Chatbot.css
+        │   │   ├── Chatbot.tsx
+        │   │   ├── chatbotContext.tsx
+        │   │   ├── ChatbotMessage.css
+        │   │   ├── ChatbotMessage.tsx
+        │   │   ├── ChatbotWidget.css
+        │   │   ├── ChatbotWidget.tsx
+        │   │   ├── ChatbotWindow.css
+        │   │   ├── ChatbotWindow.tsx
+        │   │   ├── errorHandler.ts
+        │   │   ├── loggingUtils.ts
+        │   │   ├── predefinedResponses.ts
+        │   │   ├── README.md
+        │   │   ├── spellchecker.d.ts
+        │   │   └── spellChecker.ts
+        │   ├── Common
+        │   │   ├── Button.css
+        │   │   ├── Button.tsx
+        │   │   ├── InputField.css
+        │   │   ├── InputField.tsx
+        │   │   ├── Modal.tsx
+        │   │   ├── Notification.css
+        │   │   ├── Notification.tsx
+        │   │   ├── PrivateRoute.tsx
+        │   │   └── Spinner.css
+        │   │   └── Spinner.tsx
+        │   ├── Feedback
+        │   │   ├── FeedbackForm.tsx
+        │   │   └── FeedbackList.tsx
+        │   ├── Home
+        │   │   ├── DashBordSection.tsx
+        │   │   ├── FAQs.tsx
+        │   │   ├── FloatingBubbles.css
+        │   │   ├── FloatingBubbles.tsx
+        │   │   ├── hero.jpg
+        │   │   ├── HeroSection.css
+        │   │   ├── HeroSection.tsx
+        │   │   ├── Homepage.css
+        │   │   ├── Homepage.tsx
+        │   │   ├── InterviewQuestions.css
+        │   │   ├── InterviewQuestions.tsx
+        │   │   ├── Layout
+        │   │   ├── PlanSection.tsx
+        │   │   ├── PracticeTests.tsx
+        │   │   ├── questionsData.ts
+        │   │   ├── react-typing-effect.d.ts
+        │   │   ├── Resources.css
+        │   │   ├── Resources.tsx
+        │   │   ├── ResumeBuilder.css
+        │   │   ├── ResumeBuilder.tsx
+        │   │   ├── subscriptionSection.tsx
+        │   │   ├── TestimonialSlider.css
+        │   │   ├── TestimonialSlider.tsx
+        │   │   ├── UserProfile.css
+        │   │   └── UserProfile.tsx
+        │   ├── Layout
+        │   │   ├── Footer.css
+        │   │   ├── Footer.tsx
+        │   │   ├── Header.css
+        │   │   ├── Header.cy.tsx
+        │   │   ├── Header.tsx
+        │   │   ├── logo.jpeg
+        │   │   ├── logo.jpg
+        │   │   ├── MainLayout.css
+        │   │   ├── MainLayout.tsx
+        │   │   └── Sidebar.tsx
+        │   ├── mockinterview
+        │   │   ├── components
+        │   │   │   ├── AIChatbot.tsx
+        │   │   │   ├── MockInterview.tsx
+        │   │   │   ├── MockInterviewResults.tsx
+        │   │   │   ├── MockInterviewSession.tsx
+        │   │   │   ├── MockInterviewStart.tsx
+        │   │   │   └── SpeechRecognition.tsx
+        │   │   │   └── Timer.tsx
+        │   │   │   └── UserProfile.tsx
+        │   │   │   └── VideoPlayer.tsx
+        │   │   │   └── VideoRecorder.tsx
+        │   │   ├── MockInterview
+        │   │   │   ├── AIChatbot.tsx
+        │   │   │   ├── MockInterview.tsx
+        │   │   │   ├── MockInterviewResults.tsx
+        │   │   │   ├── MockInterviewSession.tsx
+        │   │   │   ├── MockInterviewStart.tsx
+        │   │   │   └── SpeechRecognition.tsx
+        │   │   │   └── Timer.tsx
+        │   │   ├── MockInterview.css
+        │   │   ├── MockInterview.tsx
+        │   │   ├── services
+        │   │   │   ├── aiService.ts
+        │   │   │   ├── userService.ts
+        │   │   │   └── videoService.ts
+        │   │   └── styles
+        │   │       ├── AIChatbot.css
+        │   │       ├── MockInterview.css
+        │   │       ├── MockInterviewResults.css
+        │   │       ├── MockInterviewSession.css
+        │   │       ├── MockInterviewStart.css
+        │   │       ├── SpeechRecognition.css
+        │   │       ├── Timer.css
+        │   │       ├── UserProfile.css
+        │   │       └── VideoPlayer.css
+        │   │       └── VideoRecorder.css
+        │   │   ├── types
+        │   │   │   └── index.ts
+        │   │   └── utils
+        │   │       ├── formatTime.ts
+        │   │       ├── storageUtils.ts
+        │   │       └── videoUtils.ts
+        │   ├── NotFound.css
+        │   ├── NotFound.tsx
+        │   ├── pages
+        │   │   ├── AboutUs.tsx
+        │   │   ├── ActivityLog.tsx
+        │   │   ├── Blog.tsx
+        │   │   ├── Careers.tsx
+        │   │   ├── CaseStudies.tsx
+        │   │   ├── Company.tsx
+        │   │   ├── Contact.tsx
+        │   │   ├── ContactUs.tsx
+        │   │   ├── CustomerSupport.tsx
+        │   │   ├── Dashbord.tsx
+        │   │   ├── Ebooks.tsx
+        │   │   ├── FAQ.tsx
+        │   │   ├── Feedback.tsx
+        │   │   ├── Guides.tsx
+        │   │   ├── LiveChat.tsx
+        │   │   ├── Partners.tsx
+        │   │   ├── Portfolio.tsx
+        │   │   ├── Resources.tsx
+        │   │   ├── Services.tsx
+        │   │   ├── Subscribe.tsx
+        │   │   ├── Testimonial.tsx
+        │   │   └── UserProfile.tsx
+        │   ├── styles
+        │   │   ├── Main.css
+        │   │   └── UserProfile.css
+        │   ├── utils
+        │   │   ├── httpClient.ts
+        │   │   ├── localStorageUtils.ts
+        │   │   └── userUtils.ts
+        │   └── vite-env.d.ts
+        └── vite.config.ts

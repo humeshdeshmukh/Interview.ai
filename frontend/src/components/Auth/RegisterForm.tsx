@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'; 
 import axiosInstance from '../../services/api';
+import { ToastContainer, toast } from 'react-toastify'; // Importing toastify for notifications
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
+import PasswordStrengthBar from 'react-password-strength-bar'; // Install this package for password strength
 
 const RegisterForm: React.FC = () => {
   const [formData, setFormData] = useState({
-    email: '',
+    identifier: '',
     password: '',
     confirmPassword: '',
   });
 
   const [errors, setErrors] = useState<{ 
-    email?: string; 
+    identifier?: string; 
     password?: string; 
     confirmPassword?: string; 
     general?: string 
@@ -28,11 +31,15 @@ const RegisterForm: React.FC = () => {
   };
 
   const validateForm = () => {
-    const newErrors: { email?: string; password?: string; confirmPassword?: string } = {};
+    const newErrors: { identifier?: string; password?: string; confirmPassword?: string } = {};
+    
+    // Regex for validation
+    const emailRegex = /\S+@\S+\.\S+/;
+    const phoneRegex = /^\+?[1-9]\d{1,14}$/; // E.164 format for phone numbers
 
-    // Validate email format
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address.';
+    // Validate identifier
+    if (!emailRegex.test(formData.identifier) && !phoneRegex.test(formData.identifier)) {
+      newErrors.identifier = 'Please enter a valid email address or phone number.';
     }
 
     // Validate password length
@@ -60,40 +67,34 @@ const RegisterForm: React.FC = () => {
 
       // API request to register the user
       const response = await axiosInstance.post('/auth/register', {
-        email: formData.email,
+        identifier: formData.identifier,
         password: formData.password,
       });
 
       // Handle response based on API feedback
       if (response.status === 201) {
-        // Optional: Use context-based registration if applicable
         if (register) {
-          await register(formData.email, formData.password);
+          await register(formData.identifier, formData.password);
         }
-        // Redirect to login page after successful registration
-        navigate('/login');
+        // Show success notification
+        toast.success('Registration successful! Redirecting to login...');
+        // Redirect to login page after a short delay
+        setTimeout(() => navigate('/login'), 2000);
       } else {
-        setErrors({ general: response.data.message || 'Registration failed. Please try again.' });
+        toast.error(response.data.message || 'Registration failed. Please try again.');
       }
     } catch (error: any) {
       console.error('Registration error:', error);
 
-      // More detailed error handling
       if (error.response) {
-        console.error('Server responded with:', error.response.data);
-        setErrors({ general: error.response.data?.message || 'Registration failed. Please try again.' });
+        // Handle known errors
+        toast.error(error.response.data?.message || 'Registration failed. Please try again.');
       } else if (error.request) {
-        console.error('Request made, but no response:', error.request);
-        setErrors({ general: 'Server did not respond. Please try again later.' });
-      } else if (error.message === 'Network Error') {
-        // Check for network errors
-        setErrors({ general: 'Network error. Please check your internet connection.' });
-      } else if (error.message.includes('ECONNREFUSED')) {
-        // Handle database connection errors
-        setErrors({ general: 'Database connection error. Please try again later.' });
+        // Handle request errors
+        toast.error('Server did not respond. Please try again later.');
       } else {
-        console.error('Error:', error.message);
-        setErrors({ general: 'An unexpected error occurred. Please try again.' });
+        // Handle unexpected errors
+        toast.error('An unexpected error occurred. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -102,6 +103,7 @@ const RegisterForm: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <ToastContainer /> {/* Toast notifications */}
       <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
       <form
         onSubmit={handleSubmit}
@@ -114,19 +116,20 @@ const RegisterForm: React.FC = () => {
         )}
 
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 mb-2">
-            Email:
+          <label htmlFor="identifier" className="block text-gray-700 mb-2">
+            Email or Phone Number:
           </label>
           <input
-            type="email"
-            id="email"
-            value={formData.email}
+            type="text" // Changed to text to accept phone numbers
+            id="identifier"
+            value={formData.identifier}
             onChange={handleChange}
-            className={`w-full p-3 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded`}
+            className={`w-full p-3 border ${errors.identifier ? 'border-red-500' : 'border-gray-300'} rounded`}
             disabled={loading}
             required
+            aria-label="Email or Phone Number"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email}</p>}
+          {errors.identifier && <p className="text-red-500 text-sm mt-2">{errors.identifier}</p>}
         </div>
 
         <div className="mb-4">
@@ -141,7 +144,9 @@ const RegisterForm: React.FC = () => {
             className={`w-full p-3 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded`}
             disabled={loading}
             required
+            aria-label="Password"
           />
+          <PasswordStrengthBar password={formData.password} />
           {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password}</p>}
         </div>
 
@@ -157,6 +162,7 @@ const RegisterForm: React.FC = () => {
             className={`w-full p-3 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded`}
             disabled={loading}
             required
+            aria-label="Confirm Password"
           />
           {errors.confirmPassword && (
             <p className="text-red-500 text-sm mt-2">{errors.confirmPassword}</p>
