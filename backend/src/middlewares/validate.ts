@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { validationResult, body } from 'express-validator'; // Ensure this import is correct
+import expressValidator from 'express-validator'; // Default import
+
+// Extract validationResult from expressValidator
+const { validationResult } = expressValidator;
 
 const validateRequest = (req: Request, res: Response, next: NextFunction) => {
   // Check for validation errors
