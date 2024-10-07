@@ -13,7 +13,7 @@ const Chatbot: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const apiKey = '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'; // Replace with your OpenAI API key
+  const apiKey = 'AIzaSyCScbtR_509d61FO4yybzC-7U46fLppJsE'; // Replace with your Gemini API key
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
@@ -31,14 +31,29 @@ const Chatbot: React.FC = () => {
       setInputValue('');
 
       setIsLoading(true);
-      const botReply = await getBotResponse(inputValue, apiKey);
-      setIsLoading(false);
 
-      setMessages(prevMessages => [
-        ...prevMessages,
-        newMessage,
-        { text: botReply, sender: 'bot', timestamp },
-      ]);
+      try {
+        const response = await axios.post('https://api.gemini.com/v1', {
+          prompt: inputValue,
+          api_key: apiKey,
+        });
+
+        const botReply = response.data.reply || 'Sorry, I could not understand that.';
+        setMessages(prevMessages => [
+          ...prevMessages,
+          newMessage,
+          { text: botReply, sender: 'bot', timestamp },
+        ]);
+      } catch (error) {
+        console.error('Error fetching bot response:', error);
+        setMessages(prevMessages => [
+          ...prevMessages,
+          newMessage,
+          { text: 'Error getting response from the bot', sender: 'bot', timestamp },
+        ]);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -68,4 +83,5 @@ const Chatbot: React.FC = () => {
   );
 };
 
+// Export the component as the default export
 export default Chatbot;
