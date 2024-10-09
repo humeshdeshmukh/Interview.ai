@@ -9,14 +9,14 @@ import ForgotPassword from './components/Auth/ForgotPassword'; // Adjust the pat
 
 // Lazy loading for better performance
 const Homepage = lazy(() => import('./components/Home/Homepage'));
-const ResumeBuilder = lazy(() => import('./components/Home/ResumeBuilder'));
+const ResumeBuilder = lazy(() => import('./components/ResumeBuilder/ResumeBuilder'));
 const InterviewQuestions = lazy(() => import('./components/Home/InterviewQuestions'));
-const PracticeTests = lazy(() => import('./components/Home/PracticeTests'));
+const PracticeTests = lazy(() => import('./components/practice test/PracticeTests'));
 const Resources = lazy(() => import('./components/Home/Resources'));
 const UserProfile = lazy(() => import('./components/Home/UserProfile'));
 const RegisterForm = lazy(() => import('./components/Auth/RegisterForm'));
 const LoginForm = lazy(() => import('./components/Auth/LoginForm'));
-const NotFound = lazy(() => import('./components/NotFound'));
+const NotFound = lazy(() => import('./components/pages/NotFound'));
 
 // Additional pages
 const Blog = lazy(() => import('./components/pages/Blog'));

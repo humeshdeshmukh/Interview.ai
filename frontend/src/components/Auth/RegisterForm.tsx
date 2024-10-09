@@ -1,24 +1,32 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext'; 
+import { useAuth } from '../../contexts/AuthContext';
 import axiosInstance from '../../services/api';
-import { ToastContainer, toast } from 'react-toastify'; // Importing toastify for notifications
-import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
-import PasswordStrengthBar from 'react-password-strength-bar'; // Install this package for password strength
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PasswordStrengthBar from 'react-password-strength-bar';
+import GoogleLogin from 'react-google-login';
+
+import './RegisterForm.css'; // Import the CSS file
 
 const RegisterForm: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    identifier: string;
+    password: string;
+    confirmPassword: string;
+  }>({
     identifier: '',
     password: '',
     confirmPassword: '',
   });
 
-  const [errors, setErrors] = useState<{ 
-    identifier?: string; 
-    password?: string; 
-    confirmPassword?: string; 
-    general?: string 
+  const [errors, setErrors] = useState<{
+    identifier?: string;
+    password?: string;
+    confirmPassword?: string;
+    general?: string;
   }>({});
+  
   const [loading, setLoading] = useState<boolean>(false);
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -33,21 +41,17 @@ const RegisterForm: React.FC = () => {
   const validateForm = () => {
     const newErrors: { identifier?: string; password?: string; confirmPassword?: string } = {};
     
-    // Regex for validation
     const emailRegex = /\S+@\S+\.\S+/;
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/; // E.164 format for phone numbers
+    const phoneRegex = /^\+?[1-9]\d{1,14}$/; 
 
-    // Validate identifier
     if (!emailRegex.test(formData.identifier) && !phoneRegex.test(formData.identifier)) {
       newErrors.identifier = 'Please enter a valid email address or phone number.';
     }
 
-    // Validate password length
     if (formData.password.length < 8) {
       newErrors.password = 'Password must be at least 8 characters.';
     }
 
-    // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match.';
     }
@@ -58,42 +62,33 @@ const RegisterForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrors({}); // Reset error messages
+    setErrors({});
 
     if (!validateForm()) return;
 
     try {
       setLoading(true);
-
-      // API request to register the user
       const response = await axiosInstance.post('/auth/register', {
         identifier: formData.identifier,
         password: formData.password,
       });
 
-      // Handle response based on API feedback
       if (response.status === 201) {
         if (register) {
           await register(formData.identifier, formData.password);
         }
-        // Show success notification
         toast.success('Registration successful! Redirecting to login...');
-        // Redirect to login page after a short delay
         setTimeout(() => navigate('/login'), 2000);
       } else {
         toast.error(response.data.message || 'Registration failed. Please try again.');
       }
     } catch (error: any) {
       console.error('Registration error:', error);
-
       if (error.response) {
-        // Handle known errors
         toast.error(error.response.data?.message || 'Registration failed. Please try again.');
       } else if (error.request) {
-        // Handle request errors
         toast.error('Server did not respond. Please try again later.');
       } else {
-        // Handle unexpected errors
         toast.error('An unexpected error occurred. Please try again.');
       }
     } finally {
@@ -101,9 +96,32 @@ const RegisterForm: React.FC = () => {
     }
   };
 
+  const handleGoogleLogin = async (response: any) => {
+    try {
+      const { tokenId } = response;
+      const res = await axiosInstance.post('/auth/google', { idToken: tokenId });
+
+      if (res.status === 200) {
+        toast.success('Google login successful! Redirecting...');
+        setTimeout(() => navigate('/dashboard'), 2000);
+      }
+    } catch (error) {
+      console.error('Google login error:', error);
+      toast.error('Google login failed. Please try again.');
+    }
+  };
+
+  const handleGoogleLoginFailure = (response: any) => {
+    console.error('Google login failed:', response);
+    toast.error('Google login failed. Please try again.');
+  };
+
+  // Correctly declaring googleClientId
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <ToastContainer /> {/* Toast notifications */}
+      <ToastContainer />
       <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
       <form
         onSubmit={handleSubmit}
@@ -120,7 +138,7 @@ const RegisterForm: React.FC = () => {
             Email or Phone Number:
           </label>
           <input
-            type="text" // Changed to text to accept phone numbers
+            type="text"
             id="identifier"
             value={formData.identifier}
             onChange={handleChange}
@@ -176,6 +194,17 @@ const RegisterForm: React.FC = () => {
         >
           {loading ? 'Registering...' : 'Register'}
         </button>
+
+        <div className="mt-4">
+          <GoogleLogin
+            clientId={googleClientId}  // Use googleClientId directly
+            buttonText="Register with Google"
+            onSuccess={handleGoogleLogin}
+            onFailure={handleGoogleLoginFailure}
+            cookiePolicy={'single_host_origin'}
+            className="w-full p-3 bg-red-600 text-white rounded hover:bg-red-700 transition"
+          />
+        </div>
       </form>
 
       <p className="text-center mt-4">

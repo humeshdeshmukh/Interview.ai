@@ -18,7 +18,7 @@ const Resources: React.FC = () => {
   const duplicatedResources = [...resources, ...resources];
 
   return (
-    <section className="resources-section">
+    <section id="resources-section" className="resources-section">
       <Container>
         <h2 className="resources-heading">Resources</h2>
         <div className="resources-slider">

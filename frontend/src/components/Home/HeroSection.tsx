@@ -5,6 +5,14 @@ import TestimonialSlider from './TestimonialSlider'; // Adjust path as needed
 import './HeroSection.css'; // Ensure you have modern styles in this file
 
 const HeroSection: React.FC = () => {
+
+  const handleLearnMoreClick = () => {
+    const resourcesSection = document.getElementById('resources-section');
+    if (resourcesSection) {
+      resourcesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="hero-section d-flex align-items-center justify-content-center text-white position-relative overflow-hidden">
       {/* 3D Background Effect */}
@@ -46,7 +54,7 @@ const HeroSection: React.FC = () => {
                 variant="outline-light"
                 size="lg"
                 className="px-5 py-3 hero-button"
-                href="#resources"
+                onClick={handleLearnMoreClick}
                 aria-label="Learn More"
               >
                 Learn More

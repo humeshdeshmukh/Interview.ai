@@ -74,3 +74,6 @@ touch "/d/dowunload/Interview master.ai/backend/tsconfig.json"
 touch "/d/dowunload/Interview master.ai/backend/README.md"
 
 echo "Backend directory structure created successfully!"
+
+
+

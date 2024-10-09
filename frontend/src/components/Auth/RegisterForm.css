@@ -1,0 +1,71 @@
+/* Container Styles */
+.container {
+    background-color: #f8f9fa; /* Light background for contrast */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s; /* Smooth hover effect */
+  }
+  
+  /* Form Styles */
+  form {
+    background-color: #ffffff; /* White background for the form */
+    padding: 20px; /* Space around the content */
+    border-radius: 10px; /* Rounded corners for form */
+  }
+  
+  /* Input Field Styles */
+  input[type="text"],
+  input[type="password"] {
+    width: 100%; /* Full width inputs */
+    padding: 12px; /* Padding for inputs */
+    border: 2px solid #ced4da; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+  }
+  
+  /* Input Focus Styles */
+  input:focus {
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue glow */
+    outline: none; /* Remove default outline */
+  }
+  
+  /* Error Message Styles */
+  .text-red-500 {
+    color: #dc3545; /* Red color for error messages */
+  }
+  
+  /* Button Styles */
+  button {
+    padding: 12px; /* Padding for buttons */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+  }
+  
+  /* Button Hover Styles */
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+  }
+  
+  /* Google Login Button Styles */
+  .google-login {
+    background-color: #db4437; /* Google red color */
+    color: white; /* White text */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  /* Google Login Hover Styles */
+  .google-login:hover {
+    background-color: #c13529; /* Darker Google red on hover */
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 640px) {
+    .container {
+      padding: 10px; /* Less padding on small screens */
+    }
+  }
+  
