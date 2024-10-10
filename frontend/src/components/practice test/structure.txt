@@ -1,0 +1,57 @@
+D:\
+└── download\
+    └── Interview master.ai\
+        └── frontend\
+            └── src\
+                └── components\
+                    └── practice test\
+                        ├── PracticeTests.tsx                  # Main component
+                        ├── PracticeTests.css                  # Main component styles
+                        ├── index.ts                           # Exports for easy imports
+                        ├── tests/                             # Test components
+                        │   ├── TechnicalTest.tsx              # Technical test
+                        │   ├── AptitudeTest.tsx               # Aptitude test
+                        │   ├── LogicalReasoningTest.tsx       # Logical reasoning test
+                        │   └── CustomTest.tsx                 # Custom test
+                        ├── questionBank/                      # Question banks
+                        │   ├── technicalQuestions.json        # Technical questions
+                        │   ├── aptitudeQuestions.json         # Aptitude questions
+                        │   ├── logicalReasoningQuestions.json # Logical reasoning questions
+                        │   └── customQuestions.json           # Custom questions
+                        ├── scoring/                           # Scoring system
+                        │   ├── ScoreCalculator.tsx            # Score calculation
+                        │   ├── Leaderboard.tsx                # Leaderboard display
+                        ├── analytics/                         # Test analytics
+                        │   ├── TestAnalytics.tsx              # Performance analysis
+                        │   ├── ReportGenerator.tsx            # Performance report download
+                        ├── timer/                             # Timer system
+                        │   ├── TestTimer.tsx                  # Countdown timer
+                        │   ├── TimerUI.tsx                    # Timer UI
+                        ├── feedback/                          # Feedback system
+                        │   ├── TestFeedback.tsx               # User feedback
+                        │   ├── ReviewAnswers.tsx              # Review answers after test
+                        ├── services/                          # API and service logic
+                        │   ├── testService.ts                 # Manage test data
+                        │   ├── scoreService.ts                # Manage score data
+                        │   ├── analyticsService.ts            # Fetch analytics data
+                        ├── hooks/                             # Custom hooks
+                        │   ├── useTestProgress.ts             # Manage test progress
+                        │   ├── useScoreCalculation.ts         # Score calculation hook
+                        │   └── useTestTimer.ts                # Timer hook
+                        ├── context/                           # Context for global state
+                        │   ├── TestContext.tsx                # Test state context
+                        │   └── TestReducer.ts                 # State reducer for test actions
+                        ├── assets/                            # Assets (icons, images)
+                        │   └── icons/                         # Test-related icons
+                        ├── utils/                             # Utility functions
+                        │   ├── questionParser.ts              # Parse questions
+                        │   ├── scoreUtils.ts                  # Score utility functions
+                        │   ├── timerUtils.ts                  # Timer utility functions
+                        │   └── feedbackUtils.ts               # Feedback utilities
+                        ├── constants/                         # App-wide constants
+                        │   ├── actionTypes.ts                 # Action types for state management
+                        │   ├── testCategories.ts              # Test categories (technical, aptitude, etc.)
+                        │   └── initialState.ts                # Initial state for tests
+                        ├── styles/                            # Theme and global styles
+                        │   └── themes/                        # Light/dark theme styles
+                        └── README.md                          # Documentation
