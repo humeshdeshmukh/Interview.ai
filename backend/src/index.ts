@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors'; // Import the CORS package
+import cors from 'cors'; 
 import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes';
 import interviewRoutes from './routes/interviewRoutes';
@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Enable CORS for specified origin
 app.use(cors({
-    origin: 'http://localhost:3000', // Replace with your frontend URL
+    origin: 'http://localhost:5000', // Replace with your frontend URL
     credentials: true,
 }));
 
@@ -36,10 +36,7 @@ const startServer = async () => {
             throw new Error("DB_CONNECTION_STRING is not defined in .env file");
         }
 
-        await mongoose.connect(dbConnectionString, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(dbConnectionString);
 
         const PORT = process.env.PORT || 5000;
         app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
@@ -49,14 +46,14 @@ const startServer = async () => {
 };
 
 // Graceful shutdown for the server
-process.on('SIGTERM', () => {
+const shutdown = async () => {
     console.log('Shutting down server...');
+    await mongoose.connection.close();
     process.exit(0);
-});
-process.on('SIGINT', () => {
-    console.log('Shutting down server...');
-    process.exit(0);
-});
+};
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
 
 // Start the server
 startServer();

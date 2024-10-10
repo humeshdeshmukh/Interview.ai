@@ -18,13 +18,15 @@ const AiInterview: React.FC = () => {
   const [filter, setFilter] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [showQuestions, setShowQuestions] = useState(true);
+  const [loading, setLoading] = useState(false); // For loading state
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
 
   useEffect(() => {
-    const fetchQuestions = () => {
+    const fetchQuestions = async () => {
+      setLoading(true); // Start loading
       // Here you would typically fetch questions from an API or load them from a file
       const importedQuestions = [
         { question: "Tell me about yourself.", category: "General" },
@@ -35,6 +37,7 @@ const AiInterview: React.FC = () => {
         // Add more questions as needed
       ];
       setQuestions(importedQuestions);
+      setLoading(false); // Stop loading
     };
 
     fetchQuestions();
@@ -109,6 +112,8 @@ const AiInterview: React.FC = () => {
       mediaRecorderRef.current.start();
       setRecordingStatus('Recording...');
       setIsRecording(true);
+    } else {
+      alert("Unable to access camera. Please ensure camera permissions are granted.");
     }
   };
 
@@ -127,126 +132,121 @@ const AiInterview: React.FC = () => {
     <Container className="ai-interview-container">
       <h1>AI Interview</h1>
 
-      <ProgressBar 
-        now={(currentQuestionIndex / filteredQuestions.length) * 100}
-        label={`${currentQuestionIndex + 1}/${filteredQuestions.length}`} 
-        className="mb-4"
-      />
+      {loading ? (
+        <Alert variant="info">Loading questions...</Alert>
+      ) : (
+        <>
+          <ProgressBar 
+            now={(currentQuestionIndex / filteredQuestions.length) * 100}
+            label={`${currentQuestionIndex + 1}/${filteredQuestions.length}`} 
+            className="mb-4"
+          />
 
-      <Button 
-        variant="secondary" 
-        onClick={() => setShowQuestions(!showQuestions)} 
-        className="mb-3"
-      >
-        {showQuestions ? 'Hide Questions' : 'Show Questions'}
-      </Button>
+          <Button 
+            variant="secondary" 
+            onClick={() => setShowQuestions(!showQuestions)} 
+            className="mb-3"
+          >
+            {showQuestions ? 'Hide Questions' : 'Show Questions'}
+          </Button>
 
-      {showQuestions && (
-        <div>
-          <InputGroup className="mb-3">
-            <FormControl
-              placeholder="Filter questions"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            />
-          </InputGroup>
+          {showQuestions && (
+            <div>
+              <InputGroup className="mb-3">
+                <FormControl
+                  placeholder="Filter questions"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                />
+              </InputGroup>
 
-          <Form.Group controlId="categorySelect" className="mb-3">
-            <Form.Label>Category</Form.Label>
-            <Form.Control
-              as="select"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
+              <Form.Group controlId="categorySelect" className="mb-3">
+                <Form.Label>Category</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  <option value="All">All</option>
+                  <option value="General">General</option>
+                  <option value="Behavioral">Behavioral</option>
+                  <option value="Motivational">Motivational</option>
+                  {/* Add more categories as needed */}
+                </Form.Control>
+              </Form.Group>
+            </div>
+          )}
+
+          <div className="interview-form">
+            <Form.Group controlId="currentQuestion">
+              <Form.Label>Question</Form.Label>
+              <Form.Control
+                type="text"
+                readOnly
+                value={filteredQuestions[currentQuestionIndex]?.question || ''}
+                className="mb-3"
+              />
+            </Form.Group>
+            <Form.Group controlId="userInput">
+              <Form.Label>Your Response</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Type or record your response"
+                value={userInput}
+                onChange={handleInputChange}
+                disabled={isRecording}
+                className="mb-3"
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              onClick={handleSubmit}
+              disabled={isRecording}
+              className="me-2"
             >
-              <option value="All">All</option>
-              <option value="General">General</option>
-              <option value="Behavioral">Behavioral</option>
-              <option value="Motivational">Motivational</option>
-              {/* Add more categories as needed */}
-            </Form.Control>
-          </Form.Group>
-        </div>
-      )}
+              {isInterviewComplete ? 'Finish Interview' : 'Submit Answer'}
+            </Button>
 
-      <div className="interview-form">
-        <Form.Group controlId="currentQuestion">
-          <Form.Label>Question</Form.Label>
-          <Form.Control
-            type="text"
-            readOnly
-            value={filteredQuestions[currentQuestionIndex]?.question || ''}
-            className="mb-3"
-          />
-        </Form.Group>
-        <Form.Group controlId="userInput">
-          <Form.Label>Your Response</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Type or record your response"
-            value={userInput}
-            onChange={handleInputChange}
-            disabled={isRecording}
-            className="mb-3"
-          />
-        </Form.Group>
-        <Button
-          variant="primary"
-          onClick={handleSubmit}
-          disabled={isRecording}
-          className="me-2"
-        >
-          {isInterviewComplete ? 'Finish Interview' : 'Submit Answer'}
-        </Button>
+            <Button
+              variant={isRecording ? 'danger' : 'success'}
+              onClick={isRecording ? stopRecording : startRecording}
+              className="me-2"
+            >
+              {isRecording ? 'Stop Recording' : 'Start Recording'}
+            </Button>
 
-        <Button
-          variant={isRecording ? 'danger' : 'success'}
-          onClick={isRecording ? stopRecording : startRecording}
-          className="me-2"
-        >
-          {isRecording ? 'Stop Recording' : 'Start Recording'}
-        </Button>
-
-        {recordingStatus && <Alert variant={isRecording ? 'danger' : 'success'} className="mt-3">{recordingStatus}</Alert>}
-      </div>
-
-      <div className="video-section mt-4">
-        <div className="video-wrapper">
-          <video ref={videoRef} autoPlay muted className="video-preview"></video>
-        </div>
-        {videoUrl && (
-          <div className="mt-3">
-            <h4>Recorded Video:</h4>
-            <video src={videoUrl} controls className="recorded-video"></video>
+            {recordingStatus && <Alert variant={isRecording ? 'danger' : 'success'} className="mt-3">{recordingStatus}</Alert>}
           </div>
-        )}
-      </div>
 
-      <ListGroup className="mt-4">
-        {responses.map((response, index) => (
-          <ListGroup.Item key={index} className="response-item">
-            <strong>Q:</strong> {response.question} <br />
-            <strong>A:</strong> {response.answer}
-            {response.videoUrl && (
-              <div>
-                <strong>Video:</strong>
-                <video src={response.videoUrl} controls className="recorded-video"></video>
+          <div className="video-section mt-4">
+            <div className="video-wrapper">
+              <video ref={videoRef} autoPlay muted className="video-preview"></video>
+            </div>
+            {videoUrl && (
+              <div className="mt-3">
+                <h4>Recorded Video:</h4>
+                <video src={videoUrl} controls className="recorded-video"></video>
               </div>
             )}
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+          </div>
 
-      {feedback && !isInterviewComplete && (
-        <div className="mt-4">
-          <h3>AI Feedback</h3>
-          <p>{feedback}</p>
-        </div>
-      )}
+          <ListGroup className="mt-4">
+            {responses.map((response, index) => (
+              <ListGroup.Item key={index} className="response-item">
+                <strong>Q:</strong> {response.question} <br />
+                <strong>A:</strong> {response.answer}
+                {response.videoUrl && (
+                  <div>
+                    <strong>Video:</strong>
+                    <video src={response.videoUrl} controls className="recorded-video"></video>
+                  </div>
+                )}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
 
-      {isInterviewComplete && (
-        <Alert variant="success" className="mt-4">
-          Interview complete! Review your responses and feedback.
-        </Alert>
+          {feedback && <Alert variant="info" className="mt-3">{feedback}</Alert>}
+        </>
       )}
     </Container>
   );

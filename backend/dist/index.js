@@ -14,24 +14,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const cors_1 = __importDefault(require("cors")); // Import the CORS package
+const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const interviewRoutes_1 = __importDefault(require("./routes/interviewRoutes"));
 const questionRoutes_1 = __importDefault(require("./routes/questionRoutes"));
 const feedbackRoutes_1 = __importDefault(require("./routes/feedbackRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
-const dotenv_1 = __importDefault(require("dotenv"));
 // Load environment variables from .env file
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-// Enable CORS for all origins
-app.use((0, cors_1.default)());
-app.use('/auth', authRoutes_1.default);
-app.use('/interview', interviewRoutes_1.default);
-app.use('/questions', questionRoutes_1.default);
-app.use('/feedback', feedbackRoutes_1.default);
-app.use('/user', userRoutes_1.default);
+// Enable CORS for specified origin
+app.use((0, cors_1.default)({
+    origin: 'http://localhost:5000', // Replace with your frontend URL
+    credentials: true,
+}));
+// Set up routes
+app.use('/api/auth', authRoutes_1.default);
+app.use('/api/interview', interviewRoutes_1.default);
+app.use('/api/questions', questionRoutes_1.default);
+app.use('/api/feedback', feedbackRoutes_1.default);
+app.use('/api/user', userRoutes_1.default);
+// Start the server
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const dbConnectionString = process.env.DB_CONNECTION_STRING;
@@ -46,6 +51,13 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
         console.error("Error starting server:", err);
     }
 });
-process.on('SIGTERM', () => console.log('Shutting down server...'));
-process.on('SIGINT', () => console.log('Shutting down server...'));
+// Graceful shutdown for the server
+const shutdown = () => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('Shutting down server...');
+    yield mongoose_1.default.connection.close();
+    process.exit(0);
+});
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
+// Start the server
 startServer();

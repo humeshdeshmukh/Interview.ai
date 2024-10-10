@@ -5,7 +5,6 @@ import TestimonialSlider from './TestimonialSlider'; // Adjust path as needed
 import './HeroSection.css'; // Ensure you have modern styles in this file
 
 const HeroSection: React.FC = () => {
-
   const handleLearnMoreClick = () => {
     const resourcesSection = document.getElementById('resources-section');
     if (resourcesSection) {
@@ -15,10 +14,13 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="hero-section d-flex align-items-center justify-content-center text-white position-relative overflow-hidden">
-      {/* 3D Background Effect */}
+      {/* 3D Geometric Patterns in Background */}
       <div className="hero-background position-absolute top-0 start-0 w-100 h-100">
         <div className="hero-bg-layer"></div>
       </div>
+
+      {/* Particle Effect Container */}
+      <div className="particle-container" id="particle-container"></div>
 
       <Container className="position-relative z-index-3 text-center">
         <Row>
@@ -60,6 +62,12 @@ const HeroSection: React.FC = () => {
                 Learn More
               </Button>
             </div>
+
+            {/* Geometric Shapes */}
+            <div className="geometric-shape"></div>
+            <div className="geometric-shape"></div>
+            <div className="geometric-shape"></div>
+            <div className="geometric-shape"></div>
           </Col>
         </Row>
       </Container>

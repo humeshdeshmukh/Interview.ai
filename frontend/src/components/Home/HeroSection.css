@@ -80,3 +80,162 @@
 .z-index-4 {
   z-index: 4;
 }
+
+/* Hero Section: Black Theme + Glassmorphism + Neon Accents + 3D Backgrounds */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(circle at top right, #111, #000); /* Black theme gradient */
+  color: white;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* 3D Background Image Effect */
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    url('path-to-your-3d-image1.jpg'),  /* First 3D image */
+    url('path-to-your-3d-image2.jpg');  /* Second 3D image */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Parallax effect for 3D depth */
+  z-index: 0;
+}
+
+/* Adding animation to 3D backgrounds to make them more dynamic */
+.hero-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+  z-index: 1;
+  animation: backgroundMove 15s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundMove {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Geometric Shape Layer */
+.geometric-shape {
+  position: absolute;
+  width: 200px; /* Adjust size as needed */
+  height: 200px; /* Adjust size as needed */
+  background: rgba(255, 255, 255, 0.2); /* Light color for visibility */
+  mix-blend-mode: overlay;
+  opacity: 0.7; /* Adjust opacity for visibility */
+  animation: float 10s ease-in-out infinite;
+  border-radius: 50%; /* Make them circular */
+}
+
+.geometric-shape:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  transform: rotate(15deg);
+}
+
+.geometric-shape:nth-child(2) {
+  top: 50%;
+  left: 30%;
+  transform: rotate(-15deg);
+}
+
+.geometric-shape:nth-child(3) {
+  top: 70%;
+  left: 60%;
+  transform: rotate(30deg);
+}
+
+.geometric-shape:nth-child(4) {
+  top: 40%;
+  left: 80%;
+  transform: rotate(-30deg);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-20px) rotate(15deg);
+  }
+}
+
+/* Hero Title Styling: Neon Glow Effect */
+.hero-title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14; /* Neon green glow */
+  animation: fadeInUp 1s ease-out, glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+  }
+  100% {
+    text-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14, 0 0 60px #39ff14;
+  }
+}
+
+/* Subtitle Styling */
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: #ddd;
+  opacity: 0.85;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+/* Button Hover Effects: Neon Glow */
+.hero-button {
+  border-radius: 50px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.5); /* Neon green glow on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  .hero-button {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Fade-In Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
