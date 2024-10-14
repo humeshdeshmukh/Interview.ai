@@ -53,7 +53,7 @@
   /* Google Login Button Styles */
   .google-login {
     background-color: #db4437; /* Google red color */
-    color: white; /* White text */
+    color: rgb(30, 25, 25); /* White text */
     transition: background-color 0.3s; /* Smooth transition */
   }
   

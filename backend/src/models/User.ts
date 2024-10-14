@@ -1,26 +1,24 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import bcrypt from 'bcrypt';
 
-// Define an interface for the User document
+// Define the IUser interface
 export interface IUser extends Document {
-    username: string;
+    identifier: string;
     password: string;
+    comparePassword: (password: string) => Promise<boolean>; // Define the comparePassword method
 }
 
-// Create a schema for the User model
+// Create the User schema
 const UserSchema: Schema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true, // Ensure the username is unique
-        trim: true, // Trim whitespace from username
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-}, { timestamps: true }); // Automatically manage createdAt and updatedAt fields
+    identifier: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
+});
 
-// Create the User model
+// Method to compare passwords
+UserSchema.methods.comparePassword = async function (password: string): Promise<boolean> {
+    return await bcrypt.compare(password, this.password);
+};
+
+// Create and export the User model
 const User = mongoose.model<IUser>('User', UserSchema);
-
 export default User;

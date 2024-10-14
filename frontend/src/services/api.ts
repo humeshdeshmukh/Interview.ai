@@ -14,7 +14,6 @@ const api = axios.create({
 // Request interceptor to add auth token to headers
 api.interceptors.request.use(
   (config) => {
-    // Get the token from local storage or a state management solution
     const token = localStorage.getItem('authToken'); // Ensure you're storing your token correctly
 
     if (token) {
@@ -34,7 +33,6 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    // Handle errors globally
     if (error.response && error.response.status === 401) {
       console.error('Unauthorized access - redirecting to login');
       // Add logic to handle the unauthorized state, like redirecting to login

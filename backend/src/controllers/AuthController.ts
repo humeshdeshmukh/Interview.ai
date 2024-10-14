@@ -1,49 +1,92 @@
-// backend/src/controllers/AuthController.ts
-
-import { Request, Response } from 'express';
-import User from '../models/User';
-import bcrypt from 'bcrypt';
+import { Request, Response, NextFunction } from 'express';// Import your User model
 import jwt from 'jsonwebtoken';
+import { OAuth2Client } from 'google-auth-library'; // Import Google Auth library
+import User from '../models/User';
+// Create a Google OAuth2 client
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-// Registration logic
-export const register = async (req: Request, res: Response): Promise<Response> => {
-    const { username, password } = req.body;
-
+// Register controller function
+export const register = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const existingUser = await User.findOne({ username });
+        const { identifier, password } = req.body;
+
+        // Check if user already exists
+        const existingUser = await User.findOne({ identifier });
         if (existingUser) {
-            return res.status(400).json({ message: 'User already exists.' });
+            return res.status(400).json({ message: 'User already exists' });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await User.create({ username, password: hashedPassword });
+        // Create new user
+        const newUser = new User({ identifier, password });
+        await newUser.save();
 
-        return res.status(201).json({ message: 'User registered successfully!', user: newUser });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Internal server error' });
+        return res.status(201).json({ message: 'User registered successfully', user: newUser });
+    } catch (err) {
+        console.error(err);
+        next(err); // Pass the error to the error-handling middleware
     }
 };
 
-// Login logic
-export const login = async (req: Request, res: Response): Promise<Response> => {
-    const { username, password } = req.body;
-
+// Login controller function
+export const login = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const user = await User.findOne({ username });
-        if (!user) {
-            return res.status(404).json({ message: 'User not found.' });
+        const { identifier, password } = req.body;
+
+        // Check if user exists
+        const user = await User.findOne({ identifier });
+        if (!user || !(await user.comparePassword(password))) {
+            return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials.' });
-        }
-
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || '', { expiresIn: '1h' });
-        return res.json({ message: 'Login successful!', token });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Internal server error' });
+        // Generate JWT token
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+        return res.status(200).json({ message: 'Login successful', token });
+    } catch (err) {
+        console.error(err);
+        next(err); // Pass the error to the error-handling middleware
     }
+};
+
+// Google login controller function
+export const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { tokenId } = req.body;
+
+        // Verify Google token
+        const ticket = await googleClient.verifyIdToken({
+            idToken: tokenId,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+
+        const payload = ticket.getPayload();
+        if (!payload) {
+            return res.status(401).json({ message: 'Google token verification failed' });
+        }
+
+        // Check if user already exists
+        let user = await User.findOne({ googleId: payload.sub });
+        if (!user) {
+            // Create new user if not found
+            user = new User({
+                googleId: payload.sub,
+                email: payload.email,
+                name: payload.name,
+            });
+            await user.save();
+        }
+
+        // Generate JWT token
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+        return res.status(200).json({ message: 'Google login successful', token });
+    } catch (err) {
+        console.error(err);
+        next(err); // Pass the error to the error-handling middleware
+    }
+};
+
+// Export default object
+export default {
+    register,
+    login,
+    googleLogin,
 };

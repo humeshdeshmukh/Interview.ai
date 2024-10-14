@@ -26,7 +26,7 @@ const RegisterForm: React.FC = () => {
     confirmPassword?: string;
     general?: string;
   }>({});
-  
+
   const [loading, setLoading] = useState<boolean>(false);
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -40,9 +40,9 @@ const RegisterForm: React.FC = () => {
 
   const validateForm = () => {
     const newErrors: { identifier?: string; password?: string; confirmPassword?: string } = {};
-    
+
     const emailRegex = /\S+@\S+\.\S+/;
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/; 
+    const phoneRegex = /^\+?[1-9]\d{1,14}$/;
 
     if (!emailRegex.test(formData.identifier) && !phoneRegex.test(formData.identifier)) {
       newErrors.identifier = 'Please enter a valid email address or phone number.';
@@ -123,10 +123,7 @@ const RegisterForm: React.FC = () => {
     <div className="container mx-auto px-4 py-8">
       <ToastContainer />
       <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-md mx-auto bg-white p-8 shadow-lg rounded-lg"
-      >
+      <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 shadow-lg rounded-lg">
         {errors.general && (
           <div className="text-red-500 mb-4 p-2 bg-red-100 rounded">
             {errors.general}
@@ -199,7 +196,7 @@ const RegisterForm: React.FC = () => {
           <GoogleLogin
             clientId={googleClientId}  // Use googleClientId directly
             buttonText="Register with Google"
-            onSuccess={handleGoogleLogin}
+            onSuccess={handleGoogleLogin} // Change to onSuccess
             onFailure={handleGoogleLoginFailure}
             cookiePolicy={'single_host_origin'}
             className="w-full p-3 bg-red-600 text-white rounded hover:bg-red-700 transition"

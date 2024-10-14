@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { getInterviews } from '../services/interviewService'; // Import the service
 
+// Define the type for an interview
+interface Interview {
+  title: string;
+  // Add other fields as needed
+}
+
 const InterviewList: React.FC = () => {
-  const [interviews, setInterviews] = useState([]);
+  const [interviews, setInterviews] = useState<Interview[]>([]); // Define state with Interview[] type
 
   useEffect(() => {
     const fetchInterviews = async () => {
       try {
-        const response = await getInterviews();
+        const response: Interview[] = await getInterviews(); // Make sure response matches the Interview type
         setInterviews(response);
       } catch (error) {
         console.error('Error fetching interviews:', error);

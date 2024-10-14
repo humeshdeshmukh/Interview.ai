@@ -1,0 +1,68 @@
+.auth-card {
+    background-color: #ffffff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 2rem; /* Padding inside the card */
+}
+
+.auth-card h2 {
+    font-family: 'Arial', sans-serif; /* Font for the heading */
+    color: #333333; /* Dark gray color for text */
+    margin-bottom: 1.5rem; /* Space below the heading */
+}
+
+.auth-card .form-label {
+    font-weight: bold; /* Bold labels */
+    color: #555555; /* Medium gray color for labels */
+}
+
+.auth-card .form-control {
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 4px; /* Rounded edges */
+    transition: border-color 0.3s; /* Transition for focus effect */
+}
+
+.auth-card .form-control:focus {
+    border-color: #007bff; /* Border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Shadow on focus */
+}
+
+.auth-card .btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border-color: #007bff; /* Button border color */
+    font-weight: bold; /* Bold text for buttons */
+}
+
+.auth-card .btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #0056b3; /* Border color on hover */
+}
+
+.auth-card .text-center {
+    margin-top: 1rem; /* Space above the alert */
+}
+
+.auth-card .link-button {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.auth-card .link-button:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Google Login Button Styles */
+.google-login-btn {
+    background-color: #4285f4; /* Google blue */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 0.75rem; /* Padding */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.google-login-btn:hover {
+    background-color: #357ae8; /* Darker blue on hover */
+}

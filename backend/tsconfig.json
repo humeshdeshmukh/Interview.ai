@@ -1,20 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ES6",                     // Target ECMAScript version
-    "module": "commonjs",                // Module system to use
-    "strict": true,                       // Enable all strict type-checking options
-    "esModuleInterop": true,             // Enable interoperability between CommonJS and ES modules
-    "skipLibCheck": true,                 // Skip type checking of all declaration files
-    "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
-    "outDir": "dist",                    // Output directory for compiled files
-    "rootDir": "src"                     // Root directory of input files
+    "target": "ES6",                             // Target ECMAScript version (ES6 is a good choice for most applications)
+    "module": "commonjs",                        // Use CommonJS module system (standard for Node.js)
+    "strict": true,                               // Enable all strict type-checking options
+    "esModuleInterop": true,                     // Enable interoperability between CommonJS and ES modules
+    "skipLibCheck": true,                        // Skip type checking of all declaration files (helps speed up builds)
+    "forceConsistentCasingInFileNames": true,   // Disallow inconsistently-cased references to the same file
+    "outDir": "dist",                            // Output directory for compiled files
+    "rootDir": "src",                            // Root directory of input files
+    "resolveJsonModule": true,                   // Allow importing JSON modules as modules
+    "baseUrl": "./src",                          // Base directory to resolve non-relative module names
+    "paths": {                                   // Paths mapping for easier imports
+      "*": ["node_modules/*", "src/types/*"]
+    },
+    "noImplicitAny": true,                       // Raise error on expressions and declarations with an implied 'any' type
+    "lib": ["es6", "dom"]                        // Include library files for ES6 and DOM types
   },
   "include": [
-    "src/**/*",                           // Include all TypeScript files in the src directory
-    "src/types/**/*.d.ts"                // Include your custom type declarations
+    "src/**/*",                                   // Include all TypeScript files in the src directory
+    "src/types/**/*.d.ts"                        // Include your custom type declarations
   ],
   "exclude": [
-    "node_modules",                       // Exclude node_modules directory
-    "dist"                                // Exclude dist directory
+    "node_modules",                               // Exclude node_modules directory
+    "dist"                                        // Exclude dist directory
   ]
 }
