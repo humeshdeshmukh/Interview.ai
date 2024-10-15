@@ -13,87 +13,107 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.googleLogin = exports.login = exports.register = void 0;
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const google_auth_library_1 = require("google-auth-library"); // Import Google Auth library
-const User_1 = __importDefault(require("../models/User"));
-// Create a Google OAuth2 client
-const googleClient = new google_auth_library_1.OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-// Register controller function
-const register = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const User_1 = __importDefault(require("../models/User")); // Make sure this is the correct path to your User model
+const jwtSecret = process.env.JWT_SECRET || 'your_jwt_secret'; // Replace with your actual JWT secret
+// Register function
+const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { identifier, password } = req.body;
-        // Check if user already exists
-        const existingUser = yield User_1.default.findOne({ identifier });
+        const { name, email, password } = req.body;
+        // Check if the user already exists
+        const existingUser = yield User_1.default.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
-        // Create new user
-        const newUser = new User_1.default({ identifier, password });
+        // Hash the password
+        const salt = yield bcryptjs_1.default.genSalt(10);
+        const hashedPassword = yield bcryptjs_1.default.hash(password, salt);
+        // Create the new user
+        const newUser = new User_1.default({
+            name,
+            email,
+            password: hashedPassword,
+        });
+        // Save the user to the database
         yield newUser.save();
-        return res.status(201).json({ message: 'User registered successfully', user: newUser });
+        // Generate JWT token
+        const token = jsonwebtoken_1.default.sign({ userId: newUser._id }, jwtSecret, { expiresIn: '1h' });
+        // Return success response with token
+        return res.status(201).json({ message: 'User registered successfully', token });
     }
-    catch (err) {
-        console.error(err);
-        next(err); // Pass the error to the error-handling middleware
+    catch (error) {
+        // Type assertion for the error variable
+        if (error instanceof Error) {
+            return res.status(500).json({ message: 'Server error', error: error.message });
+        }
+        return res.status(500).json({ message: 'Server error', error: 'Unknown error' });
     }
 });
 exports.register = register;
-// Login controller function
-const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+// Login function
+const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { identifier, password } = req.body;
-        // Check if user exists
-        const user = yield User_1.default.findOne({ identifier });
-        if (!user || !(yield user.comparePassword(password))) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+        const { email, password } = req.body;
+        // Check if the user exists
+        const user = yield User_1.default.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid email or password' });
+        }
+        // Validate password
+        const isPasswordValid = yield bcryptjs_1.default.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({ message: 'Invalid email or password' });
         }
         // Generate JWT token
-        const token = jsonwebtoken_1.default.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jsonwebtoken_1.default.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
+        // Return success response with token
         return res.status(200).json({ message: 'Login successful', token });
     }
-    catch (err) {
-        console.error(err);
-        next(err); // Pass the error to the error-handling middleware
+    catch (error) {
+        if (error instanceof Error) {
+            return res.status(500).json({ message: 'Server error', error: error.message });
+        }
+        return res.status(500).json({ message: 'Server error', error: 'Unknown error' });
     }
 });
 exports.login = login;
-// Google login controller function
-const googleLogin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+// Google Login function (assuming you have Google OAuth integrated)
+const googleLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { tokenId } = req.body;
-        // Verify Google token
-        const ticket = yield googleClient.verifyIdToken({
-            idToken: tokenId,
-            audience: process.env.GOOGLE_CLIENT_ID,
-        });
-        const payload = ticket.getPayload();
-        if (!payload) {
-            return res.status(401).json({ message: 'Google token verification failed' });
-        }
-        // Check if user already exists
-        let user = yield User_1.default.findOne({ googleId: payload.sub });
+        const { googleIdToken } = req.body;
+        // Verify Google token and get user info (use a library like 'google-auth-library')
+        const googleUser = yield verifyGoogleToken(googleIdToken);
+        // Check if the user already exists
+        let user = yield User_1.default.findOne({ email: googleUser.email });
         if (!user) {
-            // Create new user if not found
+            // If user doesn't exist, create a new one
             user = new User_1.default({
-                googleId: payload.sub,
-                email: payload.email,
-                name: payload.name,
+                name: googleUser.name,
+                email: googleUser.email,
+                password: '', // No password since it's Google login
             });
             yield user.save();
         }
         // Generate JWT token
-        const token = jsonwebtoken_1.default.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jsonwebtoken_1.default.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
+        // Return success response with token
         return res.status(200).json({ message: 'Google login successful', token });
     }
-    catch (err) {
-        console.error(err);
-        next(err); // Pass the error to the error-handling middleware
+    catch (error) {
+        if (error instanceof Error) {
+            return res.status(500).json({ message: 'Server error', error: error.message });
+        }
+        return res.status(500).json({ message: 'Server error', error: 'Unknown error' });
     }
 });
 exports.googleLogin = googleLogin;
-// Export default object
-exports.default = {
-    register: exports.register,
-    login: exports.login,
-    googleLogin: exports.googleLogin,
-};
+// Helper function to verify Google ID Token (placeholder)
+const verifyGoogleToken = (googleIdToken) => __awaiter(void 0, void 0, void 0, function* () {
+    // Logic for verifying Google token and getting user info
+    // Use a library like google-auth-library or passport-google-oauth
+    return {
+        name: 'Google User',
+        email: 'user@example.com',
+    };
+});

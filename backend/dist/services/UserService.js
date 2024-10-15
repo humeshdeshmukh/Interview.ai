@@ -13,7 +13,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUser = void 0;
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_1 = __importDefault(require("../models/User"));
+// Function to register a user
+const register = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const hashedPassword = yield bcrypt_1.default.hash(data.password, 10);
+    const user = yield User_1.default.create(Object.assign(Object.assign({}, data), { password: hashedPassword }));
+    return user;
+});
+// Function to log in a user
+const login = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield User_1.default.findOne({ email: data.email });
+    // Check if user exists and if password is defined before comparison
+    if (!user || !user.password || !(yield bcrypt_1.default.compare(data.password, user.password))) {
+        throw new Error('Invalid credentials');
+    }
+    // Ensure the JWT_SECRET environment variable is defined
+    if (!process.env.JWT_SECRET) {
+        throw new Error('JWT Secret is not defined');
+    }
+    const token = jsonwebtoken_1.default.sign({ id: user._id }, process.env.JWT_SECRET);
+    return token;
+});
 // Function to get a user by ID
 const getUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield User_1.default.findById(id);
@@ -23,10 +45,11 @@ const getUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return user;
 });
 exports.getUser = getUser;
-// You can add more user-related functions here if needed
 // Default export object to allow easier import
 const UserService = {
+    register,
+    login,
     getUser: exports.getUser,
-    // Add other functions here
+    // Add other functions here if needed
 };
-exports.default = UserService; // Default export
+exports.default = UserService; // Single default export

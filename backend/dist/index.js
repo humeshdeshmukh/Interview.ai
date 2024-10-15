@@ -92,13 +92,14 @@ app.use((0, cors_1.default)({
 // Dependency Injection (using awilix)
 const container = (0, awilix_1.createContainer)();
 container.register({
-    authService: (0, awilix_1.asClass)(require('./services/authService')).scoped(),
-    interviewService: (0, awilix_1.asClass)(require('./services/interviewService')).scoped(),
-    questionService: (0, awilix_1.asClass)(require('./services/questionService')).scoped(),
+    authService: (0, awilix_1.asClass)(require('./services/authService').default).scoped(),
+    interviewService: (0, awilix_1.asClass)(require('./services/interviewService').default).scoped(),
+    questionService: (0, awilix_1.asClass)(require('./services/questionService').default).scoped(),
+    userService: (0, awilix_1.asClass)(require('./services/userService').default).scoped(), // Added UserService
 });
 app.use((0, awilix_express_1.scopePerRequest)(container));
-// Set up routes (validateRequest only for routes where it's needed)
-app.use('/api/auth', authRoutes_1.default); // `validateRequest` applied at route level
+// Set up routes
+app.use('/api/auth', authRoutes_1.default);
 app.use('/api/interview', interviewRoutes_1.default);
 app.use('/api/questions', questionRoutes_1.default);
 app.use('/api/feedback', feedbackRoutes_1.default);
