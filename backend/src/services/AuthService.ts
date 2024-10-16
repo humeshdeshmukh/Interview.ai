@@ -1,39 +1,29 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../models/User';
+import { User, IUser } from '../models/User';
 
-interface UserData {
+export interface UserData {
     email: string;
     password: string;
-    // Add other fields if necessary
 }
 
-const register = async (data: UserData) => {
-    const hashedPassword = await bcrypt.hash(data.password, 10);
-    const user = await User.create({ ...data, password: hashedPassword });
-    return user;
-};
+export class AuthService {
+    async register(data: UserData): Promise<IUser> {
+        // Check if the user already exists
+        const existingUser = await User.findOne({ email: data.email });
+        if (existingUser) {
+            throw new Error('User already exists');
+        }
 
-const login = async (data: UserData): Promise<string> => {
-    const user = await User.findOne({ email: data.email });
-
-    // Check if user exists and if password is defined before comparison
-    if (!user || !user.password || !(await bcrypt.compare(data.password, user.password))) {
-        throw new Error('Invalid credentials');
+        // Create new user
+        const user = new User(data);
+        await user.save();
+        return user;
     }
 
-    // Ensure the JWT_SECRET environment variable is defined
-    if (!process.env.JWT_SECRET) {
-        throw new Error('JWT Secret is not defined');
+    async login(data: UserData): Promise<IUser> {
+        const user = await User.findOne({ email: data.email });
+        if (!user || !(await user.comparePassword(data.password))) {
+            throw new Error('Invalid email or password');
+        }
+        return user;
     }
-
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    return token;
-};
-
-export default {
-    register,
-    login,
-};
-
-
+}

@@ -15,16 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const User_1 = __importDefault(require("../models/User"));
+const User_1 = require("../models/User");
 // Function to register a user
 const register = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const hashedPassword = yield bcrypt_1.default.hash(data.password, 10);
-    const user = yield User_1.default.create(Object.assign(Object.assign({}, data), { password: hashedPassword }));
+    const user = yield User_1.User.create(Object.assign(Object.assign({}, data), { password: hashedPassword }));
     return user;
 });
 // Function to log in a user
 const login = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield User_1.default.findOne({ email: data.email });
+    const user = yield User_1.User.findOne({ email: data.email });
     // Check if user exists and if password is defined before comparison
     if (!user || !user.password || !(yield bcrypt_1.default.compare(data.password, user.password))) {
         throw new Error('Invalid credentials');
@@ -38,7 +38,7 @@ const login = (data) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // Function to get a user by ID
 const getUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield User_1.default.findById(id);
+    const user = yield User_1.User.findById(id);
     if (!user) {
         throw new Error('User not found');
     }

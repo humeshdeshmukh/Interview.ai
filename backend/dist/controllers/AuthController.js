@@ -15,14 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.googleLogin = exports.login = exports.register = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const User_1 = __importDefault(require("../models/User")); // Make sure this is the correct path to your User model
+const User_1 = require("../models/User"); // Use named import
+// Make sure this is the correct path to your User model
 const jwtSecret = process.env.JWT_SECRET || 'your_jwt_secret'; // Replace with your actual JWT secret
 // Register function
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, email, password } = req.body;
         // Check if the user already exists
-        const existingUser = yield User_1.default.findOne({ email });
+        const existingUser = yield User_1.User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
@@ -30,7 +31,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const salt = yield bcryptjs_1.default.genSalt(10);
         const hashedPassword = yield bcryptjs_1.default.hash(password, salt);
         // Create the new user
-        const newUser = new User_1.default({
+        const newUser = new User_1.User({
             name,
             email,
             password: hashedPassword,
@@ -56,7 +57,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
         // Check if the user exists
-        const user = yield User_1.default.findOne({ email });
+        const user = yield User_1.User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
@@ -85,10 +86,10 @@ const googleLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         // Verify Google token and get user info (use a library like 'google-auth-library')
         const googleUser = yield verifyGoogleToken(googleIdToken);
         // Check if the user already exists
-        let user = yield User_1.default.findOne({ email: googleUser.email });
+        let user = yield User_1.User.findOne({ email: googleUser.email });
         if (!user) {
             // If user doesn't exist, create a new one
-            user = new User_1.default({
+            user = new User_1.User({
                 name: googleUser.name,
                 email: googleUser.email,
                 password: '', // No password since it's Google login

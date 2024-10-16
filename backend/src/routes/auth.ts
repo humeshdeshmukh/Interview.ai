@@ -1,8 +1,14 @@
+// src/routes/auth.ts
 import { Router, Request, Response } from 'express';
 import { AuthService } from '../services/AuthService';
 
 export const authRoutes = (authService: AuthService) => {
     const router = Router();
+
+    // Test route to check connection
+    router.get('/ping', (req: Request, res: Response) => {
+        res.status(200).json({ message: 'Backend is connected!' });
+    });
 
     // User registration route
     router.post('/register', async (req: Request, res: Response) => {

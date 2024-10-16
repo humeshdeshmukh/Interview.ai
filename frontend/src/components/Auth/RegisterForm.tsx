@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import GoogleLogin from 'react-google-login';
-
 import './RegisterForm.css'; // Import the CSS file
 
 const RegisterForm: React.FC = () => {
@@ -74,6 +73,7 @@ const RegisterForm: React.FC = () => {
       });
 
       if (response.status === 201) {
+        // Call the register method from Auth context if needed
         if (register) {
           await register(formData.identifier, formData.password);
         }
@@ -85,9 +85,9 @@ const RegisterForm: React.FC = () => {
     } catch (error: any) {
       console.error('Registration error:', error);
       if (error.response) {
-        toast.error(error.response.data?.message || 'Registration failed. Please try again.');
-      } else if (error.request) {
-        toast.error('Server did not respond. Please try again later.');
+        // Handle specific error responses from the backend
+        const errorMessage = error.response.data?.message || 'Registration failed. Please try again.';
+        toast.error(errorMessage);
       } else {
         toast.error('An unexpected error occurred. Please try again.');
       }
@@ -116,7 +116,6 @@ const RegisterForm: React.FC = () => {
     toast.error('Google login failed. Please try again.');
   };
 
-  // Correctly declaring googleClientId
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
   return (
@@ -194,9 +193,9 @@ const RegisterForm: React.FC = () => {
 
         <div className="mt-4">
           <GoogleLogin
-            clientId={googleClientId}  // Use googleClientId directly
+            clientId={googleClientId}
             buttonText="Register with Google"
-            onSuccess={handleGoogleLogin} // Change to onSuccess
+            onSuccess={handleGoogleLogin}
             onFailure={handleGoogleLoginFailure}
             cookiePolicy={'single_host_origin'}
             className="w-full p-3 bg-red-600 text-white rounded hover:bg-red-700 transition"

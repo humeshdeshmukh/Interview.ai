@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../models/User'; // Make sure this is the correct path to your User model
+import { User } from '../models/User'; // Use named import
+ // Make sure this is the correct path to your User model
 
 const jwtSecret = process.env.JWT_SECRET || 'your_jwt_secret'; // Replace with your actual JWT secret
 
