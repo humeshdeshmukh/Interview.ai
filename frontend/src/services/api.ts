@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-// Define the base URL for the API
-const API_BASE_URL = 'http://localhost:5000/api'; // Replace with your actual API base URL
+// Use the correct environment variable based on your setup
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api'; // Fallback to local if not set
 
-// Create an instance of axios with default settings
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -35,7 +34,7 @@ api.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       console.error('Unauthorized access - redirecting to login');
-      // Add logic to handle the unauthorized state, like redirecting to login
+      // Handle the unauthorized state here
     } else {
       console.error('API request error:', error);
     }
