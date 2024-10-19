@@ -14,17 +14,16 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="hero-section d-flex align-items-center justify-content-center text-white position-relative overflow-hidden">
-      {/* 3D Geometric Patterns in Background */}
+      {/* Background Layer */}
       <div className="hero-background position-absolute top-0 start-0 w-100 h-100">
-        <div className="hero-bg-layer"></div>
+        <div className="gradient-animation"></div>
+        <div className="circle-animation"></div>
+        <div className="triangle-animation"></div>
       </div>
-
-      {/* Particle Effect Container */}
-      <div className="particle-container" id="particle-container"></div>
 
       <Container className="position-relative z-index-3 text-center">
         <Row>
-          <Col md={{ span: 8, offset: 2 }}>
+          <Col md={{ span: 10, offset: 1 }}>
             <h1 className="display-4 font-weight-bold mb-4 hero-title">
               <TypingEffect
                 text={[
@@ -40,7 +39,7 @@ const HeroSection: React.FC = () => {
               />
             </h1>
             <p className="lead mb-4 hero-subtitle">
-              Your ultimate resource for mastering interviews, building resumes, and landing your dream job.
+              Master interviews and build a standout resume with our expert resources.
             </p>
             <div className="d-flex justify-content-center gap-4">
               <Button
@@ -62,12 +61,6 @@ const HeroSection: React.FC = () => {
                 Learn More
               </Button>
             </div>
-
-            {/* Geometric Shapes */}
-            <div className="geometric-shape"></div>
-            <div className="geometric-shape"></div>
-            <div className="geometric-shape"></div>
-            <div className="geometric-shape"></div>
           </Col>
         </Row>
       </Container>
