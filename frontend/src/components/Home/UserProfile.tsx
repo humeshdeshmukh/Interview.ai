@@ -1,7 +1,6 @@
 // src/components/UserProfile/UserProfile.tsx
 import React, { useState } from 'react';
-import { Card, Button, ListGroup } from 'react-bootstrap';
-import './UserProfile.css';
+import { Card, Button, ListGroup, Form, Spinner, Alert } from 'react-bootstrap';
 
 interface UserProfileProps {
   name: string;
@@ -37,9 +36,14 @@ const UserProfile: React.FC<UserProfileProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedBio, setEditedBio] = useState(bio || '');
+  const [isSaving, setIsSaving] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [profilePic, setProfilePic] = useState<string | ArrayBuffer | null>(profilePicture);
+  const [error, setError] = useState('');
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
+    setError(''); // Clear any previous errors when editing starts
   };
 
   const handleBioChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -47,9 +51,30 @@ const UserProfile: React.FC<UserProfileProps> = ({
   };
 
   const handleSaveClick = () => {
-    // Save the edited bio to the state or backend
-    // Implement the save logic here
-    setIsEditing(false);
+    setIsSaving(true);
+    // Simulate saving logic (e.g., API call)
+    setTimeout(() => {
+      if (editedBio.length < 10) {
+        setError('Bio must be at least 10 characters long.');
+        setIsSaving(false);
+        return;
+      }
+      // Assuming bio is saved successfully
+      setIsEditing(false);
+      setShowSuccess(true);
+      setIsSaving(false);
+    }, 1000);
+  };
+
+  const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePic(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -58,14 +83,18 @@ const UserProfile: React.FC<UserProfileProps> = ({
         <Card.Body>
           <div className="d-flex align-items-center mb-4">
             <img
-              src={profilePicture}
+              src={profilePic}
               alt={`${name}'s profile`}
               className="profile-picture rounded-circle"
+              style={{ width: '80px', height: '80px', objectFit: 'cover' }}
             />
             <div className="ms-3">
               <Card.Title>{name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{email}</Card.Subtitle>
             </div>
+            <Form.Group className="ms-auto">
+              <Form.Control type="file" onChange={handleProfilePicChange} />
+            </Form.Group>
           </div>
 
           <ListGroup variant="flush">
@@ -127,10 +156,13 @@ const UserProfile: React.FC<UserProfileProps> = ({
                     className="form-control mb-2"
                     value={editedBio}
                     onChange={handleBioChange}
+                    rows={3}
                   />
-                  <Button variant="primary" onClick={handleSaveClick}>
-                    Save
+                  {error && <Alert variant="danger">{error}</Alert>}
+                  <Button variant="primary" onClick={handleSaveClick} disabled={isSaving}>
+                    {isSaving ? <Spinner animation="border" size="sm" /> : 'Save'}
                   </Button>
+                  {showSuccess && <Alert variant="success" className="mt-2">Bio updated successfully!</Alert>}
                 </>
               ) : (
                 <>
