@@ -27,7 +27,7 @@ const defaultResumeFrame = {
 };
 
 // Mock AI function (replace with actual API call)
-const fetchAIResumeSuggestions = async (formData: any) => {
+const fetchAIResumeSuggestions = async (formData) => {
   await new Promise(resolve => setTimeout(resolve, 3000));
 
   return {
@@ -41,25 +41,26 @@ const fetchAIResumeSuggestions = async (formData: any) => {
 };
 
 // Mock ATS scoring (replace with actual implementation)
-const calculateATSScore = (resumeContent: string) => Math.floor(Math.random() * 100);
+const calculateATSScore = (resumeContent) => Math.floor(Math.random() * 100);
 
-const ResumeBuilder: React.FC = () => {
+const ResumeBuilder = () => {
   const [formData, setFormData] = useState({
     name: '', email: '', phone: '', linkedin: '', github: '', additionalLinks: '', summary: '', experience: '', education: '', skills: '', projects: '', certifications: ''
   });
-  const [atsScore, setAtsScore] = useState<number | null>(null);
+  const [atsScore, setAtsScore] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [selectedTemplate, setSelectedTemplate] = useState<string>('1');
+  const [selectedTemplate, setSelectedTemplate] = useState('1');
   const [aiLoading, setAiLoading] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1); // Step control
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }>) => {
-    const { name, value } = e.target as HTMLInputElement;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -89,7 +90,7 @@ const ResumeBuilder: React.FC = () => {
 
   const handleDownloadPDF = async () => {
     const doc = new jsPDF();
-    const canvas = await html2canvas(document.getElementById('resume-preview')!);
+    const canvas = await html2canvas(document.getElementById('resume-preview'));
     const imgData = canvas.toDataURL('image/png');
     doc.addImage(imgData, 'PNG', 10, 10);
     doc.save('resume.pdf');
@@ -133,105 +134,183 @@ const ResumeBuilder: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return (
+          <Step1 
+            formData={formData} 
+            handleChange={handleChange} 
+            handleSubmit={handleSubmit} 
+            loading={loading} 
+            atsScore={atsScore} 
+            error={error} 
+            handleAIEnhancement={handleAIEnhancement} 
+            aiLoading={aiLoading} 
+          />
+        );
+      case 2:
+        return (
+          <Step2 
+            selectedTemplate={selectedTemplate} 
+            setSelectedTemplate={setSelectedTemplate} 
+          />
+        );
+      case 3:
+        return (
+          <Step3 
+            formData={formData} 
+            selectedTemplate={selectedTemplate} 
+            handleDownloadPDF={handleDownloadPDF} 
+            handleDownloadDOCX={handleDownloadDOCX} 
+            previewOpen={previewOpen} 
+            setPreviewOpen={setPreviewOpen} 
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">Advanced Resume Builder</h2>
-      <form onSubmit={handleSubmit}>
-        <Row className="mb-3">
-          <Col md={6}>
-            <TextField label="Name" variant="outlined" fullWidth name="name" value={formData.name} onChange={handleChange} required />
-          </Col>
-          <Col md={6}>
-            <TextField label="Email" variant="outlined" fullWidth type="email" name="email" value={formData.email} onChange={handleChange} required />
-          </Col>
-        </Row>
-        <Row className="mb-3">
-          <Col md={6}>
-            <TextField label="Phone" variant="outlined" fullWidth type="tel" name="phone" value={formData.phone} onChange={handleChange} required />
-          </Col>
-          <Col md={6}>
-            <TextField label="LinkedIn" variant="outlined" fullWidth name="linkedin" value={formData.linkedin} onChange={handleChange} />
-          </Col>
-        </Row>
-        <Row className="mb-3">
-          <Col md={6}>
-            <TextField label="GitHub" variant="outlined" fullWidth name="github" value={formData.github} onChange={handleChange} />
-          </Col>
-          <Col md={6}>
-            <TextField label="Additional Links" variant="outlined" fullWidth name="additionalLinks" value={formData.additionalLinks} onChange={handleChange} />
-          </Col>
-        </Row>
-        <TextField label="Professional Summary" variant="outlined" fullWidth name="summary" value={formData.summary} onChange={handleChange} multiline rows={3} className="mb-3" />
-        <TextField label="Work Experience" variant="outlined" fullWidth name="experience" value={formData.experience} onChange={handleChange} multiline rows={3} className="mb-3" />
-        <TextField label="Education" variant="outlined" fullWidth name="education" value={formData.education} onChange={handleChange} multiline rows={3} className="mb-3" />
-        <TextField label="Skills" variant="outlined" fullWidth name="skills" value={formData.skills} onChange={handleChange} multiline rows={2} className="mb-3" />
-        <TextField label="Projects" variant="outlined" fullWidth name="projects" value={formData.projects} onChange={handleChange} multiline rows={3} className="mb-3" />
-        <TextField label="Certifications" variant="outlined" fullWidth name="certifications" value={formData.certifications} onChange={handleChange} multiline rows={2} className="mb-3" />
-        <InputLabel id="template-select-label">Select Template</InputLabel>
-        <Select labelId="template-select-label" value={selectedTemplate} onChange={e => setSelectedTemplate(e.target.value as string)} fullWidth className="mb-3">
-          {gptTemplates.map(template => (
-            <MenuItem key={template.id} value={template.id}>
-              {template.name} - {template.description}
-            </MenuItem>
-          ))}
-        </Select>
-        <Button variant="primary" type="submit" className="w-100" disabled={loading}>
-          {loading ? <Spinner animation="border" size="sm" /> : 'Generate Resume'}
-        </Button>
-        <Button variant="secondary" className="mt-3 w-100" onClick={handleAIEnhancement} disabled={aiLoading}>
-          {aiLoading ? <Spinner animation="border" size="sm" /> : 'Enhance with AI'}
-        </Button>
-      </form>
-
-      {atsScore !== null && !loading && (
-        <div className="mt-4">
-          <Alert variant="info">Your ATS score is: <strong>{atsScore}</strong>%</Alert>
-          <ListGroup className="mt-3">
-            <ListGroup.Item variant="info">Consider adding more specific keywords related to the job you are applying for.</ListGroup.Item>
-            <ListGroup.Item variant="info">Ensure that your skills and experience align with the job description.</ListGroup.Item>
-          </ListGroup>
-        </div>
-      )}
-
-      {error && <div className="mt-4"><Alert variant="danger">{error}</Alert></div>}
-
-      <Button variant="outline-secondary" className="mt-3" onClick={() => setPreviewOpen(true)}>Preview Resume</Button>
-
-      <Dialog open={previewOpen} onClose={() => setPreviewOpen(false)} maxWidth="md" fullWidth>
-        <DialogTitle>
-          Resume Preview
-          <IconButton edge="end" color="inherit" onClick={() => setPreviewOpen(false)} aria-label="close">
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <div id="resume-preview" className={`resume-template-${selectedTemplate}`}>
-            <Typography variant="h4" align="center">{formData.name}</Typography>
-            <Typography variant="h6" align="center">{formData.email} | {formData.phone}</Typography>
-            <Typography variant="h6" align="center">{formData.linkedin} | {formData.github}</Typography>
-            <Typography variant="h6" align="center">{formData.additionalLinks}</Typography>
-            <Typography variant="h5">Summary</Typography>
-            <Typography>{formData.summary}</Typography>
-            <Typography variant="h5">Experience</Typography>
-            <Typography>{formData.experience}</Typography>
-            <Typography variant="h5">Education</Typography>
-            <Typography>{formData.education}</Typography>
-            <Typography variant="h5">Skills</Typography>
-            <Typography>{formData.skills}</Typography>
-            <Typography variant="h5">Projects</Typography>
-            <Typography>{formData.projects}</Typography>
-            <Typography variant="h5">Certifications</Typography>
-            <Typography>{formData.certifications}</Typography>
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setPreviewOpen(false)} color="primary">Close</Button>
-          <Button onClick={handleDownloadPDF} color="primary">Download PDF</Button>
-          <Button onClick={handleDownloadDOCX} color="primary">Download DOCX</Button>
-        </DialogActions>
-      </Dialog>
+      {renderStep()}
+      <div className="d-flex justify-content-between mt-4">
+        {currentStep > 1 && (
+          <Button variant="secondary" onClick={() => setCurrentStep(currentStep - 1)}>Previous</Button>
+        )}
+        {currentStep < 3 && (
+          <Button variant="primary" onClick={() => setCurrentStep(currentStep + 1)}>Next</Button>
+        )}
+        {currentStep === 3 && (
+          <Button variant="primary" onClick={() => setCurrentStep(1)}>Restart</Button>
+        )}
+      </div>
     </div>
   );
 };
+
+// Step 1: Skills Input
+const Step1 = ({ formData, handleChange, handleSubmit, loading, atsScore, error, handleAIEnhancement, aiLoading }) => (
+  <form onSubmit={handleSubmit}>
+    <Row className="mb-3">
+      <Col md={6}>
+        <TextField label="Name" variant="outlined" fullWidth name="name" value={formData.name} onChange={handleChange} required />
+      </Col>
+      <Col md={6}>
+        <TextField label="Email" variant="outlined" fullWidth type="email" name="email" value={formData.email} onChange={handleChange} required />
+      </Col>
+    </Row>
+    <Row className="mb-3">
+      <Col md={6}>
+        <TextField label="Phone" variant="outlined" fullWidth type="tel" name="phone" value={formData.phone} onChange={handleChange} required />
+      </Col>
+      <Col md={6}>
+        <TextField label="LinkedIn" variant="outlined" fullWidth name="linkedin" value={formData.linkedin} onChange={handleChange} />
+      </Col>
+    </Row>
+    <Row className="mb-3">
+      <Col md={6}>
+        <TextField label="GitHub" variant="outlined" fullWidth name="github" value={formData.github} onChange={handleChange} />
+      </Col>
+      <Col md={6}>
+        <TextField label="Additional Links" variant="outlined" fullWidth name="additionalLinks" value={formData.additionalLinks} onChange={handleChange} />
+      </Col>
+    </Row>
+    <Row className="mb-3">
+      <Col md={12}>
+        <TextField label="Professional Summary" variant="outlined" fullWidth name="summary" value={formData.summary} onChange={handleChange} multiline rows={3} required />
+      </Col>
+    </Row>
+    <Row className="mb-3">
+      <Col md={12}>
+        <TextField label="Experience" variant="outlined" fullWidth name="experience" value={formData.experience} onChange={handleChange} multiline rows={3} required />
+      </Col>
+    </Row>
+    <Row className="mb-3">
+      <Col md={12}>
+        <TextField label="Education" variant="outlined" fullWidth name="education" value={formData.education} onChange={handleChange} multiline rows={3} required />
+      </Col>
+    </Row>
+    <Row className="mb-3">
+      <Col md={12}>
+        <TextField label="Skills" variant="outlined" fullWidth name="skills" value={formData.skills} onChange={handleChange} multiline rows={3} required />
+      </Col>
+    </Row>
+    <Row className="mb-3">
+      <Col md={12}>
+        <TextField label="Projects" variant="outlined" fullWidth name="projects" value={formData.projects} onChange={handleChange} multiline rows={3} />
+      </Col>
+    </Row>
+    <Row className="mb-3">
+      <Col md={12}>
+        <TextField label="Certifications" variant="outlined" fullWidth name="certifications" value={formData.certifications} onChange={handleChange} multiline rows={3} />
+      </Col>
+    </Row>
+    <div className="d-flex justify-content-between">
+      <Button variant="primary" type="submit" disabled={loading}>Calculate ATS Score</Button>
+      <Button variant="secondary" onClick={handleAIEnhancement} disabled={aiLoading}>
+        {aiLoading ? <Spinner animation="border" size="sm" /> : 'Enhance with AI'}
+      </Button>
+    </div>
+    {loading && <Spinner className="mt-3" animation="border" />}
+    {atsScore && <Alert variant="success" className="mt-3">Your ATS Score: {atsScore}</Alert>}
+    {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
+  </form>
+);
+
+// Step 2: Template Selection
+const Step2 = ({ selectedTemplate, setSelectedTemplate }) => (
+  <div>
+    <h4>Select a Resume Template</h4>
+    <InputLabel id="template-label">Template</InputLabel>
+    <Select
+      labelId="template-label"
+      value={selectedTemplate}
+      onChange={(e) => setSelectedTemplate(e.target.value)}
+      fullWidth
+      variant="outlined"
+      className="mb-3"
+    >
+      {gptTemplates.map((template) => (
+        <MenuItem key={template.id} value={template.id}>
+          {template.name} - {template.description}
+        </MenuItem>
+      ))}
+    </Select>
+  </div>
+);
+
+// Step 3: Preview & Download
+const Step3 = ({ formData, selectedTemplate, handleDownloadPDF, handleDownloadDOCX, previewOpen, setPreviewOpen }) => (
+  <div>
+    <h4>Resume Preview</h4>
+    <div id="resume-preview" style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '5px' }}>
+      <Typography variant="h4">{formData.name}</Typography>
+      <Typography variant="body1">Email: {formData.email}</Typography>
+      <Typography variant="body1">Phone: {formData.phone}</Typography>
+      <Typography variant="body1">LinkedIn: {formData.linkedin}</Typography>
+      <Typography variant="body1">GitHub: {formData.github}</Typography>
+      <Typography variant="body1">Additional Links: {formData.additionalLinks}</Typography>
+      <Typography variant="h6">Summary</Typography>
+      <Typography variant="body1">{formData.summary}</Typography>
+      <Typography variant="h6">Experience</Typography>
+      <Typography variant="body1">{formData.experience}</Typography>
+      <Typography variant="h6">Education</Typography>
+      <Typography variant="body1">{formData.education}</Typography>
+      <Typography variant="h6">Skills</Typography>
+      <Typography variant="body1">{formData.skills}</Typography>
+      <Typography variant="h6">Projects</Typography>
+      <Typography variant="body1">{formData.projects}</Typography>
+      <Typography variant="h6">Certifications</Typography>
+      <Typography variant="body1">{formData.certifications}</Typography>
+    </div>
+    <div className="d-flex justify-content-between mt-4">
+      <Button variant="success" onClick={handleDownloadPDF}>Download PDF</Button>
+      <Button variant="success" onClick={handleDownloadDOCX}>Download DOCX</Button>
+    </div>
+  </div>
+);
 
 export default ResumeBuilder;
