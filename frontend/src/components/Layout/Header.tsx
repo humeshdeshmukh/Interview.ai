@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import './Header.css';
 import logo from '../../assets/logo.jpg'; // Ensure this path is correct
 import profilePic from '../../assets/Profile-pic.webp'; // Ensure this path is correct
 
 const Header: React.FC = () => {
+  const [isSticky, setSticky] = useState(false);
+
+  const handleScroll = () => {
+    setSticky(window.scrollY > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <Navbar expand="lg" className="header-navbar">
+    <Navbar expand="lg" className={`header-navbar ${isSticky ? 'sticky' : ''}`}>
       <Container fluid>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img src={logo} alt="Logo" className="header-logo" />
@@ -20,7 +33,7 @@ const Header: React.FC = () => {
             <Nav.Link as={Link} to="/resume" className="nav-link">Resume Builder</Nav.Link>
             <Nav.Link as={Link} to="/questions" className="nav-link">Interview Questions</Nav.Link>
             <Nav.Link as={Link} to="/practice-tests" className="nav-link">Practice Tests</Nav.Link>
-            
+
             <NavDropdown title="Mock Interviews" id="mock-interview-dropdown" className="nav-dropdown">
               <NavDropdown.Item as={Link} to="/mock-interview">Traditional Mock Interviews</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/ai-interview">AI Interview</NavDropdown.Item>

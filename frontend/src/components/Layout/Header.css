@@ -3,6 +3,15 @@
   background-color: #000; /* Fully black background */
   color: #fff; /* White text color */
   border-bottom: 1px solid #333; /* Dark border at the bottom */
+  position: sticky; /* Makes the navbar sticky */
+  top: 0; /* Sticks it to the top of the viewport */
+  z-index: 1000; /* Ensures it stays above other content */
+  transition: background-color 0.3s ease; /* Optional: smooth transition for background color */
+}
+
+/* Shadow effect for sticky navbar */
+.header-navbar.sticky {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Shadow effect for a sticky header */
 }
 
 /* Logo Styles */
