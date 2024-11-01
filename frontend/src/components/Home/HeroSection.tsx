@@ -13,8 +13,14 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="hero-section d-flex align-items-center justify-content-center text-white position-relative overflow-hidden">
-      {/* Background Layer */}
+    <section
+      className="hero-section d-flex align-items-center justify-content-center text-white position-relative overflow-hidden"
+      style={{
+        backgroundImage: `url('/path/to/your/background-image.jpg')`, // Set the path to your image
+        backgroundSize: 'cover', // Make the background image cover the entire section
+        backgroundPosition: 'center', // Center the background image
+      }}
+    >
       <div className="hero-background position-absolute top-0 start-0 w-100 h-100">
         <div className="gradient-animation"></div>
         <div className="circle-animation"></div>

@@ -78,11 +78,11 @@ const PlanSection: React.FC = () => {
     <section className="plan-section bg-gray-900 py-16">
       <div className="max-w-screen-xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-white mb-12">Choose Your Plan</h2>
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           {plans.map((plan, index) => (
             <div
               key={index}
-              className="plan-card bg-white shadow-lg rounded-lg p-8 text-center max-w-xs flex flex-col items-center relative"
+              className="plan-card bg-white shadow-lg rounded-lg p-8 text-center flex flex-col items-center relative"
             >
               {plan.badge && (
                 <span className="absolute top-0 right-0 bg-yellow-500 text-white text-sm font-bold py-1 px-3 rounded-bl-lg">

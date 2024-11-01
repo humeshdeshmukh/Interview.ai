@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Chatbot.css';
 import chatbotIcon from './chatbot.1.png';
 import axios from 'axios';
-import { Message } from './types.ts';
+import { Message } from './types';
 import ChatbotWindow from './ChatbotWindow';
 import { getBotResponse } from './botUtils';
 import { ChatbotContextProvider } from './chatbotContext';

@@ -1,0 +1,23 @@
+/* contactSection.css */
+body {
+    background-color: black;
+    color: white;
+  }
+  
+  input,
+  textarea {
+    background-color: #1a1a1a; /* Slightly lighter black for inputs */
+    color: white;
+    border: 1px solid #444444; /* Dark border */
+  }
+  
+  input::placeholder,
+  textarea::placeholder {
+    color: #aaa; /* Placeholder text color */
+  }
+  
+  button {
+    background-color: #007bff; /* Button background */
+    color: white; /* Button text color */
+  }
+  

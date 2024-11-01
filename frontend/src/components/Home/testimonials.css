@@ -1,0 +1,39 @@
+/* testimonials.css */
+
+body {
+    background-color: #000; /* Set background color to black */
+  }
+  
+  h2 {
+    color: white; /* White color for headings */
+  }
+  
+  .testimonial-card {
+    background-color: #1a1a1a; /* Dark gray for cards */
+    border: 1px solid #333; /* Lighter border for contrast */
+    border-radius: 0.5rem; /* Slightly rounded corners */
+    padding: 1.5rem; /* Padding inside cards */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Soft shadow */
+  }
+  
+  .testimonial-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Stronger shadow on hover */
+  }
+  
+  .text-gray-400 {
+    color: #b3b3b3; /* Light gray for secondary text */
+  }
+  
+  .text-gray-300 {
+    color: #d9d9d9; /* Slightly lighter gray for more contrast */
+  }
+  
+  .text-gray-200 {
+    color: #e6e6e6; /* Even lighter gray for accents */
+  }
+  
+  /* Ensure the quote icon color is a subtle gray */
+  .icon-quote {
+    color: #4d4d4d; /* Set a different color for the quote icon */
+  }
+  

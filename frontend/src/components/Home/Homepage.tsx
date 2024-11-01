@@ -2,9 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import HeroSection from './HeroSection';
 import Resources from './Resources';
-import SubscriptionSection from './subscriptionSection';
+import SubscriptionSection from './SubscriptionSection';
 import PlanSection from './PlanSection';
-import './Homepage.css'; // Ensure this file contains your custom styles
+import FeaturesSection from './FeaturesSection';
+import Testimonials from './Testimonials';
+import ContactSection from './ContactSection';
+import './Homepage.css';
 
 // Define animation variants
 const containerVariants = {
@@ -28,14 +31,29 @@ const Homepage: React.FC = () => {
       <motion.div className="homepage-section" variants={sectionVariants}>
         <HeroSection />
       </motion.div>
+
       <motion.div className="homepage-section" variants={sectionVariants}>
         <Resources />
       </motion.div>
+
       <motion.div className="homepage-section" variants={sectionVariants}>
         <SubscriptionSection />
       </motion.div>
+
       <motion.div className="homepage-section" variants={sectionVariants}>
         <PlanSection />
+      </motion.div>
+
+      <motion.div className="homepage-section" variants={sectionVariants}>
+        <FeaturesSection />
+      </motion.div>
+
+      <motion.div className="homepage-section" variants={sectionVariants}>
+        <Testimonials />
+      </motion.div>
+
+      <motion.div className="homepage-section" variants={sectionVariants}>
+        <ContactSection />
       </motion.div>
     </motion.div>
   );

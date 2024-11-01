@@ -1,3 +1,5 @@
+/* src/components/HeroSection.css */
+
 /* General Hero Section */
 .hero-section {
   position: relative;
@@ -21,9 +23,7 @@
   width: 100%;
   height: 100%;
   z-index: 0;
-  background: 
-    url('path-to-your-3d-image1.jpg'),
-    url('path-to-your-3d-image2.jpg');
+  background: url('../../assets/images/light-background.jpg'); /* Replace with actual path */
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Parallax effect */
@@ -75,6 +75,7 @@
   color: #fff;
   text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14; /* Neon glow */
   animation: fadeInUp 1s ease-out, glow 2s ease-in-out infinite alternate;
+  z-index: 3;
 }
 
 @keyframes glow {
@@ -87,6 +88,7 @@
   font-size: 1.5rem;
   color: #ddd;
   animation: fadeInUp 1.2s ease-out;
+  z-index: 3;
 }
 
 /* Button Styling with Neon Hover */
