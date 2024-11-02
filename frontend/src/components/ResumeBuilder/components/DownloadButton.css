@@ -1,0 +1,38 @@
+/* DownloadButton.css */
+
+.download-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4CAF50; /* Green background */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+  
+  .download-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .download-button:focus {
+    outline: 2px solid #333; /* Optional: Adds focus outline */
+    outline-offset: 4px;
+  }
+  
+  .download-button:active {
+    transform: scale(0.98); /* Slight shrink effect on click */
+    background-color: #388e3c; /* Darker green for active state */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Reduced shadow on click */
+  }
+  
+  .download-button:disabled {
+    background-color: #ccc; /* Gray background when disabled */
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  

@@ -1,0 +1,36 @@
+.header {
+    background-color: #007bff; /* Primary color */
+    color: white; /* Text color */
+    padding: 20px; /* Padding around header */
+    text-align: center; /* Center text */
+}
+
+.header-title {
+    font-size: 2.5rem; /* Title font size */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.header-subtitle {
+    font-size: 1.2rem; /* Subtitle font size */
+    margin-bottom: 20px; /* Space below subtitle */
+}
+
+.header-nav ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.header-nav li {
+    display: inline; /* Display items in a line */
+    margin: 0 15px; /* Space between items */
+}
+
+.header-nav a {
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.header-nav a:hover {
+    color: #e0e0e0; /* Lighter color on hover */
+}

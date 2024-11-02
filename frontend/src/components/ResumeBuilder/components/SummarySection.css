@@ -1,0 +1,23 @@
+.summary-section {
+    margin-top: 20px; /* Space above the section */
+  }
+  
+  .summary-textarea {
+    width: 100%; /* Full width */
+    height: 100px; /* Set height for the textarea */
+    padding: 10px; /* Padding inside the textarea */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    resize: vertical; /* Allow vertical resizing */
+    font-size: 16px; /* Font size for readability */
+  }
+  
+  .summary-textarea::placeholder {
+    color: #aaa; /* Placeholder text color */
+  }
+  
+  .summary-textarea:focus {
+    outline: none; /* Remove default outline */
+    border-color: #007bff; /* Change border color on focus */
+  }
+  

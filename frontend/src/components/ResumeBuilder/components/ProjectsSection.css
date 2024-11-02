@@ -1,0 +1,68 @@
+.projects-section {
+    margin: 20px 0;
+  }
+  
+  .project-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .project-input input,
+  .project-input textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .project-input textarea {
+    resize: none; /* Prevent resizing */
+    height: 80px; /* Set fixed height */
+  }
+  
+  .add-project-button {
+    background-color: #2ecc71; /* Green background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+  }
+  
+  .add-project-button:hover {
+    background-color: #27ae60; /* Darker green on hover */
+  }
+  
+  .projects-list {
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+  }
+  
+  .project-item {
+    background-color: #f9f9f9; /* Light grey background */
+    border: 1px solid #ddd; /* Border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Padding */
+    margin-bottom: 10px; /* Space between items */
+  }
+  
+  .project-item h3 {
+    margin: 0 0 5px; /* Margin for project title */
+  }
+  
+  .project-item p {
+    margin: 0 0 10px; /* Margin for project description */
+  }
+  
+  .project-item a {
+    color: #3498db; /* Blue link color */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  .project-item a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  

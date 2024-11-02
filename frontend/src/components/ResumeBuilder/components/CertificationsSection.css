@@ -1,0 +1,51 @@
+.certifications-section {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .certifications-section h2 {
+    color: #555;
+  }
+  
+  .certification-inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .certification-inputs input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .certification-inputs button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .certification-inputs button:hover {
+    background-color: #45a049;
+  }
+  
+  .certification-list {
+    margin-top: 20px;
+  }
+  
+  .certification-item {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
+  }
+  

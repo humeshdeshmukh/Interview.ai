@@ -4,7 +4,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: #333; /* Dark background color for the root container */
+  background-color: #e4e0e0; /* Dark background color for the root container */
   color: #fff; /* Light text color for contrast */
   display: flex;
   flex-direction: column;

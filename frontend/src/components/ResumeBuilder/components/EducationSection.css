@@ -1,0 +1,60 @@
+.education-section {
+    margin-bottom: 20px; /* Space below the section */
+  }
+  
+  .education-entry {
+    display: flex; /* Flexbox for alignment */
+    flex-direction: column; /* Stack inputs vertically */
+    margin-bottom: 15px; /* Space between entries */
+    padding: 15px; /* Padding for the entry */
+    background-color: #ffffff; /* White background */
+    border: 1px solid #dcdcdc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  }
+  
+  .education-entry input {
+    padding: 10px; /* Padding inside inputs */
+    margin-bottom: 10px; /* Space between inputs */
+    border: 1px solid #dcdcdc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size for readability */
+  }
+  
+  .education-entry button {
+    background-color: #ff4d4d; /* Red color for remove button */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 10px; /* Padding for button */
+    transition: background-color 0.3s; /* Smooth background color transition */
+  }
+  
+  .education-entry button:hover {
+    background-color: #cc0000; /* Darker red on hover */
+  }
+  
+  .add-entry {
+    background-color: #007bff; /* Blue color for add button */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 10px; /* Padding for button */
+    transition: background-color 0.3s; /* Smooth background color transition */
+  }
+  
+  .add-entry:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .validation-messages {
+    margin-top: 15px; /* Space above validation messages */
+    color: red; /* Red color for error messages */
+  }
+  
+  .error-message {
+    margin: 5px 0; /* Space between error messages */
+  }
+  

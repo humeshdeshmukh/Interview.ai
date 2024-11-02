@@ -1,0 +1,19 @@
+.print-button {
+    background-color: #3498db; /* Blue background */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for size */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+  }
+  
+  .print-button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+  }
+  
+  .print-button:focus {
+    outline: none; /* Remove outline on focus */
+  }
+  

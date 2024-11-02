@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "clean": "rd /s /q node_modules && npm cache clean --force",
     "test": "jest"
   },
   "dependencies": {

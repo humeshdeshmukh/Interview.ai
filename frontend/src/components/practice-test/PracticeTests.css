@@ -1,0 +1,84 @@
+/* PracticeTests.css */
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #343a40;
+}
+
+.card {
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.card-text {
+  color: #495057;
+}
+
+.btn {
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0 0.5rem; /* Add horizontal margin for spacing */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  border: none;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.modal-content {
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 1rem; /* Margin between cards on smaller screens */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Smaller header size on mobile */
+  }
+}

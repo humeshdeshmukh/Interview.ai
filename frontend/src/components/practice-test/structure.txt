@@ -1,0 +1,25 @@
+practice-test/
+├── PracticeTests.tsx                       # Main component for the practice test
+├── PracticeTests.css                       # Styles for the main practice test component
+├── TestComponents/                         # Grouped test-related components
+│   ├── QuestionManager.tsx                 # Component for managing questions
+│   ├── QuestionManager.css                  # Styles for QuestionManager
+│   ├── Timer.tsx                            # Component for the timer functionality
+│   ├── Timer.css                            # Styles for Timer
+│   ├── ScoreDisplay.tsx                     # Component for displaying score
+│   ├── ScoreDisplay.css                     # Styles for ScoreDisplay
+│   ├── ReviewMode.tsx                       # Component for review mode of the test
+│   ├── ReviewMode.css                       # Styles for ReviewMode
+│   ├── CategoryDifficultySelector.tsx       # Combined Category and Difficulty selection
+│   ├── CategoryDifficultySelector.css       # Styles for the selector
+│   ├── ProgressTracker.tsx                  # Component for tracking progress
+│   ├── ProgressTracker.css                  # Styles for ProgressTracker
+│   ├── FeedbackModal.tsx                    # Modal for providing feedback on answers
+│   └── FeedbackModal.css                    # Styles for FeedbackModal
+├── utils/                                   # Utility functions
+│   ├── questionUtils.ts                     # Utility functions for question handling
+│   ├── scoreUtils.ts                        # Utility functions for score calculations
+│   └── userUtils.ts                         # Utility functions related to user management
+└── types/                                   # TypeScript types
+    ├── Question.ts                          # Type definition for Question
+    └── User.ts                              # Type definition for User

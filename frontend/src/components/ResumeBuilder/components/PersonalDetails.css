@@ -1,0 +1,44 @@
+.personal-details {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .personal-details h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .input-group input,
+  .input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  
+  .input-group input:focus,
+  .input-group textarea:focus {
+    border-color: #3498db; /* Change border color on focus */
+    outline: none;
+  }
+  
+  .input-group textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Set minimum height */
+  }
+  

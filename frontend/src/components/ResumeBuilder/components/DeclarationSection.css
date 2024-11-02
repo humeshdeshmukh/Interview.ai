@@ -1,0 +1,27 @@
+.declaration-section {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .declaration-section h2 {
+    color: #555;
+  }
+  
+  .declaration-input {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: vertical; /* Allows vertical resizing of the textarea */
+  }
+  
+  .declaration-input::placeholder {
+    color: #aaa; /* Placeholder color */
+    font-style: italic; /* Placeholder style */
+  }
+  

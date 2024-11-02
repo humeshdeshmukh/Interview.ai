@@ -1,0 +1,20 @@
+.export-button {
+    background-color: #28a745; /* Green color for the button */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .export-button:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+  }
+  
+  .export-button:active {
+    transform: scale(0.95); /* Slightly decrease size on click */
+  }
+  

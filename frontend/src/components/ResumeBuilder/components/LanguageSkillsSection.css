@@ -1,0 +1,48 @@
+.language-skills-section {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .language-skills-section h3 {
+    margin-bottom: 10px;
+  }
+  
+  .skill-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .skill-input input {
+    flex: 1;
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .add-skill, .remove-skill {
+    background-color: #007bff; /* Blue color for the button */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-skill:hover, .remove-skill:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .remove-skill {
+    background-color: #dc3545; /* Red color for remove button */
+  }
+  
+  .remove-skill:hover {
+    background-color: #c82333; /* Darker red on hover */
+  }
+  

@@ -9,9 +9,10 @@ import ForgotPassword from './components/Auth/ForgotPassword'; // Adjust the pat
 
 // Lazy loading for better performance
 const Homepage = lazy(() => import('./components/Home/Homepage'));
-const ResumeBuilder = lazy(() => import('./components/ResumeBuilder/ResumeBuilder'));
+const ResumeBuilder = lazy(() => import('./components/ResumeBuilder/components/ResumeBuilder.tsx'));
 const InterviewQuestions = lazy(() => import('./components/Home/InterviewQuestions'));
-const PracticeTests = lazy(() => import('./components/practice test/PracticeTests'));
+import PracticeTests from './components/practice-test/PracticeTests';
+
 const Resources = lazy(() => import('./components/Home/Resources'));
 const UserProfile = lazy(() => import('./components/Home/UserProfile'));
 const RegisterForm = lazy(() => import('./components/Auth/RegisterForm'));
@@ -44,6 +45,17 @@ const Subscriptions = lazy(() => import('./components/pages/Subscriptions'));
 // Import the AiInterview component
 const AiInterview = lazy(() => import('./components/AiInterview/AiInterview'));
 
+// Resume Builder Section Components
+const PersonalDetails = lazy(() => import('./components/ResumeBuilder/components/PersonalDetails'));
+const Education = lazy(() => import('./components/ResumeBuilder/components/EducationSection.tsx'));
+const Experience = lazy(() => import('./components/ResumeBuilder/components/ExperienceSection.tsx'));
+const Skills = lazy(() => import('./components/ResumeBuilder/components/SkillsSection.tsx'));
+const References = lazy(() => import('./components/ResumeBuilder/components/ReferencesSection.tsx'));
+const Projects = lazy(() => import('./components/ResumeBuilder/components/ProjectsSection.tsx'));
+const Certifications = lazy(() => import('./components/ResumeBuilder/components/CertificationsSection.tsx'));
+const Languages = lazy(() => import('./components/ResumeBuilder/components/LanguageSkillsSection.tsx'));
+const Declaration = lazy(() => import('./components/ResumeBuilder/components/DeclarationSection.tsx'));
+
 // Error Boundary Component
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
   constructor(props: { children: React.ReactNode }) {
@@ -74,6 +86,15 @@ const AppRoutes: React.FC = () => (
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/resume" element={<ResumeBuilder />} />
+      <Route path="/personal-details" element={<PersonalDetails />} />
+      <Route path="/education" element={<Education />} />
+      <Route path="/experience" element={<Experience />} />
+      <Route path="/skills" element={<Skills />} />
+      <Route path="/references" element={<References />} />
+      <Route path="/projects" element={<Projects />} />
+      <Route path="/certifications" element={<Certifications />} />
+      <Route path="/languages" element={<Languages />} />
+      <Route path="/declaration" element={<Declaration />} />
       <Route path="/questions" element={<InterviewQuestions />} />
       <Route path="/practice-tests" element={<PracticeTests />} />
       <Route path="/mock-interview" element={<MockInterview />} />
@@ -107,7 +128,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/subscriptions" element={<Subscriptions />} />
 
       {/* Route for AiInterview */}
-      <Route path="/ai-interview" element={<AiInterview />} /> {/* Add this route */}
+      <Route path="/ai-interview" element={<AiInterview />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

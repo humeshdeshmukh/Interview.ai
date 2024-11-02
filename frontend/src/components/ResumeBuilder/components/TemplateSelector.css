@@ -1,0 +1,35 @@
+.template-selector {
+    margin-top: 20px; /* Space above the section */
+  }
+  
+  .template-options {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping of items */
+    gap: 20px; /* Space between template options */
+  }
+  
+  .template-option {
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Padding inside the template option */
+    text-align: center; /* Center text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+  }
+  
+  .template-option:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  
+  .template-option.selected {
+    border-color: #007bff; /* Change border color for selected template */
+    background-color: #e7f1ff; /* Light background for selected template */
+  }
+  
+  .template-preview {
+    width: 100%; /* Full width of the option */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 200px; /* Limit max width for previews */
+    border-radius: 4px; /* Rounded corners for images */
+  }
+  

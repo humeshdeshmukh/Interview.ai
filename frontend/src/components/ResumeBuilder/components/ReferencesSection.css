@@ -1,0 +1,53 @@
+.references-section {
+    margin: 20px 0;
+  }
+  
+  .reference-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .reference-input input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .add-reference-button {
+    background-color: #3498db; /* Blue background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+  }
+  
+  .add-reference-button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+  }
+  
+  .references-list {
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+  }
+  
+  .reference-item {
+    background-color: #f9f9f9; /* Light grey background */
+    border: 1px solid #ddd; /* Border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Padding */
+    margin-bottom: 10px; /* Space between items */
+  }
+  
+  .reference-item h3 {
+    margin: 0 0 5px; /* Margin for reference name */
+  }
+  
+  .reference-item p {
+    margin: 0; /* No margin for paragraphs */
+  }
+  
