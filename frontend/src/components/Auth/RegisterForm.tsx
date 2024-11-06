@@ -5,28 +5,19 @@ import axiosInstance from '../../services/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PasswordStrengthBar from 'react-password-strength-bar';
-import GoogleLogin from 'react-google-login';
 import './RegisterForm.css'; // Import the CSS file
 
 const RegisterForm: React.FC = () => {
-  const [formData, setFormData] = useState<{
-    identifier: string;
-    password: string;
-    confirmPassword: string;
-  }>({
+  const [formData, setFormData] = useState({
     identifier: '',
     password: '',
     confirmPassword: '',
+    otp: '',
   });
 
-  const [errors, setErrors] = useState<{
-    identifier?: string;
-    password?: string;
-    confirmPassword?: string;
-    general?: string;
-  }>({});
-
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState<boolean>(false);
+  const [otpSent, setOtpSent] = useState<boolean>(false);
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -38,8 +29,7 @@ const RegisterForm: React.FC = () => {
   };
 
   const validateForm = () => {
-    const newErrors: { identifier?: string; password?: string; confirmPassword?: string } = {};
-
+    const newErrors: any = {};
     const emailRegex = /\S+@\S+\.\S+/;
     const phoneRegex = /^\+?[1-9]\d{1,14}$/;
 
@@ -55,8 +45,47 @@ const RegisterForm: React.FC = () => {
       newErrors.confirmPassword = 'Passwords do not match.';
     }
 
+    if (otpSent && formData.otp.length === 0) {
+      newErrors.otp = 'OTP is required for verification.';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const sendOTP = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const response = await axiosInstance.post('/auth/send-otp', {
+        identifier: formData.identifier,
+      });
+
+      if (response.status === 200) {
+        setOtpSent(true);
+        toast.success('OTP sent to your phone!');
+      }
+    } catch (error: any) {
+      toast.error('Failed to send OTP. Please try again.');
+    }
+  };
+
+  const verifyOTP = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const response = await axiosInstance.post('/auth/verify-otp', {
+        identifier: formData.identifier,
+        otp: formData.otp,
+      });
+
+      if (response.status === 200) {
+        toast.success('OTP verified successfully! Redirecting to login...');
+        setTimeout(() => navigate('/login'), 2000);
+      }
+    } catch (error: any) {
+      toast.error('Invalid OTP. Please try again.');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -73,7 +102,6 @@ const RegisterForm: React.FC = () => {
       });
 
       if (response.status === 201) {
-        // Call the register method from Auth context if needed
         if (register) {
           await register(formData.identifier, formData.password);
         }
@@ -85,7 +113,6 @@ const RegisterForm: React.FC = () => {
     } catch (error: any) {
       console.error('Registration error:', error);
       if (error.response) {
-        // Handle specific error responses from the backend
         const errorMessage = error.response.data?.message || 'Registration failed. Please try again.';
         toast.error(errorMessage);
       } else {
@@ -96,27 +123,9 @@ const RegisterForm: React.FC = () => {
     }
   };
 
-  const handleGoogleLogin = async (response: any) => {
-    try {
-      const { tokenId } = response;
-      const res = await axiosInstance.post('/auth/google', { idToken: tokenId });
-
-      if (res.status === 200) {
-        toast.success('Google login successful! Redirecting...');
-        setTimeout(() => navigate('/dashboard'), 2000);
-      }
-    } catch (error) {
-      console.error('Google login error:', error);
-      toast.error('Google login failed. Please try again.');
-    }
+  const handleGitHubLogin = () => {
+    window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/github`; // Redirect to your backend's GitHub auth route
   };
-
-  const handleGoogleLoginFailure = (response: any) => {
-    console.error('Google login failed:', response);
-    toast.error('Google login failed. Please try again.');
-  };
-
-  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -183,32 +192,61 @@ const RegisterForm: React.FC = () => {
           )}
         </div>
 
+        <div className="mb-4">
+          <label htmlFor="otp" className="block text-gray-700 mb-2">
+            OTP (if applicable):
+          </label>
+          <input
+            type="text"
+            id="otp"
+            value={formData.otp}
+            onChange={handleChange}
+            className={`w-full p-3 border ${errors.otp ? 'border-red-500' : 'border-gray-300'} rounded`}
+            disabled={loading}
+            placeholder="Enter OTP sent to your phone"
+            aria-label="OTP"
+          />
+          {errors.otp && <p className="text-red-500 text-sm mt-2">{errors.otp}</p>}
+        </div>
+
+        <button
+          type="button"
+          onClick={sendOTP}
+          className={`w-full p-3 bg-blue-400 text-white rounded hover:bg-blue-500 transition mb-4 ${loading ? 'opacity-50' : ''}`}
+          disabled={loading}
+        >
+          {loading ? 'Sending...' : 'Send OTP'}
+        </button>
+
+        <button
+          type="button"
+          onClick={verifyOTP}
+          className={`w-full p-3 bg-green-400 text-white rounded hover:bg-green-500 transition mb-4 ${loading ? 'opacity-50' : ''}`}
+          disabled={loading || !otpSent}
+        >
+          {loading ? 'Verifying...' : 'Verify OTP'}
+        </button>
+
         <button
           type="submit"
+          className={`w-full p-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition ${loading ? 'opacity-50' : ''}`}
           disabled={loading}
-          className="w-full p-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         >
           {loading ? 'Registering...' : 'Register'}
         </button>
 
-        <div className="mt-4">
-          <GoogleLogin
-            clientId={googleClientId}
-            buttonText="Register with Google"
-            onSuccess={handleGoogleLogin}
-            onFailure={handleGoogleLoginFailure}
-            cookiePolicy={'single_host_origin'}
-            className="w-full p-3 bg-red-600 text-white rounded hover:bg-red-700 transition"
-          />
-        </div>
-      </form>
+        <button
+          type="button"
+          onClick={handleGitHubLogin}
+          className={`w-full p-3 bg-gray-800 text-white rounded hover:bg-gray-900 transition mb-4`}
+        >
+          Login with GitHub
+        </button>
 
-      <p className="text-center mt-4">
-        Already have an account?{' '}
-        <Link to="/login" className="text-blue-600 hover:underline">
-          Login
-        </Link>
-      </p>
+        <p className="mt-4 text-center">
+          Already have an account? <Link to="/login" className="text-blue-500">Login</Link>
+        </p>
+      </form>
     </div>
   );
 };
