@@ -1,0 +1,8 @@
+[
+    { "question": "Tell me about yourself.", "category": "General" },
+    { "question": "What are your strengths and weaknesses?", "category": "Behavioral" },
+    { "question": "Why do you want to work here?", "category": "Motivational" },
+    { "question": "Describe a challenging situation you've faced and how you handled it.", "category": "Behavioral" },
+    { "question": "Where do you see yourself in 5 years?", "category": "Motivational" }
+  ]
+  

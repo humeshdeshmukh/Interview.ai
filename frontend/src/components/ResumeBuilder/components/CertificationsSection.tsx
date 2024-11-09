@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FaCertificate } from 'react-icons/fa';
+import Header from './Header'; // Adjust this path based on your structure
 import './CertificationsSection.css';
 
 interface Certification {
@@ -26,37 +28,42 @@ const CertificationsSection: React.FC = () => {
   };
 
   return (
-    <section className="certifications-section">
-      <h2>Certifications</h2>
-      <div className="certification-inputs">
-        <input
-          type="text"
-          placeholder="Certification Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Issuing Organization"
-          value={issuingOrganization}
-          onChange={(e) => setIssuingOrganization(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Year"
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-        />
-        <button onClick={addCertification}>Add Certification</button>
-      </div>
-      <div className="certification-list">
-        {certifications.map((cert, index) => (
-          <div key={index} className="certification-item">
-            <strong>{cert.title}</strong> - {cert.issuingOrganization} ({cert.year})
-          </div>
-        ))}
-      </div>
-    </section>
+    <>
+      <section className="certifications-section">
+        <div className="certifications-header">
+          <FaCertificate className="certifications-icon" />
+          <h2>Certifications</h2>
+        </div>
+        <div className="certification-inputs">
+          <input
+            type="text"
+            placeholder="Certification Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Issuing Organization"
+            value={issuingOrganization}
+            onChange={(e) => setIssuingOrganization(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+          />
+          <button onClick={addCertification}>Add Certification</button>
+        </div>
+        <div className="certification-list">
+          {certifications.map((cert, index) => (
+            <div key={index} className="certification-item">
+              <strong>{cert.title}</strong> - {cert.issuingOrganization} ({cert.year})
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 };
 

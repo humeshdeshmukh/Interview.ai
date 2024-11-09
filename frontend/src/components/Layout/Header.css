@@ -1,102 +1,144 @@
 /* Header Styles */
 .header-navbar {
-  background-color: #000; /* Fully black background */
+  background-color: #000; /* Black background */
   color: #fff; /* White text color */
   border-bottom: 1px solid #333; /* Dark border at the bottom */
-  position: sticky; /* Makes the navbar sticky */
-  top: 0; /* Sticks it to the top of the viewport */
-  z-index: 1000; /* Ensures it stays above other content */
-  transition: background-color 0.3s ease; /* Optional: smooth transition for background color */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth background & shadow transitions */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Padding for spacing */
 }
 
 /* Shadow effect for sticky navbar */
 .header-navbar.sticky {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Shadow effect for a sticky header */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Increased shadow for a more pronounced floating effect */
 }
 
 /* Logo Styles */
 .header-logo {
-  border-radius: 50%; /* Circular logo */
-  height: 40px; /* Adjust based on your logo size */
-  width: 40px; /* Adjust based on your logo size */
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  transition: transform 0.3s ease; /* Hover transition */
 }
 
+.header-logo:hover {
+  transform: scale(1.1); /* Hover effect on logo */
+}
+
+/* Header Title */
 .header-title {
-  font-size: 24px; /* Title size */
-  font-weight: 700; /* Title weight */
-  color: #fff; /* White title color */
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.header-title:hover {
+  color: #80cfd1; /* Subtle color change on hover */
 }
 
 /* Navigation Links */
 .nav-link {
-  color: #fff !important; /* White link color */
-  font-weight: 500; /* Font weight */
-  margin-right: 20px; /* Margin between links */
-  transition: color 0.3s ease; /* Smooth color transition */
+  color: #fff !important;
+  font-weight: 500;
+  margin-right: 20px;
+  transition: color 0.3s ease, transform 0.2s ease; /* Color and transform transitions */
 }
 
 .nav-link:hover,
 .nav-link:focus {
-  color: #aaa !important; /* Hover color */
+  color: #aaa !important;
+  transform: scale(1.05); /* Subtle zoom effect */
 }
 
 /* Dropdown Animations */
 .nav-dropdown .dropdown-menu {
-  background-color: #000; /* Black background for dropdown */
-  border: 1px solid #333; /* Dark border around dropdown */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation */
+  background-color: #000;
+  border: 1px solid #333;
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-15px);
+  display: block !important;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .nav-dropdown.show .dropdown-menu {
   opacity: 1;
   transform: translateY(0);
+  visibility: visible;
 }
 
 .nav-dropdown .dropdown-item {
-  color: #fff !important; /* Dropdown item color */
+  color: #fff !important;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-dropdown .dropdown-item:hover {
-  background-color: #333; /* Hover background color */
-  color: #fff; /* Hover text color */
+  background-color: #333;
+  color: #fff;
 }
 
 /* User Profile Section */
 .profile-picture {
-  border-radius: 50%; /* Circular profile picture */
-  height: 35px; /* Adjust based on your profile picture size */
-  width: 35px; /* Adjust based on your profile picture size */
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  border: 2px solid #666;
+  transition: transform 0.3s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.1); /* Zoom effect */
 }
 
 .profile-title {
-  font-size: 16px; /* Font size for profile title */
-  color: #fff; /* White text color */
+  font-size: 16px;
+  color: #fff;
+  margin-left: 8px;
+  font-weight: 500;
 }
 
+/* Accessibility & Responsiveness for mobile view */
 @media (max-width: 767px) {
   .header-title {
-    font-size: 20px; /* Smaller title size for mobile */
+    font-size: 20px;
   }
 
   .nav-link {
-    margin-right: 10px; /* Smaller margin for mobile */
+    margin-right: 10px;
   }
 
   .profile-picture {
-    height: 30px; /* Smaller profile picture for mobile */
-    width: 30px; /* Smaller profile picture for mobile */
+    height: 30px;
+    width: 30px;
   }
 
   .profile-title {
-    font-size: 14px; /* Smaller font size for mobile */
+    font-size: 14px;
+  }
+
+  .header-navbar {
+    padding: 8px 10px; /* Adjust navbar padding for mobile */
+  }
+
+  .header-logo {
+    height: 35px;
+    width: 35px; /* Smaller logo for mobile */
   }
 }
 
-
-
-
-
-
-
+/* Smooth transition for hover effects */
+.nav-dropdown .dropdown-item:hover,
+.header-logo:hover,
+.profile-picture:hover,
+.header-title:hover {
+  filter: brightness(1.2);
+}

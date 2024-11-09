@@ -19,6 +19,15 @@ const ResumeForm: React.FC = () => {
     address: '',
   });
 
+  // Combine all sections to form the resume content
+  const resumeContent = `
+    Name: ${personalDetails.name}
+    Email: ${personalDetails.email}
+    Phone: ${personalDetails.phone}
+    Address: ${personalDetails.address}
+    // Additional content can be appended from other sections here
+  `;
+
   return (
     <div className="resume-form">
       <h1>Resume Builder</h1>
@@ -31,7 +40,7 @@ const ResumeForm: React.FC = () => {
       <ReferencesSection />
       <DeclarationSection />
       <div className="buttons">
-        <DownloadButton />
+        <DownloadButton resumeContent={resumeContent} />
         <PrintButton />
       </div>
     </div>

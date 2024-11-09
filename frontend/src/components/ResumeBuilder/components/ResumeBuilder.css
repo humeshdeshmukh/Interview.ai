@@ -1,190 +1,179 @@
-/* Basic layout and font styling */
+/* Root styling for ResumeBuilder */
 .resume-builder {
-    font-family: Arial, sans-serif;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease;
-  }
-  
-  .resume-builder:hover {
-    background: #f0f0f0;
-  }
-  
-  /* Header and Footer */
-  header, footer {
-    text-align: center;
-    padding: 10px;
-    background: #004a9f;
-    color: white;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  /* Template Selector */
-  .template-selector {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .template-selector img {
-    width: 100px;
-    height: auto;
-    margin: 0 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .template-selector img:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .template-selector img.selected {
-    border: 3px solid #004a9f;
-    border-radius: 5px;
-  }
-  
-  /* Section Titles */
-  .resume-sections div[id^="section-"] {
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .resume-sections div[id^="section-"]:hover {
-    transform: scale(1.01);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Navigation Buttons */
-  .navigation-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .navigation-buttons button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .navigation-buttons button:disabled {
-    cursor: not-allowed;
-    background: #ccc;
-  }
-  
-  .navigation-buttons button:not(:disabled) {
-    background: #004a9f;
-  }
-  
-  .navigation-buttons button:not(:disabled):hover {
-    background: #003880;
-  }
-  
-  /* Download and Reset Buttons */
-  .download-button, .reset-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #004a9f;
-    border: 2px solid #004a9f;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    transition: color 0.3s ease, background 0.3s ease;
-  }
-  
-  .download-button:hover, .reset-button:hover {
-    background: #004a9f;
-    color: white;
-  }
-  
-  /* Interactive hover effects for each section */
-  .personal-details, .education, .experience, .skills, .certifications, .projects, .languages, .summary, .references, .declaration {
-    padding: 15px;
-    border-radius: 5px;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .personal-details:hover, .education:hover, .experience:hover, .skills:hover, .certifications:hover, .projects:hover, .languages:hover, .summary:hover, .references:hover, .declaration:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Smooth transition for Resume Preview */
-  .resume-preview {
-    padding: 20px;
-    margin-top: 20px;
-    background: #f1f1f1;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  .resume-preview:hover {
-    transform: scale(1.02);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 600px) {
-    .resume-builder {
-      padding: 10px;
-    }
-  
-    .navigation-buttons button,
-    .download-button, .reset-button {
-      font-size: 14px;
-      padding: 8px 15px;
-    }
-  
-    .template-selector img {
-      width: 80px;
-      margin: 5px;
-    }
-  }
-  
+  font-family: Arial, sans-serif;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  background: #dcf2f1; /* Light cyan for a softer look */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
 
+.resume-builder:hover {
+  background: #e3f0ef;
+}
 
+/* Header and Footer */
+header, footer {
+  text-align: center;
+  padding: 12px;
+  background: #457b9d; /* Medium blue for headers and footers */
+  color: white;
+  border-radius: 6px;
+  margin-bottom: 25px;
+}
 
+/* Template Selector */
+.template-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
 
+.template-selector img {
+  width: 110px;
+  height: auto;
+  margin: 0 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.template-selector img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
 
+.template-selector img.selected {
+  border: 3px solid #457b9d;
+  border-radius: 6px;
+}
 
+/* Section Titles */
+.resume-sections div[id^="section-"] {
+  border-bottom: 2px solid #d0e2e2;
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.resume-sections div[id^="section-"]:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
 
+.navigation-buttons button {
+  padding: 10px 22px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  background: #457b9d; /* Medium blue */
+}
 
+.navigation-buttons button:disabled {
+  cursor: not-allowed;
+  background: #b2c7d1;
+}
 
-  /* ResumeBuilder.css */
+.navigation-buttons button:not(:disabled):hover {
+  background: #1d3557; /* Dark navy */
+}
+
+/* Download and Reset Buttons */
+.download-button,
+.reset-button {
+  display: inline-block;
+  padding: 10px 22px;
+  font-size: 16px;
+  color: #457b9d;
+  border: 2px solid #457b9d;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.3s ease, background 0.3s ease;
+  margin-top: 15px;
+}
+
+.download-button:hover,
+.reset-button:hover {
+  background: #457b9d;
+  color: white;
+}
+
+/* Interactive hover effects for each section */
+.resume-sections > div {
+  padding: 15px;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.resume-sections > div:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Smooth transition for Resume Preview */
+.resume-preview {
+  padding: 20px;
+  margin-top: 20px;
+  background: #f1f1f1;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.resume-preview:hover {
+  transform: scale(1.02);
+}
+
+/* Download Options */
 .download-options {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.download-options button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #80cfd1; /* Soft blue */
+  color: #1d3557; /* Dark navy for contrast */
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.download-options button:hover {
+  background-color: #457b9d; /* Medium blue on hover */
+  color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .resume-builder {
+      padding: 12px;
   }
-  
-  .download-options button {
-    padding: 8px 16px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+
+  .navigation-buttons button,
+  .download-button,
+  .reset-button {
+      font-size: 14px;
+      padding: 8px 16px;
   }
-  
-  .download-options button:hover {
-    background-color: #0056b3;
+
+  .template-selector img {
+      width: 85px;
+      margin: 5px;
   }
-  
+}

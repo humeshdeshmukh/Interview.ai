@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import './LanguageSkillsSection.css';
+import { FaPlus, FaTrashAlt } from 'react-icons/fa'; // Importing icons
 
 interface LanguageSkill {
   language: string;
   proficiency: string;
 }
+
+const proficiencyLevels: { [key: string]: number } = {
+  Beginner: 25,
+  Intermediate: 50,
+  Advanced: 75,
+  Fluent: 100,
+};
 
 const LanguageSkillsSection: React.FC = () => {
   const [skills, setSkills] = useState<LanguageSkill[]>([{ language: '', proficiency: '' }]);
@@ -35,16 +43,31 @@ const LanguageSkillsSection: React.FC = () => {
             value={skill.language}
             onChange={(e) => handleInputChange(index, 'language', e.target.value)}
           />
-          <input
-            type="text"
-            placeholder="Proficiency (e.g., Beginner, Intermediate, Fluent)"
+          <select
             value={skill.proficiency}
             onChange={(e) => handleInputChange(index, 'proficiency', e.target.value)}
-          />
-          <button className="remove-skill" onClick={() => removeSkill(index)}>Remove</button>
+            placeholder="Proficiency"
+          >
+            <option value="">Select Proficiency</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Fluent">Fluent</option>
+          </select>
+          <div className="proficiency-bar">
+            <div
+              className="proficiency-level"
+              style={{ width: `${proficiencyLevels[skill.proficiency] || 0}%` }}
+            ></div>
+          </div>
+          <button className="remove-skill" onClick={() => removeSkill(index)}>
+            <FaTrashAlt /> Remove
+          </button>
         </div>
       ))}
-      <button className="add-skill" onClick={addSkill}>Add Language Skill</button>
+      <button className="add-skill" onClick={addSkill}>
+        <FaPlus /> Add Language Skill
+      </button>
     </div>
   );
 };

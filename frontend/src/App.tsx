@@ -6,6 +6,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import Chatbot from './components/Chatbot/Chatbot';
 import MockInterview from './components/MockInterview/MockInterview';
 import ForgotPassword from './components/Auth/ForgotPassword'; // Adjust the path as needed
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // Lazy loading for better performance
 const Homepage = lazy(() => import('./components/Home/Homepage'));

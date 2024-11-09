@@ -1,36 +1,79 @@
-.header {
-    background-color: #007bff; /* Primary color */
-    color: white; /* Text color */
-    padding: 20px; /* Padding around header */
-    text-align: center; /* Center text */
+/* Header Container */
+.resume-header {
+  width: 100%;
+  background-color: #dcf2f1;
+  color: #1d3557;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.header-title {
-    font-size: 2.5rem; /* Title font size */
-    margin-bottom: 10px; /* Space below title */
+/* Header Title */
+.resume-header h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
 }
 
-.header-subtitle {
-    font-size: 1.2rem; /* Subtitle font size */
-    margin-bottom: 20px; /* Space below subtitle */
+/* Navigation Links for Desktop */
+.nav-links {
+  display: flex;
+  gap: 1rem;
 }
 
-.header-nav ul {
-    list-style: none; /* Remove bullet points */
-    padding: 0; /* Remove padding */
+/* Link Styling */
+.nav-links a {
+  color: #1d3557;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
-.header-nav li {
-    display: inline; /* Display items in a line */
-    margin: 0 15px; /* Space between items */
+.nav-links a:hover {
+  color: #457b9d;
 }
 
-.header-nav a {
-    color: white; /* Link color */
-    text-decoration: none; /* Remove underline */
-    transition: color 0.3s; /* Smooth color transition */
+/* Mobile Toggle Button */
+.toggle-button {
+  font-size: 1.5rem;
+  color: #457b9d;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: none;
 }
 
-.header-nav a:hover {
-    color: #e0e0e0; /* Lighter color on hover */
+/* Mobile Menu Styling */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.mobile-menu a {
+  color: #1d3557;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  color: #457b9d;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+  }
+
+  .toggle-button {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
 }

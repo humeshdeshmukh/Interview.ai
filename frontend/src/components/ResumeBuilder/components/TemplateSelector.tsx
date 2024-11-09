@@ -1,10 +1,11 @@
 import React from 'react';
 import './TemplateSelector.css';
+import { FaCheckCircle } from 'react-icons/fa';
 
 interface Template {
   id: string;
   name: string;
-  previewImage: string; // URL or path to the template preview image
+  previewImage: string;
 }
 
 interface TemplateSelectorProps {
@@ -13,7 +14,11 @@ interface TemplateSelectorProps {
   onTemplateSelect: (templateId: string) => void;
 }
 
-const TemplateSelector: React.FC<TemplateSelectorProps> = ({ templates, selectedTemplateId, onTemplateSelect }) => {
+const TemplateSelector: React.FC<TemplateSelectorProps> = ({
+  templates,
+  selectedTemplateId,
+  onTemplateSelect
+}) => {
   return (
     <div className="template-selector">
       <h3>Select a Resume Template</h3>
@@ -24,8 +29,13 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({ templates, selected
             className={`template-option ${selectedTemplateId === template.id ? 'selected' : ''}`}
             onClick={() => onTemplateSelect(template.id)}
           >
-            <img src={template.previewImage} alt={template.name} className="template-preview" />
-            <span>{template.name}</span>
+            <div className="template-preview-container">
+              <img src={template.previewImage} alt={template.name} className="template-preview" />
+              {selectedTemplateId === template.id && (
+                <FaCheckCircle className="selected-icon" />
+              )}
+            </div>
+            <span className="template-name">{template.name}</span>
           </div>
         ))}
       </div>

@@ -1,39 +1,14 @@
 import React, { useState } from 'react';
 import './ResumePreview.css';
 
-interface PersonalDetails {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-}
-
-interface ResumePreviewProps {
-  personalDetails: PersonalDetails;
-  education: Array<{ degree: string; institution: string; year: string }>;
-  experience: Array<{ jobTitle: string; company: string; year: string; description: string }>;
-  certifications: string[];
-  languages: string[];
-  projects: Array<{ title: string; description: string }>;
-  references: Array<{ name: string; relationship: string; contact: string }>;
-}
-
-const ResumePreview: React.FC<ResumePreviewProps> = ({
-  personalDetails,
-  education,
-  experience,
-  certifications,
-  languages,
-  projects,
-  references,
-}) => {
+const ResumePreview: React.FC = () => {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
-    education: false,
-    experience: false,
-    certifications: false,
-    languages: false,
-    projects: false,
-    references: false,
+    education: true,
+    experience: true,
+    certifications: true,
+    languages: true,
+    projects: true,
+    references: true,
   });
 
   const toggleSection = (section: string) => {
@@ -42,95 +17,94 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({
 
   return (
     <div className="resume-preview">
-      <h2>{personalDetails.name}</h2>
-      <p>{personalDetails.email} | {personalDetails.phone}</p>
-      <p>{personalDetails.address}</p>
+      <header className="resume-header">
+        <h2>John Doe</h2>
+        <p>johndoe@example.com | (123) 456-7890 | 123 Main St, Anytown</p>
+      </header>
 
-      <div className="section">
+      <section className="section">
         <h3 onClick={() => toggleSection('education')} className="section-title">
-          Education {openSections.education ? '-' : '+'}
+          Education {openSections.education ? '▼' : '▶'}
         </h3>
         {openSections.education && (
           <ul>
-            {education.map((edu, index) => (
-              <li key={index}>{edu.degree} from {edu.institution} ({edu.year})</li>
-            ))}
+            <li>Bachelor of Science in Computer Science, XYZ University, 2022</li>
+            <li>Master of Business Administration, ABC University, 2024</li>
           </ul>
         )}
-      </div>
+      </section>
 
-      <div className="section">
+      <section className="section">
         <h3 onClick={() => toggleSection('experience')} className="section-title">
-          Experience {openSections.experience ? '-' : '+'}
+          Experience {openSections.experience ? '▼' : '▶'}
         </h3>
         {openSections.experience && (
           <ul>
-            {experience.map((exp, index) => (
-              <li key={index}>
-                <strong>{exp.jobTitle}</strong> at {exp.company} ({exp.year})<br />
-                {exp.description}
-              </li>
-            ))}
+            <li>
+              <strong>Software Engineer</strong> at Tech Solutions, 2023 - Present<br />
+              Developing and maintaining scalable web applications.
+            </li>
+            <li>
+              <strong>Intern</strong> at Innovations Inc., 2022 - 2023<br />
+              Assisted in data analysis and automation tasks.
+            </li>
           </ul>
         )}
-      </div>
+      </section>
 
-      <div className="section">
+      <section className="section">
         <h3 onClick={() => toggleSection('certifications')} className="section-title">
-          Certifications {openSections.certifications ? '-' : '+'}
+          Certifications {openSections.certifications ? '▼' : '▶'}
         </h3>
         {openSections.certifications && (
           <ul>
-            {certifications.map((cert, index) => (
-              <li key={index}>{cert}</li>
-            ))}
+            <li>Certified Kubernetes Administrator (CKA)</li>
+            <li>Professional Scrum Master (PSM I)</li>
           </ul>
         )}
-      </div>
+      </section>
 
-      <div className="section">
+      <section className="section">
         <h3 onClick={() => toggleSection('languages')} className="section-title">
-          Languages {openSections.languages ? '-' : '+'}
+          Languages {openSections.languages ? '▼' : '▶'}
         </h3>
         {openSections.languages && (
           <ul>
-            {languages.map((lang, index) => (
-              <li key={index}>{lang}</li>
-            ))}
+            <li>English - Fluent</li>
+            <li>Spanish - Intermediate</li>
           </ul>
         )}
-      </div>
+      </section>
 
-      <div className="section">
+      <section className="section">
         <h3 onClick={() => toggleSection('projects')} className="section-title">
-          Projects {openSections.projects ? '-' : '+'}
+          Projects {openSections.projects ? '▼' : '▶'}
         </h3>
         {openSections.projects && (
           <ul>
-            {projects.map((project, index) => (
-              <li key={index}>
-                <strong>{project.title}</strong><br />
-                {project.description}
-              </li>
-            ))}
+            <li>
+              <strong>Portfolio Website</strong><br />
+              A personal portfolio website showcasing projects and skills.
+            </li>
+            <li>
+              <strong>Machine Learning Model</strong><br />
+              Developed a predictive model to analyze customer behavior.
+            </li>
           </ul>
         )}
-      </div>
+      </section>
 
-      <div className="section">
+      <section className="section">
         <h3 onClick={() => toggleSection('references')} className="section-title">
-          References {openSections.references ? '-' : '+'}
+          References {openSections.references ? '▼' : '▶'}
         </h3>
         {openSections.references && (
           <ul>
-            {references.map((ref, index) => (
-              <li key={index}>
-                {ref.name} - {ref.relationship} | Contact: {ref.contact}
-              </li>
-            ))}
+            <li>Jane Smith - Mentor | Contact: jane.smith@example.com</li>
+            <li>Bob Johnson - Former Supervisor | Contact: bob.johnson@example.com</li>
           </ul>
         )}
-      </div>
+      </section>
     </div>
   );
 };

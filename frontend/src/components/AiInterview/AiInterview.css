@@ -1,127 +1,238 @@
-/* Container for the entire component */
+/* Overall container styling for the interview */
 .ai-interview-container {
-    max-width: 800px;
-    margin: 0 auto;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  border-top: 8px solid #457b9d; /* Accent color at the top */
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Header styling for the title */
+.ai-interview-container h1 {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: #1d3557;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #80cfd1;
+  padding-bottom: 0.5rem;
+}
+
+/* Left Section */
+.left-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Progress bar section */
+.progress-bar {
+  height: 12px;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+/* Filter and category section */
+.filter-section input,
+.filter-section select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e2e2;
+  transition: all 0.3s ease;
+}
+
+/* Form for user input */
+.interview-form {
+  margin-bottom: 2rem;
+}
+
+.form-control {
+  padding: 15px;
+  font-size: 1.125rem;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: border 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #457b9d;
+  box-shadow: 0 0 8px rgba(69, 123, 157, 0.5);
+}
+
+/* Buttons styling */
+button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 0.875rem;
+}
+
+button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.btn-submit {
+  background-color: #457b9d;
+  color: white;
+}
+
+.btn-submit:hover {
+  background-color: #365f75;
+}
+
+.btn-recording {
+  background-color: #80cfd1;
+  color: white;
+}
+
+.btn-recording:hover {
+  background-color: #6fa7bb;
+}
+
+/* New: Small navigation buttons for next/previous actions */
+.navigation-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.navigation-buttons button {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.navigation-buttons .btn-prev {
+  background-color: #dcf2f1;
+  color: #1d3557;
+}
+
+.navigation-buttons .btn-prev:hover {
+  background-color: #80cfd1;
+}
+
+.navigation-buttons .btn-next {
+  background-color: #80cfd1;
+  color: #ffffff;
+}
+
+.navigation-buttons .btn-next:hover {
+  background-color: #457b9d;
+}
+
+/* Right Section */
+.right-section {
+  flex: 1;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Video preview and recorded video section */
+.video-section {
+  text-align: center;
+}
+
+.video-wrapper {
+  width: 100%;
+  height: 400px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-preview, .recorded-video {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.recorded-video {
+  margin-top: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* List of responses */
+.response-item {
+  padding: 1.25rem;
+  background-color: #f9f9f9;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.response-item strong {
+  color: #457b9d;
+}
+
+/* Alerts for feedback */
+.alert {
+  margin-top: 2rem;
+}
+
+.alert-info {
+  background-color: #f1f9f9;
+  border-color: #80cfd1;
+}
+
+.alert-success {
+  background-color: #dcf2f1;
+  border-color: #80cfd1;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 768px) {
+  .ai-interview-container {
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
   }
-  
-  /* Heading styles */
-  .ai-interview-container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #333;
+
+  .video-wrapper {
+    height: 300px;
   }
-  
-  /* Form styling */
-  .form-control {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    font-size: 1rem;
-  }
-  
-  /* Button styling */
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    border-radius: 4px;
-    font-size: 1rem;
-    width: 100%; /* Make the button full-width on smaller screens */
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
-  }
-  
-  /* ListGroup styling */
-  .list-group-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    font-size: 1rem;
-  }
-  
-  /* Feedback section styling */
-  .ai-feedback {
-    margin-top: 20px;
-  }
-  
-  .ai-feedback h3 {
+
+  h1 {
     font-size: 1.75rem;
+  }
+
+  .response-item {
+    padding: 1rem;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+  }
+
+  .navigation-buttons button {
+    width: 100%;
     margin-bottom: 10px;
-    color: #007bff;
   }
-  
-  .ai-feedback p {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .ai-interview-container {
-      padding: 15px;
-    }
-  
-    .ai-interview-container h1 {
-      font-size: 2rem;
-    }
-  
-    .form-control {
-      font-size: 0.875rem;
-      padding: 8px;
-    }
-  
-    .btn-primary {
-      font-size: 0.875rem;
-    }
-  
-    .list-group-item {
-      font-size: 0.875rem;
-    }
-  
-    .ai-feedback h3 {
-      font-size: 1.5rem;
-    }
-  
-    .ai-feedback p {
-      font-size: 0.875rem;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .ai-interview-container {
-      padding: 10px;
-    }
-  
-    .ai-interview-container h1 {
-      font-size: 1.75rem;
-    }
-  
-    .form-control {
-      font-size: 0.75rem;
-      padding: 6px;
-    }
-  
-    .btn-primary {
-      font-size: 0.75rem;
-    }
-  
-    .list-group-item {
-      font-size: 0.75rem;
-    }
-  
-    .ai-feedback h3 {
-      font-size: 1.25rem;
-    }
-  
-    .ai-feedback p {
-      font-size: 0.75rem;
-    }
-  }
-  
+}

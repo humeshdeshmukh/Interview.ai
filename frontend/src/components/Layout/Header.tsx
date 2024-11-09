@@ -7,9 +7,18 @@ import profilePic from '../../assets/Profile-pic.webp'; // Ensure this path is c
 
 const Header: React.FC = () => {
   const [isSticky, setSticky] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null); // State to manage open dropdowns
 
   const handleScroll = () => {
     setSticky(window.scrollY > 0);
+  };
+
+  const handleMouseEnter = (dropdownId: string) => {
+    setDropdownOpen(dropdownId); // Open the specific dropdown
+  };
+
+  const handleMouseLeave = () => {
+    setDropdownOpen(null); // Close all dropdowns on mouse leave
   };
 
   useEffect(() => {
@@ -34,12 +43,26 @@ const Header: React.FC = () => {
             <Nav.Link as={Link} to="/questions" className="nav-link">Interview Questions</Nav.Link>
             <Nav.Link as={Link} to="/practice-tests" className="nav-link">Practice Tests</Nav.Link>
 
-            <NavDropdown title="Mock Interviews" id="mock-interview-dropdown" className="nav-dropdown">
+            <NavDropdown
+              title="Mock Interviews"
+              id="mock-interview-dropdown"
+              className="nav-dropdown"
+              show={dropdownOpen === 'mock-interview-dropdown'} // Control dropdown visibility
+              onMouseEnter={() => handleMouseEnter('mock-interview-dropdown')}
+              onMouseLeave={handleMouseLeave}
+            >
               <NavDropdown.Item as={Link} to="/mock-interview">Traditional Mock Interviews</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/ai-interview">AI Interview</NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown title="Resources" id="resources-dropdown" className="nav-dropdown">
+            <NavDropdown
+              title="Resources"
+              id="resources-dropdown"
+              className="nav-dropdown"
+              show={dropdownOpen === 'resources-dropdown'}
+              onMouseEnter={() => handleMouseEnter('resources-dropdown')}
+              onMouseLeave={handleMouseLeave}
+            >
               <NavDropdown.Item as={Link} to="/blog">Blog</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/webinars">Webinars</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/ebooks">E-books</NavDropdown.Item>
@@ -50,7 +73,14 @@ const Header: React.FC = () => {
               <NavDropdown.Item as={Link} to="/tools">Tools</NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown title="Support" id="support-dropdown" className="nav-dropdown">
+            <NavDropdown
+              title="Support"
+              id="support-dropdown"
+              className="nav-dropdown"
+              show={dropdownOpen === 'support-dropdown'}
+              onMouseEnter={() => handleMouseEnter('support-dropdown')}
+              onMouseLeave={handleMouseLeave}
+            >
               <NavDropdown.Item as={Link} to="/faq">FAQ</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/customer-support">Customer Support</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/tutorials">Tutorials</NavDropdown.Item>
@@ -61,7 +91,14 @@ const Header: React.FC = () => {
               <NavDropdown.Item as={Link} to="/live-chat">Live Chat</NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown title="About Us" id="about-us-dropdown" className="nav-dropdown">
+            <NavDropdown
+              title="About Us"
+              id="about-us-dropdown"
+              className="nav-dropdown"
+              show={dropdownOpen === 'about-us-dropdown'}
+              onMouseEnter={() => handleMouseEnter('about-us-dropdown')}
+              onMouseLeave={handleMouseLeave}
+            >
               <NavDropdown.Item as={Link} to="/company">Company</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/team">Team</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/careers">Careers</NavDropdown.Item>
@@ -82,6 +119,9 @@ const Header: React.FC = () => {
               id="profile-dropdown"
               align="end"
               className="nav-dropdown"
+              show={dropdownOpen === 'profile-dropdown'}
+              onMouseEnter={() => handleMouseEnter('profile-dropdown')}
+              onMouseLeave={handleMouseLeave}
             >
               <NavDropdown.Item as={Link} to="/profile">View Profile</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/activity-log">Activity Log</NavDropdown.Item>

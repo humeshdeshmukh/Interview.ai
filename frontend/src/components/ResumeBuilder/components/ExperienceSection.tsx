@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBriefcase, faBuilding, faCalendarAlt, faClipboard } from '@fortawesome/free-solid-svg-icons';
 import './ExperienceSection.css';
 
 interface Experience {
@@ -34,35 +36,50 @@ const ExperienceSection: React.FC = () => {
       <h2>Experience</h2>
       {experienceEntries.map((entry, index) => (
         <div className="experience-entry" key={index}>
-          <input
-            type="text"
-            placeholder="Job Title"
-            value={entry.jobTitle}
-            onChange={(e) => handleChange(index, 'jobTitle', e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Company"
-            value={entry.company}
-            onChange={(e) => handleChange(index, 'company', e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Start Year"
-            value={entry.startYear}
-            onChange={(e) => handleChange(index, 'startYear', Number(e.target.value))}
-          />
-          <input
-            type="number"
-            placeholder="End Year"
-            value={entry.endYear}
-            onChange={(e) => handleChange(index, 'endYear', Number(e.target.value))}
-          />
-          <textarea
-            placeholder="Responsibilities"
-            value={entry.responsibilities}
-            onChange={(e) => handleChange(index, 'responsibilities', e.target.value)}
-          />
+          <div className="input-wrapper">
+            <FontAwesomeIcon icon={faBriefcase} className="icon" />
+            <input
+              type="text"
+              placeholder="Job Title"
+              value={entry.jobTitle}
+              onChange={(e) => handleChange(index, 'jobTitle', e.target.value)}
+            />
+          </div>
+          <div className="input-wrapper">
+            <FontAwesomeIcon icon={faBuilding} className="icon" />
+            <input
+              type="text"
+              placeholder="Company"
+              value={entry.company}
+              onChange={(e) => handleChange(index, 'company', e.target.value)}
+            />
+          </div>
+          <div className="input-wrapper">
+            <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
+            <input
+              type="number"
+              placeholder="Start Year"
+              value={entry.startYear}
+              onChange={(e) => handleChange(index, 'startYear', Number(e.target.value))}
+            />
+          </div>
+          <div className="input-wrapper">
+            <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
+            <input
+              type="number"
+              placeholder="End Year"
+              value={entry.endYear}
+              onChange={(e) => handleChange(index, 'endYear', Number(e.target.value))}
+            />
+          </div>
+          <div className="input-wrapper">
+            <FontAwesomeIcon icon={faClipboard} className="icon" />
+            <textarea
+              placeholder="Responsibilities"
+              value={entry.responsibilities}
+              onChange={(e) => handleChange(index, 'responsibilities', e.target.value)}
+            />
+          </div>
           <button className="remove-entry" onClick={() => handleRemoveEntry(index)}>Remove</button>
         </div>
       ))}

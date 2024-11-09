@@ -1,68 +1,133 @@
 .projects-section {
-    margin: 20px 0;
-  }
-  
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 40rem;
+  margin: 2rem auto;
+  animation: fadeIn 0.5s ease;
+}
+
+.projects-section h2 {
+  color: #457b9d;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.project-input {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.project-input input,
+.project-input textarea {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  width: 80%;
+}
+
+.project-input button {
+  padding: 0.75rem 1.25rem;
+  background-color: #457b9d;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.project-input button:hover {
+  background-color: #1d3557;
+}
+
+/* Projects List */
+.projects-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-item {
+  background-color: #e9f2f4;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.project-actions button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: #457b9d;
+}
+
+.project-actions button:hover {
+  color: #1d3557;
+}
+
+.clear-all-projects {
+  padding: 0.75rem 1.25rem;
+  background-color: #80cfd1;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.clear-all-projects:hover {
+  background-color: #457b9d;
+}
+
+/* Keyframes Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
   .project-input {
-    display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    gap: 0.5rem;
   }
-  
+
   .project-input input,
   .project-input textarea {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+    font-size: 1rem;
+    padding: 0.65rem;
   }
-  
-  .project-input textarea {
-    resize: none; /* Prevent resizing */
-    height: 80px; /* Set fixed height */
+
+  .project-input button {
+    font-size: 1rem;
+    padding: 0.65rem 1.2rem;
   }
-  
-  .add-project-button {
-    background-color: #2ecc71; /* Green background */
-    color: white; /* White text */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px; /* Padding */
-    cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s ease; /* Transition for hover effect */
+
+  .clear-all-projects {
+    font-size: 1rem;
+    padding: 0.65rem 1.2rem;
   }
-  
-  .add-project-button:hover {
-    background-color: #27ae60; /* Darker green on hover */
-  }
-  
-  .projects-list {
-    list-style: none; /* Remove default list styles */
-    padding: 0; /* Remove padding */
-  }
-  
-  .project-item {
-    background-color: #f9f9f9; /* Light grey background */
-    border: 1px solid #ddd; /* Border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 15px; /* Padding */
-    margin-bottom: 10px; /* Space between items */
-  }
-  
-  .project-item h3 {
-    margin: 0 0 5px; /* Margin for project title */
-  }
-  
-  .project-item p {
-    margin: 0 0 10px; /* Margin for project description */
-  }
-  
-  .project-item a {
-    color: #3498db; /* Blue link color */
-    text-decoration: none; /* Remove underline */
-  }
-  
-  .project-item a:hover {
-    text-decoration: underline; /* Underline on hover */
-  }
-  
+}
