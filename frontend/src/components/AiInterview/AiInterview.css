@@ -236,3 +236,10 @@ button:disabled {
     margin-bottom: 10px;
   }
 }
+
+
+
+/* Add this to your AiInterview.css file */
+.flip-video {
+  transform: scaleX(-1); /* This horizontally flips the video */
+}

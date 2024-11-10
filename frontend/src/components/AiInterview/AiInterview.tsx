@@ -108,6 +108,11 @@ const AiInterview: React.FC = () => {
     }
   };
 
+  const handleDeleteResponse = (index: number) => {
+    const updatedResponses = responses.filter((_, i) => i !== index);
+    setResponses(updatedResponses);
+  };
+
   const filteredQuestions = questions.filter(question =>
     (selectedCategory === 'All' || question.category === selectedCategory) &&
     question.question.toLowerCase().includes(filter.toLowerCase())
@@ -193,7 +198,7 @@ const AiInterview: React.FC = () => {
       </div>
       <div className="right-section">
         <div className="video-section mt-4">
-          <video ref={videoRef} autoPlay muted className="video-preview"></video>
+          <video ref={videoRef} autoPlay muted className="video-preview flip-video"></video>
         </div>
         {videoUrl && (
           <div className="mt-3">
@@ -211,6 +216,9 @@ const AiInterview: React.FC = () => {
                   <strong>Video:</strong> <video src={response.videoUrl} controls className="response-video" />
                 </div>
               )}
+              <Button variant="danger" size="sm" onClick={() => handleDeleteResponse(index)} className="mt-2">
+                Delete
+              </Button>
             </ListGroup.Item>
           ))}
         </ListGroup>
